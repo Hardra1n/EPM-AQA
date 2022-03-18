@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/reportportal/agent-net-nunit/master/src/ReportPortal.NUnitExtension/ReportPortal.config.schema",
+  "enabled": true,
+  "server": {
+    "url": "https://reportportal.epam.com/api/v1",
+    "project": "epm-rdby",
+    "authentication": {
+      "uuid": "f314325c-968b-4fdc-983d-66d8722a637b"
+    }
+  },
+  "launch": {
+    "name": "test_example",
+    "description": "this is description",
+    "debugMode": true,
+    "attributes": []
+  },
+  "rootNamespaces": [ "TestLayer.dll", "TestLayer" ]
+}
