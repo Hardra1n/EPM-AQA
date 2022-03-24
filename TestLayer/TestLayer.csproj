@@ -15,4 +15,9 @@
     <PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QAAutomationLab.BusinessLayer\QAAutomationLab.BusinessLayer.csproj" />
+    <ProjectReference Include="..\QAAutomationLab.CoreLayer\QAAutomationLab.CoreLayer.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -11,13 +11,13 @@ namespace TestLayer
         [SetUp]
         public void SetUp()
         {
-            throw new NotImplementedException();
+            Driver = QAAutomationLab.CoreLayer.Driver.Driver.GetInstance();
         }
 
         [TearDown]
         public void TearDown()
         {
-            Driver?.Close();
+            QAAutomationLab.CoreLayer.Driver.Driver.Quit();
         }
     }
 }
