@@ -25,6 +25,47 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
         {
         }
 
+        public AttrationPage EnterSearchString(string text)
+        {
+            _searchFieldElement.SendKeys(text);
 
+            return this;
+        }
+
+        public SearchResultsPage GoToDubai()
+        {
+            _topDestinationDubai.Click();
+
+            return new SearchResultsPage(Driver);
+        }
+
+        public SearchResultsPage GoToSearchResult(string text)
+        {
+            _searchFieldElement.SendKeys(text);
+            _submitButton.Click();
+
+            return new SearchResultsPage(Driver);
+        }
+
+        public SearchResultsPage GoToKyoto()
+        {
+            _kyotoLink.Click();
+
+            return new SearchResultsPage(Driver);
+        }
+
+        public AttrationPage SubmitSearchRequest()
+        {
+            _submitButton.Click();
+
+            return this;
+        }
+
+        public AttrationPage ChooseAsiaTab()
+        {
+            _asiaTab.Click();
+
+            return this;
+        }
     }
 }
