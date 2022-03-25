@@ -62,11 +62,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return this;
         }
 
-        public CarRentalsPage ClickSearchButton()
+        public SearchResultsPage ClickSearchButton()
         {
             _searchButton.Click();
 
-            return this;
+            return new SearchResultsPage();
         }
     }
 }
