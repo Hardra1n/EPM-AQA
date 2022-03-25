@@ -15,7 +15,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         private BaseWebElement personsDropDownMenu => new(By.XPath("//label[@id='xp__guests__toggle']"));
 
 
-        public StaysSearchingPage(IWebDriver driver) : base(driver) { }
+        public StaysSearchingPage() : base() { }
 
         public StaysSearchingPage EnterDestination(string destination)
         {

@@ -23,9 +23,9 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         public string BaseUrl;
 
-        public AttrationPage(IWebDriver driver) : base(driver)
+        public AttrationPage() : base()
         {
-            BaseUrl = driver.Url;
+            BaseUrl = DriverInstance.Url;
         }
 
         public AttrationPage EnterSearchString(string text)

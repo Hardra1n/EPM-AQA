@@ -13,15 +13,15 @@ namespace QAAutomationLab.BusinessLayer.PageObjects
 
         private readonly BaseWebElement _attractionsButton = new(By.XPath("//a[@data-decider-header=\"attractions\"]"));
 
-        public MainPage(IWebDriver driver):base(driver) 
+        public MainPage():base() 
         {
-            Driver.FindElement(By.XPath($"//title[contains(text(),'{_title})]"));
+            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title})]"));
         }
 
         public AttrationPage GoToAttractions()
         {
             _attractionsButton.Click();
-            return new AttrationPage(Driver);
+            return new AttrationPage();
         }
     }
 }

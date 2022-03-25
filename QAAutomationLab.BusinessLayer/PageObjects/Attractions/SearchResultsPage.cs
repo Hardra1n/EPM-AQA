@@ -25,7 +25,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private readonly BaseWebElement _submitButton = new(By.XPath("//*[@type=\"submit\"]"));
 
-        public SearchResultsPage(IWebDriver driver) : base(driver)
+        public SearchResultsPage() : base()
         {
         }
 

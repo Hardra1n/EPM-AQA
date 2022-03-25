@@ -16,9 +16,9 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         public BaseWebElement SearchButton = new BaseWebElement(By.XPath("//span[contains(text(),'Search')]/.."));
 
-        public SearchPage(IWebDriver driver):base(driver)
+        public SearchPage( ):base()
         {
-            Driver.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
+            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
         }
     }
 }

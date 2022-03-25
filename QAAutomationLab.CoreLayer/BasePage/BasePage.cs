@@ -4,11 +4,11 @@ namespace QAAutomationLab.CoreLayer.BasePage
 {
     public abstract class BasePage
     {
-        public IWebDriver Driver;
+        public IWebDriver DriverInstance;
 
         public BasePage()
         {
-            this.Driver = CoreLayer.Driver.Driver.GetInstance();           
+            this.DriverInstance = Driver.Driver.GetInstance();           
         }
     }
 }
