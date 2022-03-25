@@ -21,8 +21,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private readonly BaseWebElement _kyotoLink = new(By.XPath("//a[@title=\"Kyoto\"]"));
 
+        public string BaseUrl;
+
         public AttrationPage(IWebDriver driver) : base(driver)
         {
+            BaseUrl = driver.Url;
         }
 
         public AttrationPage EnterSearchString(string text)

@@ -6,9 +6,9 @@ namespace QAAutomationLab.CoreLayer.BasePage
     {
         public IWebDriver Driver;
 
-        public BasePage(IWebDriver driver)
+        public BasePage()
         {
-            this.Driver = driver;           
+            this.Driver = CoreLayer.Driver.Driver.GetInstance();           
         }
     }
 }
