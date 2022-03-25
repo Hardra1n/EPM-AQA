@@ -12,7 +12,7 @@ namespace QAAutomationLab.BusinessLayer.Utilities
 
             driver.Navigate().GoToUrl(url);
 
-            return new MainPage(driver);
+            return new MainPage();
         }
     }
 }

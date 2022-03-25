@@ -1,11 +1,6 @@
 ﻿using OpenQA.Selenium;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 {
@@ -39,7 +34,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
         {
             _topDestinationDubai.Click();
 
-            return new SearchResultsPage(Driver);
+            return new SearchResultsPage();
         }
 
         public SearchResultsPage GoToSearchResult(string text)
@@ -47,14 +42,14 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             _searchFieldElement.SendKeys(text);
             _submitButton.Click();
 
-            return new SearchResultsPage(Driver);
+            return new SearchResultsPage();
         }
 
         public SearchResultsPage GoToKyoto()
         {
             _kyotoLink.Click();
 
-            return new SearchResultsPage(Driver);
+            return new SearchResultsPage();
         }
 
         public AttrationPage SubmitSearchRequest()
