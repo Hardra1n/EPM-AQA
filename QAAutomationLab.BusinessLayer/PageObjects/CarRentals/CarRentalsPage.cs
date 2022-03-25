@@ -12,9 +12,15 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         private BaseWebElement _differentLocationSelector = new BaseWebElement(By.XPath("//label[contains(text(),'different location')]"));
 
-        private BaseWebElement _searchField = new BaseWebElement(By.XPath("//input[contains(@placeholder,'Pick-up location')]"));
+        private BaseWebElement _pickUpLocationField = new BaseWebElement(By.XPath("//input[contains(@placeholder,'Pick-up location')]"));
+
+        private BaseWebElement _dropOffLocationField = new BaseWebElement(By.XPath("//input[contains(@placeholder,'Drop-off location')]"));
 
         private BaseWebElement _searchButton = new BaseWebElement(By.XPath("//span[contains(text(),'Search')]/.."));
+
+        private BaseWebElement _firstSearchSuggestion = new BaseWebElement(By.XPath("//ul[contains(@aria-label,'suggested destinations')]//li"));
+
+
 
         public CarRentalsPage():base()
         {
@@ -35,9 +41,30 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return this;
         }
 
-        public CarRentalsPage EnterSearchMessage(string message) 
+        public CarRentalsPage EnterPickUpLocation(string location) 
         {
-            _searchField.SendKeys(message);
+            _pickUpLocationField.SendKeys(location);
+
+            return this;
+        }
+
+        public CarRentalsPage EnterDropOffLocation(string location)
+        {
+            _dropOffLocationField.SendKeys(location);
+
+            return this;
+        }
+
+        public CarRentalsPage ChooseFirstSearchSuggestion()
+        {
+            _firstSearchSuggestion.Click();
+
+            return this;
+        }
+
+        public CarRentalsPage ClickSearchButton()
+        {
+            _searchButton.Click();
 
             return this;
         }
