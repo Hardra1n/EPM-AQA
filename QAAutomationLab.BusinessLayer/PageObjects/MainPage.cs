@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using QAAutomationLab.BusinessLayer.PageObjects.Attractions;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
@@ -10,9 +11,17 @@ namespace QAAutomationLab.BusinessLayer.PageObjects
 
         public BaseWebElement CarRentalsButton => new BaseWebElement(By.XPath("//span[contains(text(),'Car rentals')]"));
 
+        private readonly BaseWebElement _attractionsButton = new(By.XPath("//a[@data-decider-header=\"attractions\"]"));
+
         public MainPage(IWebDriver driver):base(driver) 
         {
             Driver.FindElement(By.XPath($"//title[contains(text(),'{_title})]"));
+        }
+
+        public AttrationPage GoToAttractions()
+        {
+            _attractionsButton.Click();
+            return new AttrationPage(Driver);
         }
     }
 }
