@@ -16,7 +16,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects
 
         public MainPage():base() 
         {
-            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title})]"));
+            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
         }
 
         public AttrationPage GoToAttractions()
