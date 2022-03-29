@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.PageObjects.Attractions;
 using QAAutomationLab.BusinessLayer.PageObjects.CarRentals;
+using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
@@ -31,5 +32,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects
 
             return new CarRentalsPage();
         }
+
+        public StaysSearchingPage GoToStays() => new StaysSearchingPage();
     }
 }

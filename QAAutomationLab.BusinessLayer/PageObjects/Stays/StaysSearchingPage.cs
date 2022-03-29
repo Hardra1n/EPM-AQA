@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
+using System;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
@@ -10,7 +11,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         private BaseWebElement searchButton => new(By.XPath("//button[@class='sb-searchbox__button ']"));
 
-        private BaseWebElement calendarDropDownMenu => new(By.XPath("//div[@class='xp__dates-inner']"));
+        private CalendarWebElement calendarDropDownMenu => new(By.XPath("//div[@class='xp__dates-inner']"));
 
         private BaseWebElement personsDropDownMenu => new(By.XPath("//label[@id='xp__guests__toggle']"));
 
@@ -35,12 +36,21 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             return this;
         }
 
+        public StaysSearchingPage SelectDatesToStay(DateTime stayFromDate, DateTime stayToDate)
+        {
+            calendarDropDownMenu.ChooseFromToDates(CreateChoosingDateXPathLocator(stayFromDate),
+                                                   CreateChoosingDateXPathLocator(stayToDate));
+            return this;
+        }
+
+        private By CreateChoosingDateXPathLocator(DateTime date) 
+            => By.XPath($"//td[@data-date = '{date.ToString("yyyy-MM-dd")}']");
+
         public StaysSearchingPage ClickPersonsMenu()
         {
             personsDropDownMenu.Click();
             return this;
         }
-
 
     }
 }
