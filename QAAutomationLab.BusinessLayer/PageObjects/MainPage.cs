@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.PageObjects.Attractions;
 using QAAutomationLab.BusinessLayer.PageObjects.CarRentals;
 using QAAutomationLab.CoreLayer.BasePage;
@@ -25,11 +25,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects
             return new AttrationPage();
         }
 
-        /*public CarRentalsPage GoToCarRentals() 
+        public CarRentalsPage GoToCarRentals() 
         {
             _carRentalsButton.Click();
 
             return new CarRentalsPage();
-        }*/
+        }
     }
 }
