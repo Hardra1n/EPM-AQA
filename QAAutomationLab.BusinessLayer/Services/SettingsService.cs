@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using QAAutomationLab.BusinessLayer.Utilities;
-using System;
-using System.Collections.Generic;
+using QAAutomationLab.CoreLayer.Driver;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QAAutomationLab.BusinessLayer.Services
 {
@@ -21,6 +16,13 @@ namespace QAAutomationLab.BusinessLayer.Services
             var settings = JsonConvert.DeserializeObject<T>(file);
 
             return settings;
+        }
+
+        public static void SetPathToDriver()
+        {
+            var pathToDriver = PathUtility.GetDriverPath();
+
+            Driver.PathToDriver = pathToDriver;
         }
     }
 }

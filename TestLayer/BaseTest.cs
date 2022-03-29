@@ -12,13 +12,13 @@ namespace TestLayer
 
         protected ReportPortalLogger Logger;
 
-        protected TestSettings TestSettings;
+        protected TestSettings TestsSettings;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
             Logger = ReportPortalLogger.GetInstance();
-            TestSettings = SettingsService<TestSettings>.GetSettings();
+            TestsSettings = SettingsService<TestSettings>.GetSettings();
         }
 
         [SetUp]

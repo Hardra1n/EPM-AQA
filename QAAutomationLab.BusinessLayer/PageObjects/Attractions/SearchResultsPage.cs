@@ -11,28 +11,29 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 {
     public class SearchResultsPage : BasePage
     {
-        private BaseWebElement _firstResultLink;
+        private BaseWebElement _activitiesCheckBox => new(By.XPath("//*[@value=\"activities\"]"));
 
-        private readonly BaseWebElement _activitiesCheckBox = new(By.XPath("//*[@value=\"activities\"]"));
+        private BaseWebElement _priceCheckBox => new(By.XPath("//*[@value=\"b1\"]"));
 
-        private readonly BaseWebElement _priceCheckBox = new(By.XPath("//*[@value=\"b1\"]"));
+        private BaseWebElement _freeCancellationCheckBox => new(By.XPath("//*[@value=\"free_cancellation\"]"));
 
-        private readonly BaseWebElement _freeCancellationCheckBox = new(By.XPath("//*[@value=\"free_cancellation\"]"));
-
-        private readonly BaseWebElement _brooklynCheckBox = new(By.XPath("//*[@value=\"20085207\"]"));
+        private BaseWebElement _brooklynCheckBox => new(By.XPath("//*[@value=\"20085207\"]"));
 
         private readonly BaseWebElement _searchField = new(By.XPath("//*[@type=\"search\"]"));
 
         private readonly BaseWebElement _submitButton = new(By.XPath("//*[@type=\"submit\"]"));
 
+        public string BaseUrl;
+
         public SearchResultsPage() : base()
         {
+            BaseUrl = DriverInstance.Url;
         }
 
         public string ShowFirstResultTitle()
         {
-            _firstResultLink = new(By.XPath("(//*[@class=\"css-xbcz3d\"])[0]"));
-            return _firstResultLink.GetAttribute("title");
+            var firstResultLink = DriverInstance.FindElements(By.XPath("//a[@class=\"css-xbcz3d\"]"))[0];
+            return firstResultLink.GetAttribute("title");
         }
 
         public SearchResultsPage FilterResult()

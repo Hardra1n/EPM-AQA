@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using QAAutomationLab.BusinessLayer.Utilities;
+using System.Threading.Tasks;
 
 namespace TestLayer
 {
@@ -11,7 +12,7 @@ namespace TestLayer
         public void GoToAttractions_WhenAllDataAreValid_ShouldReturnAttractionPage()
         {
             // Assert
-            var mainPageUrl = TestSettings.MainPageUrl;
+            var mainPageUrl = TestsSettings.MainPageUrl;
             var attractionsPart = "attractions";
 
             // Act

@@ -25,11 +25,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects
             return new AttrationPage();
         }
 
-        public CarRentalsPage GoToCarRentals() 
+        /*public CarRentalsPage GoToCarRentals() 
         {
             _carRentalsButton.Click();
 
             return new CarRentalsPage();
-        }
+        }*/
     }
 }
