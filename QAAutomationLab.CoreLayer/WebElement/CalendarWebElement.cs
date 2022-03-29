@@ -13,10 +13,19 @@ namespace QAAutomationLab.CoreLayer.WebElement
 
         public void ChooseFromToDates(By dateFromLocator, By dateToLocator)
         {
-            BaseWebElement fromDateElement = new(this.FindElement(dateFromLocator));
-            BaseWebElement toDateElement = new(this.FindElement(dateToLocator));
-            fromDateElement.Click();
-            toDateElement.Click();
+            try
+            {
+                BaseWebElement fromDateElement = new(this.FindElement(dateFromLocator));
+                BaseWebElement toDateElement = new(this.FindElement(dateToLocator));
+                fromDateElement.Click();
+                toDateElement.Click();
+                _logger.Information("Calendar.ChooseFromToDates:Success");
+            }
+            catch (Exception ex)
+            {
+                _logger.Error("Calendar.ChooseFromToDates:Error");
+                throw;
+            }
         }
     }
 }
