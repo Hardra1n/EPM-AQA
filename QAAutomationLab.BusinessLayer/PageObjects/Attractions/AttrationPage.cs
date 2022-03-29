@@ -14,7 +14,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private readonly BaseWebElement _asiaTab = new(By.XPath("//button[.=\"Asia\"]"));
 
-        private readonly BaseWebElement _kyotoLink = new(By.XPath("//a[@title=\"Kyoto\"]"));
+        private BaseWebElement _kyotoLink => new(By.XPath("//a[@title=\"Kyoto\"]"));
 
         public string BaseUrl;
 

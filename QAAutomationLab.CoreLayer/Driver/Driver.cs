@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
+using System.IO;
 
 namespace QAAutomationLab.CoreLayer.Driver
 {
@@ -9,6 +10,8 @@ namespace QAAutomationLab.CoreLayer.Driver
         private static IWebDriver _driver;
 
         public const int _implicitWaitTime = 15;
+
+        public static string PathToDriver;
 
         private static object _locker = new object();
 
@@ -20,7 +23,7 @@ namespace QAAutomationLab.CoreLayer.Driver
             {
                 lock (_locker)
                 {
-                    _driver = new ChromeDriver();
+                    _driver = new ChromeDriver(@"D:\qa-automation-lab\QAAutomationLab.CoreLayer\Files\");
                 }
 
                 SetUpParameters();
