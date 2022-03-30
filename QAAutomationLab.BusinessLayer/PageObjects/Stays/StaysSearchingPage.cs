@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 using System;
@@ -75,13 +76,27 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             return this;
         }
 
-        public StaysSearchingPage SelectPersonsValues(int adultsCount, int childrenCount, int roomsCount)
+        public StaysSearchingPage SelectPersonsValues(int adultsCount, int childrenCount, int roomsCount, params int[] age)
         {
             adultsAdderElement.SetValue(adultsCount);
             childrenAdderElement.SetValue(childrenCount);
+            SelectAgeForChildren(age);
             roomsAdderElement.SetValue(roomsCount);
             return this;
         }
 
+        public StaysSearchingPage SelectAgeForChildren(params int[] age)
+        {
+            for (int i = 0; i < age.Length; i++)
+            {
+                var element = new BaseWebElement(CreateChoosingChildAgeLocator(i));
+                var selectElement = new SelectElement(element.Element);
+                selectElement.SelectByValue(age[i].ToString());
+            }
+            return this;
+        }
+
+        public By CreateChoosingChildAgeLocator(int id)
+            => By.XPath($"//select[@data-group-child-age='{id}']");
     }
 }

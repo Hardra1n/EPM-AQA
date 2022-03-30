@@ -22,13 +22,17 @@ namespace TestLayer.Stays
         {
             DateTime stayFromDate = DateTime.Now;
             DateTime stayToDate = DateTime.Now.AddDays(1);
+            int adultsCount = 5;
+            int childrenCount = 2;
+            int roomsCount = 3;
+            int[] childrenAge = new int[] {15, 16};
 
             _page.EnterDestination(destination)
                  .ClickCalendarMenu()
                  .SelectDatesToStay(stayFromDate, stayToDate)
                  .ClickPersonsMenu()
-                 .SelectPersonsValues(5, 3, 3);
-            
+                 .SelectPersonsValues(adultsCount, childrenCount, roomsCount, childrenAge);
+
             Assert.Fail("Not fully implemented yet");
         }
     }
