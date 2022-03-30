@@ -9,6 +9,7 @@ using System.Threading;
 namespace TestLayer.Stays
 {
     [TestFixture]
+    [Category("All")]
     public class SearchingPageTests : BaseTest
     {
         private StaysSearchingPage _page;
@@ -20,6 +21,7 @@ namespace TestLayer.Stays
         }
 
         [Test]
+        [Category("Smoke")]
         public void CorrectStaysSearchingTest()
         {
             StaysSearchingContext context = StaysSearchingContext.GetDefaultContext();
