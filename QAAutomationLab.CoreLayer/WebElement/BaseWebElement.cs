@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.Logging;
 using Serilog;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace QAAutomationLab.CoreLayer.WebElement
         public ILogger _logger;
 
         public IWebElement Element { get; private set; }
+
+        public WebDriverWait Wait { get; private set; }
 
         public By Locator { get; private set; }
 
@@ -35,12 +38,14 @@ namespace QAAutomationLab.CoreLayer.WebElement
             _logger = ReportPortalLogger.GetInstance().Logger;
             Locator = locator;
             Element = _driver.FindElement(Locator);
+            Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
         }
 
         public BaseWebElement(IWebElement element)
         {
             _logger = ReportPortalLogger.GetInstance().Logger;
             Element = element;
+            Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
         }
 
         public BaseWebElement(IWebElement element, By locator)
@@ -48,6 +53,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
             _logger = ReportPortalLogger.GetInstance().Logger;
             Element = element;
             Locator = locator;
+            Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
         }
 
         public void SendKeys(string text)
