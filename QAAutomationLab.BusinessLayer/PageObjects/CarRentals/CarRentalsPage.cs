@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
@@ -8,19 +9,21 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
     {
         private const string _title = "car hire";
 
-        private BaseWebElement _sameLocationSelector = new BaseWebElement(By.XPath("//label[contains(text(),'same location')]"));
+        private BaseWebElement _sameLocationSelector = new BaseWebElement(By.XPath("//label[@for='return-location-same']"));
 
-        private BaseWebElement _differentLocationSelector = new BaseWebElement(By.XPath("//label[contains(text(),'different location')]"));
+        private BaseWebElement _differentLocationSelector = new BaseWebElement(By.XPath("//label[@for='return-location-different']"));
 
-        private BaseWebElement _pickUpLocationField = new BaseWebElement(By.XPath("//input[contains(@placeholder,'Pick-up location')]"));
+        private BaseWebElement _pickUpLocationField = new BaseWebElement(By.XPath("//input[@id='ss_origin']"));
 
-        private BaseWebElement _dropOffLocationField = new BaseWebElement(By.XPath("//input[contains(@placeholder,'Drop-off location')]"));
+        private BaseWebElement _dropOffLocationField = new BaseWebElement(By.XPath("//input[@id='ss']"));
 
-        private BaseWebElement _searchButton = new BaseWebElement(By.XPath("//span[contains(text(),'Search')]/.."));
+        private BaseWebElement _searchButton = new BaseWebElement(By.XPath("//button[@type='submit']"));
 
-        private BaseWebElement _firstSearchSuggestion = new BaseWebElement(By.XPath("//ul[contains(@aria-label,'suggested destinations')]//li"));
+        private BaseWebElement _invalidSearchRequrstMessage = new BaseWebElement(By.XPath("//div[@id='destination__error']"));
 
+        private readonly By _pickUpFirstSearchSuggestion =By.XPath("//div[@data-visible='rentalcars']//ul//li");
 
+        private readonly By _dropOffFirstSearchSuggestion =By.XPath("//input[@id='ss']/../..//li");
 
         public CarRentalsPage():base()
         {
@@ -55,9 +58,20 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return this;
         }
 
-        public CarRentalsPage ChooseFirstSearchSuggestion()
+        public CarRentalsPage ChooseFirstDropOffSuggestion(string location) 
         {
-            _firstSearchSuggestion.Click();
+            _dropOffLocationField.Wait.Until(x => x.FindElement(_dropOffFirstSearchSuggestion).Text.Contains(location));
+
+            DriverInstance.FindElement(_dropOffFirstSearchSuggestion).Click();
+
+            return this;
+        }
+
+        public CarRentalsPage ChooseFirstPickUpSuggestion(string location)
+        {
+            _pickUpLocationField.Wait.Until(x => x.FindElement(_pickUpFirstSearchSuggestion).Text.Contains(location));
+
+            DriverInstance.FindElement(_pickUpFirstSearchSuggestion).Click();
 
             return this;
         }
@@ -67,6 +81,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             _searchButton.Click();
 
             return new SearchResultsPage();
+        }
+
+        public bool IsErrorMessageShown() 
+        {
+            return _invalidSearchRequrstMessage.Displayed || _invalidSearchRequrstMessage.Enabled;
         }
     }
 }
