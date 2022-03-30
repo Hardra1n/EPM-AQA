@@ -39,6 +39,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
                 AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Rooms']"))
             };
 
+        private BaseWebElement _destinationErrorBanner = new(By.XPath("//div[@class='fe_banner__message']"));
+
 
         public StaysSearchingPage() : base() { }
 
@@ -52,6 +54,12 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         {
             _searchButton.Click();
             return new StaysSearchResultsPage();
+        }
+
+        public StaysSearchingPage ClickSearchButtonWithoutNavigating()
+        {
+            _searchButton.Click();
+            return this;
         }
 
         public StaysSearchingPage ClickCalendarMenu()
@@ -98,5 +106,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         public By CreateChoosingChildAgeLocator(int id)
             => By.XPath($"//select[@data-group-child-age='{id}']");
+
+        public string GetDestinationErrorMessage() => _destinationErrorBanner.Text;
+
     }
 }
