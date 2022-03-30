@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 using System;
@@ -101,6 +102,17 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
                 var selectElement = new SelectElement(element.Element);
                 selectElement.SelectByValue(age[i].ToString());
             }
+            return this;
+        }
+        public StaysSearchingPage AddSearchingContext(StaysSearchingContext context)
+        {
+            EnterDestination(context.Destination);
+            ClickCalendarMenu().SelectDatesToStay(context.DateFrom, 
+                                                  context.DateTo);
+            ClickPersonsMenu().SelectPersonsValues(context.AdultsCount,
+                                                   context.ChildrenCount,
+                                                   context.RoomsCount,
+                                                   context.ChildrenAge);
             return this;
         }
 
