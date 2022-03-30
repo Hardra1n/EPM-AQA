@@ -27,13 +27,14 @@ namespace TestLayer.Stays
             int roomsCount = 3;
             int[] childrenAge = new int[] {15, 16};
 
-            _page.EnterDestination(destination)
-                 .ClickCalendarMenu()
-                 .SelectDatesToStay(stayFromDate, stayToDate)
-                 .ClickPersonsMenu()
-                 .SelectPersonsValues(adultsCount, childrenCount, roomsCount, childrenAge);
+            var resultpage = _page.EnterDestination(destination)
+                                  .ClickCalendarMenu()
+                                  .SelectDatesToStay(stayFromDate, stayToDate)
+                                  .ClickPersonsMenu()
+                                  .SelectPersonsValues(adultsCount, childrenCount, roomsCount, childrenAge)
+                                  .ClickSearchButton();
 
-            Assert.Fail("Not fully implemented yet");
+            Assert.That(resultpage is StaysSearchResultsPage, Is.True);
         }
     }
 }
