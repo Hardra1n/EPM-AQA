@@ -15,6 +15,29 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         private BaseWebElement personsDropDownMenu => new(By.XPath("//label[@id='xp__guests__toggle']"));
 
+        private AdderWebElement adultsAdderElement
+            => new()
+            {
+                ValueElement = new(By.XPath("//div[contains(@class, 'adult')]//span[@data-bui-ref='input-stepper-value']")),
+                RemoveOneFromValueButton = new(By.XPath("//button[@aria-label = 'Decrease number of Adults']")),
+                AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Adults']"))
+            };
+
+        private AdderWebElement childrenAdderElement
+            => new()
+            {
+                ValueElement = new(By.XPath("//div[contains(@class, 'children')]//span[@data-bui-ref='input-stepper-value']")),
+                RemoveOneFromValueButton = new(By.XPath("//button[@aria-label = 'Decrease number of Children']")),
+                AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Children']"))
+            };
+        private AdderWebElement roomsAdderElement
+            => new()
+            {
+                ValueElement = new(By.XPath("//div[contains(@class, 'rooms')]//span[@data-bui-ref='input-stepper-value']")),
+                RemoveOneFromValueButton = new(By.XPath("//button[@aria-label = 'Decrease number of Rooms']")),
+                AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Rooms']"))
+            };
+
 
         public StaysSearchingPage() : base() { }
 
@@ -49,6 +72,14 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         public StaysSearchingPage ClickPersonsMenu()
         {
             personsDropDownMenu.Click();
+            return this;
+        }
+
+        public StaysSearchingPage SelectPersonsValues(int adultsCount, int childrenCount, int roomsCount)
+        {
+            adultsAdderElement.SetValue(adultsCount);
+            childrenAdderElement.SetValue(childrenCount);
+            roomsAdderElement.SetValue(roomsCount);
             return this;
         }
 

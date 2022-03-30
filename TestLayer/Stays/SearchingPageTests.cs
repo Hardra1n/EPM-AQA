@@ -25,7 +25,9 @@ namespace TestLayer.Stays
 
             _page.EnterDestination(destination)
                  .ClickCalendarMenu()
-                 .SelectDatesToStay(stayFromDate, stayToDate);
+                 .SelectDatesToStay(stayFromDate, stayToDate)
+                 .ClickPersonsMenu()
+                 .SelectPersonsValues(5, 3, 3);
             
             Assert.Fail("Not fully implemented yet");
         }
