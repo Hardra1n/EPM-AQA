@@ -7,9 +7,24 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
     {
         private const string _title = "at discounted rates";
 
+        private readonly By _noResultsMessage = By.XPath("//div[@class='no_results']");
+
         public SearchResultsPage() : base() 
         {
             DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
+        }
+
+        public bool IsNoResultsMessageShown()
+        {
+            try
+            {
+                DriverInstance.FindElement(_noResultsMessage);
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
         }
     }
 }
