@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace TestLayer.Stays
 {
     [TestFixture]
+    [Category("All")]
     public class StaysSearchResultsPageTests : BaseTest
     {
         private StaysSearchResultsPage _page;
@@ -27,6 +28,7 @@ namespace TestLayer.Stays
         }
 
         [Test]
+        [Category("Smoke")]
         public void CorrectNavigatingToAdPage()
         {
             string expectedAdPageTitleSubstring = _page.GetFirstAddTitle();
