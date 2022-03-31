@@ -1,12 +1,8 @@
 ﻿using OpenQA.Selenium;
-using QAAutomationLab.BusinessLayer.Utilities;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {

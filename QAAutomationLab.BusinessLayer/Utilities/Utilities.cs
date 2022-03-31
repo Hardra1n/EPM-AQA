@@ -30,7 +30,5 @@ namespace QAAutomationLab.BusinessLayer.Utilities
                 driver.SwitchTo().Window(newHandle);
             }
         }
-
-        public delegate T Operation<T>();
     }
 }

@@ -1,14 +1,7 @@
 ﻿using NUnit.Framework;
 using QAAutomationLab.BusinessLayer.Models;
-using QAAutomationLab.BusinessLayer.PageObjects;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.BusinessLayer.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace TestLayer.Stays
 {
