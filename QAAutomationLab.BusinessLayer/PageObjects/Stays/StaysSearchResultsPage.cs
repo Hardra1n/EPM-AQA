@@ -27,6 +27,9 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             => new(DriverInstance.FindElements(
                 By.XPath("//div[@data-filters-group = 'class']//div[@data-filters-item]")).FirstOrDefault());
 
+        private BaseWebElement FirstShowOnMapButton 
+            => new(DriverInstance.FindElements(By.XPath("//div[@data-testid = 'location']/a")).FirstOrDefault());
+
         public BaseWebElement FilteringOverlayElement 
             => new(By.XPath("//div[@data-testid='overlay-card']"));
 
@@ -75,6 +78,12 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
                 }
             });
             return this;
+        }
+
+        public StaysAdPage ClickFirstShowOnMapButton()
+        { 
+            Utilities.Utilities.SwitchToNewHandle(FirstShowOnMapButton.Click);
+            return new StaysAdPage();
         }
     }
 }

@@ -4,6 +4,7 @@ using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.BusinessLayer.Utilities;
 using System;
+using System.Threading;
 
 namespace TestLayer.Stays
 {
@@ -42,6 +43,14 @@ namespace TestLayer.Stays
             int? numberOfAdsAfterFiltering = _page.GetAdsCount();
 
             Assert.That(numberOfAdsAfterFiltering, Is.Not.EqualTo(numberOfAdsBeforeFiltering));
+        }
+
+        [Test]
+        public void StayingPlaceShowsOnMapSuccessfully()
+        {
+            var page = _page.ClickFirstShowOnMapButton();
+
+            Assert.That(page.IsMapDisplayed(), Is.True);
         }
     }
 }

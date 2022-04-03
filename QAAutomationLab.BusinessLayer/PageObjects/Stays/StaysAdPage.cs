@@ -13,6 +13,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         private BaseWebElement _reserveButton = new(By.Id("hp_book_now_button"));
 
+        private BaseWebElement _mapContainer = new(By.Id("b_map_container"));
+
         public StaysAdPage() : base()
         {
             try
@@ -26,5 +28,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         }
 
         public string GetHotelName() => _hotelNameElement.Text;
+
+        public bool IsMapDisplayed() => _mapContainer.Displayed;
     }
 }
