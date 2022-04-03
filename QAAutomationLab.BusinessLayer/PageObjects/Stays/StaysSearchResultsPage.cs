@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Linq;
 
@@ -15,10 +17,18 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         private BaseWebElement AdsHeadElement => new(By.XPath("//h1"));
 
         private BaseWebElement FirstAdNavigatingButton
-            => new(DriverInstance.FindElements(By.XPath("//div[@data-testid='property-card']//a[@role='button']")).FirstOrDefault());
+            => new(DriverInstance.FindElements(
+                By.XPath("//div[@data-testid='property-card']//a[@role='button']")).FirstOrDefault());
 
         private BaseWebElement FirstAdTitle
             => new(DriverInstance.FindElements(By.XPath("//div[@data-testid = 'title']")).FirstOrDefault());
+
+        private BaseWebElement FirstFilteringStarsOption
+            => new(DriverInstance.FindElements(
+                By.XPath("//div[@data-filters-group = 'class']//div[@data-filters-item]")).FirstOrDefault());
+
+        public BaseWebElement FilteringOverlayElement 
+            => new(By.XPath("//div[@data-testid='overlay-card']"));
 
         public StaysSearchResultsPage() : base()
         {
@@ -45,6 +55,26 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
                 return new StaysAdPage();
             }
             throw new ArgumentException(_noAdsExceptionMessage);
+        }
+
+        public StaysSearchResultsPage ClickFirstFilteringStarsOption()
+        {
+            FirstFilteringStarsOption.Click();
+            var waiter = new WebDriverWait(DriverInstance, TimeSpan.FromSeconds(10));
+            waiter.PollingInterval = TimeSpan.FromSeconds(1);
+            waiter.Until(x => FilteringOverlayElement.Displayed);
+            waiter.Until(x =>
+            {
+                try
+                {
+                    return !FilteringOverlayElement.Displayed;
+                }
+                catch (NoSuchElementException)
+                {
+                    return true;
+                }
+            });
+            return this;
         }
     }
 }
