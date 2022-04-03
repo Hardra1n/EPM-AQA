@@ -2,7 +2,6 @@
 using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
-using SeleniumExtras.WaitHelpers;
 using System;
 using System.Linq;
 

@@ -7,11 +7,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
     public class StaysAdPage : BasePage
     {
-        private BaseWebElement _titleElement = new(By.XPath("//title"));
-
         private BaseWebElement _hotelNameElement = new(By.Id("hp_hotel_name"));
-
-        private BaseWebElement _reserveButton = new(By.Id("hp_book_now_button"));
 
         private BaseWebElement _mapContainer = new(By.Id("b_map_container"));
 
