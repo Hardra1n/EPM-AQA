@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
@@ -63,5 +64,14 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             return this;
         }
        
+        public StaysBookingDetailsPage AddBookingDetailsContext(StaysBookingDetailsContext context)
+        {
+            EnterFirstName(context.FirstName);
+            EnterLastName(context.LastName);
+            EnterEmail(context.Email);
+            EnterEmailConfirm(context.ConfirmEmail);
+            SelectDefaultArriavalTime();
+            return this;
+        }
     }
 }

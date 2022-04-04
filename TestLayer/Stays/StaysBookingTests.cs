@@ -33,17 +33,7 @@ namespace TestLayer.Stays
         [Category("Smoke")]
         public void CorrectNavigatingToFinalStep()
         {
-            string firstname = "Korora";
-            string lastname = "Fazo";
-            string email = "differentmail@yand.ru";
-            string confirmemail = email;
-
-
-            var resultPage = _page.EnterFirstName(firstname)
-                                  .EnterLastName(lastname)
-                                  .EnterEmail(email)
-                                  .EnterEmailConfirm(confirmemail)
-                                  .SelectDefaultArriavalTime()
+            var resultPage = _page.AddBookingDetailsContext(StaysBookingDetailsContext.GetDefaultContext())
                                   .ClickConfirmButton();
 
             Assert.That(resultPage is StaysBookingFinalStepPage, Is.True);
