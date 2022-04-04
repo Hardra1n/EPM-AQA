@@ -28,7 +28,7 @@ namespace TestLayer.Stays
 
             string actualAdPageTitle = _page.ClickFirstAdNavigatingButton().GetHotelName();
 
-            Assert.That(actualAdPageTitle, Does.Contain(expectedAdPageTitleSubstring));
+            Assert.That(actualAdPageTitle, Is.EqualTo(expectedAdPageTitleSubstring));
         }
 
         [Test]

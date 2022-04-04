@@ -32,7 +32,7 @@ namespace TestLayer.Stays
                                           .ClickNavigatingToBookingButton()
                                           .GetHotelName();
 
-            Assert.That(actualHotelName, Is.SubsetOf(expectedHotelName));
+            Assert.That(actualHotelName, Is.EqualTo(expectedHotelName));
         }
 
     }

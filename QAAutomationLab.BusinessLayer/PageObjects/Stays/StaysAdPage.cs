@@ -30,7 +30,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             }
         }
 
-        public string GetHotelName() => _hotelNameElement.Text;
+        public string GetHotelName()
+        {
+            int hotelNameStartIndex = _hotelNameElement.Text.LastIndexOf('\n') + 1;
+            return _hotelNameElement.Text.Substring(hotelNameStartIndex);
+        }
 
         public bool IsMapDisplayed() => _mapContainer.Displayed;
 
