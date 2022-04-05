@@ -31,7 +31,7 @@ namespace TestLayer.CarRentals
                 .ChooseSameLocation()
                 .EnterPickUpLocation(location);
 
-            Assert.Throws<OpenQA.Selenium.NoSuchElementException>(() => page.ClickSearchButton());
+            Assert.Throws<OpenQA.Selenium.WebDriverTimeoutException> (() => page.ClickSearchButton());
 
             bool vissible = page.IsErrorMessageShown();
 
