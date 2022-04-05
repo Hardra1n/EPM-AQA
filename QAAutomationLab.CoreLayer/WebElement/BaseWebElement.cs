@@ -4,6 +4,7 @@ using QAAutomationLab.CoreLayer.Logging;
 using Serilog;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace QAAutomationLab.CoreLayer.WebElement
 {
@@ -146,11 +147,11 @@ namespace QAAutomationLab.CoreLayer.WebElement
             }
         }
 
-        public IWebElement FindElement(By by)
+        public BaseWebElement FindElement(By by)
         {
             try
             {
-                IWebElement element = Element.FindElement(by);
+                BaseWebElement element = new(Element.FindElement(by));
                 _logger.Information("FindElement:Success");
 
                 return element;
@@ -163,11 +164,12 @@ namespace QAAutomationLab.CoreLayer.WebElement
             }
         }
 
-        public IReadOnlyCollection<IWebElement> FindElements(By by)
+        public IReadOnlyCollection<BaseWebElement> FindElements(By by)
         {
             try
             {
-                IReadOnlyCollection<IWebElement> elements = Element.FindElements(by);
+                IReadOnlyCollection<BaseWebElement> elements 
+                    = Element.FindElements(by).Select(x => new BaseWebElement(x)).ToList();
                 _logger.Information("FindElements:Success");
 
                 return elements;
