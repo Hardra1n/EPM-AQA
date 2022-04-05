@@ -37,8 +37,9 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             _logger = ReportPortalLogger.GetInstance().Logger;
             Locator = locator;
-            Element = _driver.FindElement(Locator);
             Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
+            Wait.Until(x => x.FindElement(locator));
+            Element = _driver.FindElement(Locator);
         }
 
         public BaseWebElement(IWebElement element)
@@ -58,6 +59,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
 
         public void SendKeys(string text)
         {
+            Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
             try
             {
                 Element.SendKeys(text);
@@ -71,6 +73,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
 
         public void Click()
         {
+            Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
             try
             {
                 Element.Click();
