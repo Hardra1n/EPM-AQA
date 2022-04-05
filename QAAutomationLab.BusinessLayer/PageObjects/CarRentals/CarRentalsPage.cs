@@ -27,7 +27,9 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         public CarRentalsPage():base()
         {
-            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
+            WebDriverWait Wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(25));
+
+            Wait.Until(x => x.FindElement(By.XPath($"//title[contains(text(),'{_title}')]")));
         }
 
         public CarRentalsPage ChooseSameLocation() 
@@ -85,7 +87,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         public bool IsErrorMessageShown() 
         {
-            return _invalidSearchRequrstMessage.Displayed || _invalidSearchRequrstMessage.Enabled;
+            return _invalidSearchRequrstMessage.Displayed && _invalidSearchRequrstMessage.Enabled;
         }
     }
 }
