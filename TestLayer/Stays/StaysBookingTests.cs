@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using QAAutomationLab.BusinessLayer.Models;
+using QAAutomationLab.BusinessLayer.PageObjects;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.BusinessLayer.Utilities;
 using System;
@@ -37,6 +38,15 @@ namespace TestLayer.Stays
                                   .ClickConfirmButton();
 
             Assert.That(resultPage is StaysBookingFinalStepPage, Is.True);
+        }
+
+        [Test]
+        public void NotificationAppearsAfterClosingUnfinishedBooking()
+        {
+            Utilities.RunBrowser(TestsSettings.MainPageUrl);
+            bool result = _page.IsThereUnfinishedBookingNotification();
+
+            Assert.That(result, Is.True);
         }
     }
 }

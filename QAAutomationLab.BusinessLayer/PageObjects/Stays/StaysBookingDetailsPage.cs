@@ -8,6 +8,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
     public class StaysBookingDetailsPage : BasePage
     {
+        private BaseWebElement _unfinishedNotification => new(By.Id("growl_squash"));
+
         private BaseWebElement _hotelNameElement => new(By.XPath("//h1[contains(@id, 'title')]"));
 
         private BaseWebElement _firstNameInput => new(By.Name("firstname"));
@@ -73,5 +75,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             SelectDefaultArriavalTime();
             return this;
         }
+
+        public bool IsThereUnfinishedBookingNotification() => _unfinishedNotification.Displayed;
     }
 }
