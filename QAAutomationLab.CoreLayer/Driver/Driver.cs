@@ -23,7 +23,7 @@ namespace QAAutomationLab.CoreLayer.Driver
             {
                 lock (_locker)
                 {
-                    _driver = new ChromeDriver(@"D:\qa-automation-lab\QAAutomationLab.CoreLayer\Files\");
+                    _driver = new ChromeDriver(PathToDriver);
                 }
 
                 SetUpParameters();

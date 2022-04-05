@@ -17,7 +17,10 @@ namespace QAAutomationLab.BusinessLayer.Services
 
             return settings;
         }
+    }
 
+    public static class DriverSettingService
+    {
         public static void SetPathToDriver()
         {
             var pathToDriver = PathUtility.GetDriverPath();
