@@ -27,6 +27,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         public StaysBookingDetailsPage() : base() { }
 
+
         public string GetHotelName() => _hotelNameElement.Text;
 
         public StaysBookingDetailsPage EnterFirstName(string firstname)

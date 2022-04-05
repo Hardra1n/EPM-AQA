@@ -2,7 +2,6 @@
 using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.BusinessLayer.Utilities;
-using System.Threading;
 
 namespace TestLayer.Stays
 {

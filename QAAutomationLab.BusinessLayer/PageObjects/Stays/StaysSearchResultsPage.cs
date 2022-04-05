@@ -13,33 +13,35 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         private const string _noAdsExceptionMessage = "There are no ads on the page";
 
-        private BaseWebElement AdsHeadElement => new(By.XPath("//h1"));
-
-        private BaseWebElement FirstAdNavigatingButton
+        private BaseWebElement _firstAdNavigatingButton
             => new(DriverInstance.FindElements(
                 By.XPath("//div[@data-testid='property-card']//a[@role='button']")).FirstOrDefault());
 
-        private BaseWebElement FirstAdTitle
+        private BaseWebElement _firstAdTitle
             => new(DriverInstance.FindElements(By.XPath("//div[@data-testid = 'title']")).FirstOrDefault());
 
-        private BaseWebElement FirstFilteringStarsOption
+        private BaseWebElement _firstFilteringStarsOption
             => new(DriverInstance.FindElements(
                 By.XPath("//div[@data-filters-group = 'class']//div[@data-filters-item]")).FirstOrDefault());
 
-        private BaseWebElement FirstShowOnMapButton 
+        private BaseWebElement _firstShowOnMapButton 
             => new(DriverInstance.FindElements(By.XPath("//div[@data-testid = 'location']/a")).FirstOrDefault());
+        
+        private BaseWebElement _adsHeadElement => new(By.XPath("//h1"));
 
-        public BaseWebElement FilteringOverlayElement 
+        public BaseWebElement _filteringOverlayElement 
             => new(By.XPath("//div[@data-testid='overlay-card']"));
+
 
         public StaysSearchResultsPage() : base()
         {
             DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
         }
 
+
         public int? GetAdsCount()
         {
-            string digits = new String(AdsHeadElement.Text.Where(c => Char.IsDigit(c)).ToArray());
+            string digits = new String(_adsHeadElement.Text.Where(c => Char.IsDigit(c)).ToArray());
             if (Int32.TryParse(digits, out int number))
                 return number;
             else
@@ -47,13 +49,13 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         }
 
         public string GetFirstAddTitle()
-            => FirstAdTitle.Text;
+            => _firstAdTitle.Text;
 
         public StaysAdPage ClickFirstAdNavigatingButton()
         {
             if (GetAdsCount() > 0)
             { 
-                Utilities.Utilities.SwitchToNewHandle(FirstAdNavigatingButton.Click);
+                Utilities.Utilities.SwitchToNewHandle(_firstAdNavigatingButton.Click);
                 return new StaysAdPage();
             }
             throw new ArgumentException(_noAdsExceptionMessage);
@@ -61,15 +63,15 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         public StaysSearchResultsPage ClickFirstFilteringStarsOption()
         {
-            FirstFilteringStarsOption.Click();
+            _firstFilteringStarsOption.Click();
             var waiter = new WebDriverWait(DriverInstance, TimeSpan.FromSeconds(10));
             waiter.PollingInterval = TimeSpan.FromSeconds(1);
-            waiter.Until(x => FilteringOverlayElement.Displayed);
+            waiter.Until(x => _filteringOverlayElement.Displayed);
             waiter.Until(x =>
             {
                 try
                 {
-                    return !FilteringOverlayElement.Displayed;
+                    return !_filteringOverlayElement.Displayed;
                 }
                 catch (NoSuchElementException)
                 {
@@ -81,7 +83,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         public StaysAdPage ClickFirstShowOnMapButton()
         { 
-            Utilities.Utilities.SwitchToNewHandle(FirstShowOnMapButton.Click);
+            Utilities.Utilities.SwitchToNewHandle(_firstShowOnMapButton.Click);
             return new StaysAdPage();
         }
     }

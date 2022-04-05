@@ -18,6 +18,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         private BaseWebElement _navigatingToBookingButton 
             => new(By.XPath("//div[contains(@data-component, 'reservation-cta')]/button"));
 
+
         public StaysAdPage() : base()
         {
             try
@@ -29,6 +30,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
                 throw new Exception(ex.Message + "\n Driver hasn't navigated to Ad page");
             }
         }
+
 
         public string GetHotelName()
         {
