@@ -27,7 +27,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         public CarRentalsPage():base()
         {
-            WebDriverWait Wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(25));
+            WebDriverWait Wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(10));
 
             Wait.Until(x => x.FindElement(By.XPath($"//title[contains(text(),'{_title}')]")));
         }
