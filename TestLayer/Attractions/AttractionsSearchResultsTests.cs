@@ -29,16 +29,16 @@ namespace TestLayer.Attractions
         {
             // Arrange
             var mainPageUrl = TestsSettings.MainPageUrl;
-            var expectedTitle = "Edge Sky Deck Admission Tickets";
+            var expectedCount = 4;
             var searchResultPage = Utilities.RunBrowser(mainPageUrl).
                 GoToAttractions().
                 GoToSearchResult("New");
 
             // Act
-            var similarFirstResult = searchResultPage.SearchForSimilarActivities("Edge").ShowFirstResultTitle();
+            var similarResults = searchResultPage.SearchForSimilarActivities("Edge").FindAllResults();
 
             // Assert
-            similarFirstResult.Should().Contain(expectedTitle);
+            similarResults.Count.Should().Be(expectedCount);
         }
 
         [Test]

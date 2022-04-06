@@ -2,6 +2,7 @@
 using QAAutomationLab.BusinessLayer.Waiters;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
+using System.Collections.Generic;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 {
@@ -51,6 +52,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
         public SearchResultsPage SearchForSimilarActivities(string text)
         {
             _searchField.SendKeys(text);
+            DriverInstance.WaitForElementToAppear(_nightBusLocator);
             _submitButton.Click();
 
             return this;
@@ -63,6 +65,12 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             _nightBusResult.Click();
 
             return new AttractionSinglePage();
+        }
+
+        public IReadOnlyCollection<IWebElement> FindAllResults()
+        {
+            DriverInstance.WaitForElementsCountToBeExpected(_firstResultLocator, 4);
+            return DriverInstance.FindElements(_firstResultLocator);
         }
     }
 }
