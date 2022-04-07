@@ -16,6 +16,8 @@ namespace TestLayer.CarRentals
                  .ChooseSameLocation()
                  .EnterPickUpLocation(location)
                  .ChooseFirstPickUpSuggestion(location)
+                 .ClickAgeCheckBox()
+                 .EnterAge("21")
                  .ClickSearchButton()
                  .IsNoResultsMessageShown();
 
