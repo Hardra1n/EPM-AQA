@@ -9,8 +9,8 @@
     }
   },
   "launch": {
-    "name": "test_example",
-    "description": "this is description",
+    "name": "AT Lab 2022CW7.Net",
+    "description": "Booking.com site UI automation testing.",
     "debugMode": false,
     "attributes": []
   },
