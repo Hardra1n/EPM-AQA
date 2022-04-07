@@ -10,7 +10,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private BaseWebElement _activitiesCheckBox => new(By.XPath("//span[text()=\"Activities\"]/.."));
         
-        private BaseWebElement _priceCheckBox => new(By.XPath("(//div[@class=\"css-18yal0d\"])[9]"));
+        private BaseWebElement _priceCheckBox => new(By.XPath("(//div[@class=\"css-18yal0d\"])[10]"));
 
         private BaseWebElement _freeCancellationCheckBox => new(By.XPath("//span[text()=\"Free cancellation\"]/.."));
 
