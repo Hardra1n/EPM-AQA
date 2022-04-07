@@ -61,7 +61,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             try
             {
-                Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Displayed);
+                Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
                 Element.SendKeys(text);
                 _logger.Information("SendKeys:Success");
             }
@@ -75,7 +75,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             try
             {
-                Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Displayed);
+                Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
                 Element.Click();
                 _logger.Information("Click:Success");
             }
@@ -123,7 +123,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             try
             {
-                Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Displayed);
+                Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
                 Element.Clear();
                 _logger.Information("Clear:Success");
             }
