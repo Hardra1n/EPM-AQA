@@ -22,7 +22,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             {
                 ValueElement = new(By.XPath("//div[contains(@class, 'adult')]//span[@data-bui-ref='input-stepper-value']")),
                 RemoveOneFromValueButton = new(By.XPath("//button[@aria-label = 'Decrease number of Adults']")),
-                AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Adults']"))
+                AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Adults']")),
             };
 
         private AdderWebElement _childrenAdderElement
@@ -30,18 +30,18 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             {
                 ValueElement = new(By.XPath("//div[contains(@class, 'children')]//span[@data-bui-ref='input-stepper-value']")),
                 RemoveOneFromValueButton = new(By.XPath("//button[@aria-label = 'Decrease number of Children']")),
-                AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Children']"))
+                AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Children']")),
             };
+
         private AdderWebElement _roomsAdderElement
             => new()
             {
                 ValueElement = new(By.XPath("//div[contains(@class, 'rooms')]//span[@data-bui-ref='input-stepper-value']")),
                 RemoveOneFromValueButton = new(By.XPath("//button[@aria-label = 'Decrease number of Rooms']")),
-                AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Rooms']"))
+                AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Rooms']")),
             };
 
-        private BaseWebElement _destinationErrorBanner = new(By.XPath("//div[@class='fe_banner__message']"));
-
+        private BaseWebElement _destinationErrorBanner => new(By.XPath("//div[@class='fe_banner__message']"));
 
         public StaysSearchingPage() : base() { }
 
@@ -71,13 +71,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         public StaysSearchingPage SelectDatesToStay(DateTime stayFromDate, DateTime stayToDate)
         {
-            _calendarDropDownMenu.ChooseFromToDates(CreateChoosingDateXPathLocator(stayFromDate),
-                                                   CreateChoosingDateXPathLocator(stayToDate));
+            _calendarDropDownMenu.ChooseFromToDates(
+                CreateChoosingDateXPathLocator(stayFromDate),
+                CreateChoosingDateXPathLocator(stayToDate));
             return this;
         }
-
-        private By CreateChoosingDateXPathLocator(DateTime date) 
-            => By.XPath($"//td[@data-date = '{date.ToString("yyyy-MM-dd")}']");
 
         public StaysSearchingPage ClickPersonsMenu()
         {
@@ -102,24 +100,30 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
                 var selectElement = new SelectElement(element.Element);
                 selectElement.SelectByValue(age[i].ToString());
             }
+
             return this;
         }
+
         public StaysSearchingPage AddSearchingContext(StaysSearchingContext context)
         {
             EnterDestination(context.Destination);
-            ClickCalendarMenu().SelectDatesToStay(context.DateFrom, 
-                                                  context.DateTo);
-            ClickPersonsMenu().SelectPersonsValues(context.AdultsCount,
-                                                   context.ChildrenCount,
-                                                   context.RoomsCount,
-                                                   context.ChildrenAge);
+            ClickCalendarMenu().SelectDatesToStay(
+                context.DateFrom,
+                context.DateTo);
+            ClickPersonsMenu().SelectPersonsValues(
+                context.AdultsCount,
+                context.ChildrenCount,
+                context.RoomsCount,
+                context.ChildrenAge);
             return this;
         }
 
-        public By CreateChoosingChildAgeLocator(int id)
-            => By.XPath($"//select[@data-group-child-age='{id}']");
-
         public string GetDestinationErrorMessage() => _destinationErrorBanner.Text;
 
+        private By CreateChoosingDateXPathLocator(DateTime date)
+            => By.XPath($"//td[@data-date = '{date.ToString("yyyy-MM-dd")}']");
+
+        private By CreateChoosingChildAgeLocator(int id)
+            => By.XPath($"//select[@data-group-child-age='{id}']");
     }
 }

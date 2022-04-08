@@ -1,11 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using QAAutomationLab.BusinessLayer.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestLayer.Attractions
 {

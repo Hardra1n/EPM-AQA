@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 

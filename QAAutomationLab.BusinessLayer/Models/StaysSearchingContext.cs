@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QAAutomationLab.BusinessLayer.Models
 {
     public class StaysSearchingContext
     {
         public string Destination { get; set; }
-        
+
         public DateTime DateFrom { get; set; }
-        
+
         public DateTime DateTo { get; set; }
 
         public int AdultsCount { get; set; }
@@ -22,7 +18,7 @@ namespace QAAutomationLab.BusinessLayer.Models
 
         public int[] ChildrenAge { get; set; }
 
-        public static StaysSearchingContext GetDefaultContext() 
+        public static StaysSearchingContext GetDefaultContext()
         {
             return new StaysSearchingContext()
             {
@@ -32,7 +28,7 @@ namespace QAAutomationLab.BusinessLayer.Models
                 AdultsCount = 3,
                 ChildrenCount = 1,
                 RoomsCount = 2,
-                ChildrenAge = new int[] { 13 }
+                ChildrenAge = new int[] { 13 },
             };
         }
     }

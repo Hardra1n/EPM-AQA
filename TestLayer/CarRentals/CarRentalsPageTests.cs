@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using QAAutomationLab.BusinessLayer.PageObjects.CarRentals;
 using QAAutomationLab.BusinessLayer.Utilities;
 
 namespace TestLayer.CarRentals
