@@ -1,0 +1,6 @@
+﻿<Project>
+	<!-- StyleCop Analyzers Configuration-->
+	<ItemGroup>
+		<AdditionalFiles Include="$(MSBuildThisFileDirectory)/QAAutomationLab.CoreLayer/stylecop.json" Link="stylecop.json"/>
+	</ItemGroup>
+</Project>

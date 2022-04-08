@@ -3,13 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
-	<ItemGroup>
-		<AdditionalFiles Include="..\QAAutomationLab.CoreLayer\stylecop.json">
-			<Link>stylecop.json</Link>
-		</AdditionalFiles>
-	</ItemGroup>
-
+	
   <ItemGroup>
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
