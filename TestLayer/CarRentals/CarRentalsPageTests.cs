@@ -16,6 +16,8 @@ namespace TestLayer.CarRentals
                  .ChooseSameLocation()
                  .EnterPickUpLocation(location)
                  .ChooseFirstPickUpSuggestion(location)
+                 .ClickAgeCheckBox()
+                 .EnterAge("21")
                  .ClickSearchButton()
                  .IsNoResultsMessageShown();
 
@@ -31,7 +33,7 @@ namespace TestLayer.CarRentals
                 .ChooseSameLocation()
                 .EnterPickUpLocation(location);
 
-            Assert.Throws<OpenQA.Selenium.NoSuchElementException>(() => page.ClickSearchButton());
+            Assert.Throws<OpenQA.Selenium.WebDriverTimeoutException> (() => page.ClickSearchButton());
 
             bool vissible = page.IsErrorMessageShown();
 
