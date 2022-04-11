@@ -33,6 +33,5 @@ namespace TestLayer.Stays
 
             Assert.That(actualHotelName, Is.EqualTo(expectedHotelName));
         }
-
     }
 }

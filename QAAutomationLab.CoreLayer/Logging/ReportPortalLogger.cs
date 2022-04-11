@@ -1,6 +1,6 @@
-﻿using ReportPortal.Serilog;
+﻿using System;
+using ReportPortal.Serilog;
 using Serilog;
-using System;
 
 namespace QAAutomationLab.CoreLayer.Logging
 {
@@ -8,12 +8,12 @@ namespace QAAutomationLab.CoreLayer.Logging
     {
         private static readonly Lazy<ReportPortalLogger> _instance = new(new ReportPortalLogger());
 
-        public ILogger Logger { get; private set; }
-
         private ReportPortalLogger()
         {
             Logger = new LoggerConfiguration().WriteTo.ReportPortal().CreateLogger();
         }
+
+        public ILogger Logger { get; private set; }
 
         public static ReportPortalLogger GetInstance()
         {

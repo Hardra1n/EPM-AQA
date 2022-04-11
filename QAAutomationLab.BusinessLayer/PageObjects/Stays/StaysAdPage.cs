@@ -1,25 +1,15 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
-using System;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
     public class StaysAdPage : BasePage
     {
-        private BaseWebElement _hotelNameElement => new(By.Id("hp_hotel_name"));
-
-        private BaseWebElement _mapContainer => new(By.Id("b_map_container"));
-
-        private BaseWebElement _firstRoomSelector 
-            => new(By.XPath("//select[contains(@data-component, 'select-rooms')]"));
-
-        private BaseWebElement _navigatingToBookingButton 
-            => new(By.XPath("//div[contains(@data-component, 'reservation-cta')]/button"));
-
-
-        public StaysAdPage() : base()
+        public StaysAdPage()
+            : base()
         {
             try
             {
@@ -31,6 +21,15 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             }
         }
 
+        private BaseWebElement _hotelNameElement => new(By.Id("hp_hotel_name"));
+
+        private BaseWebElement _mapContainer => new(By.Id("b_map_container"));
+
+        private BaseWebElement _firstRoomSelector
+            => new(By.XPath("//select[contains(@data-component, 'select-rooms')]"));
+
+        private BaseWebElement _navigatingToBookingButton
+            => new(By.XPath("//div[contains(@data-component, 'reservation-cta')]/button"));
 
         public string GetHotelName()
         {

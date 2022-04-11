@@ -1,9 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
-using System;
 
-namespace QAAutomationLab.BusinessLayer.Waiters
+namespace QAAutomationLab.CoreLayer.Waiters
 {
     public static class TestWaiters
     {

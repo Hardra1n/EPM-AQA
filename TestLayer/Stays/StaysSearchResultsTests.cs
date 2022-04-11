@@ -7,10 +7,10 @@ namespace TestLayer.Stays
 {
     [TestFixture]
     [Category("All")]
-    public class StaysSearchResultsPageTests : BaseTest
+    public class StaysSearchResultsTests : BaseTest
     {
         private StaysSearchResultsPage _page;
-        
+
         [SetUp]
         public void SetUp()
         {
@@ -35,7 +35,7 @@ namespace TestLayer.Stays
         public void SearchResultsChangesAfterCheckingFilteringOptions()
         {
             int? numberOfAdsBeforeFiltering = _page.GetAdsCount();
-            
+
             _page.ClickFirstFilteringStarsOption();
             int? numberOfAdsAfterFiltering = _page.GetAdsCount();
 

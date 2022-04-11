@@ -1,18 +1,40 @@
-﻿using OpenQA.Selenium;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.Logging;
 using Serilog;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 
 namespace QAAutomationLab.CoreLayer.WebElement
 {
     public class BaseWebElement
     {
-        private IWebDriver _driver => Driver.Driver.GetInstance();
+        public BaseWebElement(By locator)
+        {
+            Logger = ReportPortalLogger.GetInstance().Logger;
+            Locator = locator;
+            Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
+            Wait.Until(x => x.FindElement(Locator));
+            Element = _driver.FindElement(Locator);
+        }
 
-        public ILogger _logger;
+        public BaseWebElement(IWebElement element)
+        {
+            Logger = ReportPortalLogger.GetInstance().Logger;
+            Element = element;
+            Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
+        }
+
+        public BaseWebElement(IWebElement element, By locator)
+        {
+            Logger = ReportPortalLogger.GetInstance().Logger;
+            Element = element;
+            Locator = locator;
+            Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
+        }
+
+        public ILogger Logger { get; }
 
         public IWebElement Element { get; private set; }
 
@@ -34,29 +56,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
 
         public Point Location => Element.Location;
 
-        public BaseWebElement(By locator)
-        {
-            _logger = ReportPortalLogger.GetInstance().Logger;
-            Locator = locator;
-            Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
-            Wait.Until(x => x.FindElement(Locator));
-            Element = _driver.FindElement(Locator);
-        }
-
-        public BaseWebElement(IWebElement element)
-        {
-            _logger = ReportPortalLogger.GetInstance().Logger;
-            Element = element;
-            Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
-        }
-
-        public BaseWebElement(IWebElement element, By locator)
-        {
-            _logger = ReportPortalLogger.GetInstance().Logger;
-            Element = element;
-            Locator = locator;
-            Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
-        }
+        private IWebDriver _driver => Driver.Driver.GetInstance();
 
         public void SendKeys(string text)
         {
@@ -64,11 +64,11 @@ namespace QAAutomationLab.CoreLayer.WebElement
             {
                 Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
                 Element.SendKeys(text);
-                _logger.Information("SendKeys:Success");
+                Logger.Information("SendKeys:Success");
             }
             catch
             {
-                _logger.Error("SendKeys:Error");
+                Logger.Error("SendKeys:Error");
             }
         }
 
@@ -78,11 +78,11 @@ namespace QAAutomationLab.CoreLayer.WebElement
             {
                 Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
                 Element.Click();
-                _logger.Information("Click:Success");
+                Logger.Information("Click:Success");
             }
             catch
             {
-                _logger.Error("Click:Error");
+                Logger.Error("Click:Error");
             }
         }
 
@@ -91,13 +91,13 @@ namespace QAAutomationLab.CoreLayer.WebElement
             try
             {
                 string attribute = Element.GetAttribute(attributeName);
-                _logger.Information("GetAttribute:Success");
+                Logger.Information("GetAttribute:Success");
 
                 return attribute;
             }
             catch
             {
-                _logger.Error("GetAttribute:Error");
+                Logger.Error("GetAttribute:Error");
 
                 throw;
             }
@@ -107,14 +107,14 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             try
             {
-                string property = Element.GetProperty(propertyName);
-                _logger.Information("GetProperty:Success");
+                string property = Element.GetDomProperty(propertyName);
+                Logger.Information("GetProperty:Success");
 
                 return property;
             }
             catch
             {
-                _logger.Error("GetProperty:Error");
+                Logger.Error("GetProperty:Error");
 
                 throw;
             }
@@ -126,11 +126,11 @@ namespace QAAutomationLab.CoreLayer.WebElement
             {
                 Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
                 Element.Clear();
-                _logger.Information("Clear:Success");
+                Logger.Information("Clear:Success");
             }
             catch
             {
-                _logger.Error("Clear:Error");
+                Logger.Error("Clear:Error");
             }
         }
 
@@ -139,13 +139,13 @@ namespace QAAutomationLab.CoreLayer.WebElement
             try
             {
                 string cssValue = Element.GetCssValue(propertyName);
-                _logger.Information("GetCssValue:Success");
+                Logger.Information("GetCssValue:Success");
 
                 return cssValue;
             }
             catch
             {
-                _logger.Error("GetCSSValue:Error");
+                Logger.Error("GetCSSValue:Error");
 
                 throw;
             }
@@ -157,13 +157,13 @@ namespace QAAutomationLab.CoreLayer.WebElement
             {
                 Wait.Until(x => Element.FindElement(by));
                 BaseWebElement element = new(Element.FindElement(by));
-                _logger.Information("FindElement:Success");
+                Logger.Information("FindElement:Success");
 
                 return element;
             }
             catch
             {
-                _logger.Error("FindElement:Error");
+                Logger.Error("FindElement:Error");
 
                 throw;
             }
@@ -173,15 +173,15 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             try
             {
-                IReadOnlyCollection<BaseWebElement> elements 
+                IReadOnlyCollection<BaseWebElement> elements
                     = Element.FindElements(by).Select(x => new BaseWebElement(x)).ToList();
-                _logger.Information("FindElements:Success");
+                Logger.Information("FindElements:Success");
 
                 return elements;
             }
             catch
             {
-                _logger.Error("FindElements:Error");
+                Logger.Error("FindElements:Error");
 
                 throw;
             }

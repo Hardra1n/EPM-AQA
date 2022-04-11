@@ -1,7 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using System.Linq;
+using OpenQA.Selenium;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
-using System.Linq;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 {
@@ -11,21 +11,22 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private readonly By _lastDateLocator = By.XPath("//td[@role=\"gridcell\"]");
 
-        private BaseWebElement _timePickerSelect => new(By.TagName("select"));
-
         private readonly By _optionLocator = By.TagName("option");
 
         private readonly By _selectLocator = By.XPath("//button[@data-testid=\"select-ticket\"]");
 
-        private BaseWebElement _plusElement => new(By.XPath("//span[.=\"+\"]/.."));
-
-        private BaseWebElement _testDateResultLocator => new(By.XPath("//div[@class=\"css-1tl8iqp\"]"));
+        public AttractionSinglePage()
+            : base()
+        {
+        }
 
         public string BaseUrl => DriverInstance.Url;
 
-        public AttractionSinglePage() : base()
-        {
-        }
+        private BaseWebElement _timePickerSelect => new(By.TagName("select"));
+
+        private BaseWebElement _plusElement => new(By.XPath("//span[.=\"+\"]/.."));
+
+        private BaseWebElement _testDateResultLocator => new(By.XPath("//div[@class=\"css-1tl8iqp\"]"));
 
         public AttractionSinglePage ChooseDateAndTime()
         {

@@ -8,16 +8,16 @@ namespace TestLayer
 {
     public class BaseTest
     {
-        protected IWebDriver Driver;
+        private IWebDriver _driver;
 
-        protected ReportPortalLogger Logger;
+        private ReportPortalLogger _logger;
 
-        protected TestSettings TestsSettings;
+        protected TestSettings TestsSettings { get; private set; }
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            Logger = ReportPortalLogger.GetInstance();
+            _logger = ReportPortalLogger.GetInstance();
             TestsSettings = SettingsService<TestSettings>.GetSettings();
         }
 
@@ -25,8 +25,8 @@ namespace TestLayer
         public void SetUp()
         {
             DriverSettingService.SetPathToDriver();
-            Driver = QAAutomationLab.CoreLayer.Driver.Driver.GetInstance();
-            Logger.Logger.Information($"{TestContext.CurrentContext.Test.Name} successfully started.");
+            _driver = QAAutomationLab.CoreLayer.Driver.Driver.GetInstance();
+            _logger.Logger.Information($"{TestContext.CurrentContext.Test.Name} successfully started.");
         }
 
         [TearDown]
@@ -34,11 +34,11 @@ namespace TestLayer
         {
             if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
-                Logger.Logger.Error(TestContext.CurrentContext.Result.Message);
+                _logger.Logger.Error(TestContext.CurrentContext.Result.Message);
             }
             else
             {
-                Logger.Logger.Information($"{TestContext.CurrentContext.Test.Name} executed successfully.");
+                _logger.Logger.Information($"{TestContext.CurrentContext.Test.Name} executed successfully.");
             }
 
             QAAutomationLab.CoreLayer.Driver.Driver.Quit();

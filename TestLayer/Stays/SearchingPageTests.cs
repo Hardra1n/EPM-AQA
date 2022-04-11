@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
@@ -36,7 +35,7 @@ namespace TestLayer.Stays
         {
             string expectedErrorMessage = "enter a destination to start searching.";
             StaysSearchingContext context = StaysSearchingContext.GetDefaultContext();
-            context.Destination = String.Empty;
+            context.Destination = string.Empty;
 
             _page.AddSearchingContext(context)
                  .ClickSearchButtonWithoutNavigating();
@@ -53,7 +52,7 @@ namespace TestLayer.Stays
 
             _page.AddSearchingContext(context);
 
-            Assert.That(() => _page.ClickSearchButton(), Throws.TypeOf<NoSuchElementException>());    
+            Assert.That(() => _page.ClickSearchButton(), Throws.TypeOf<NoSuchElementException>());
         }
     }
 }

@@ -1,21 +1,20 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
-using System.IO;
 
 namespace QAAutomationLab.CoreLayer.Driver
 {
     public class Driver
     {
-        private static IWebDriver _driver;
-
         public const int _implicitWaitTime = 15;
 
-        public static string PathToDriver;
+        private static IWebDriver _driver;
 
         private static object _locker = new object();
 
         private Driver() { }
+
+        public static string PathToDriver { get; set; }
 
         public static IWebDriver GetInstance()
         {
@@ -32,16 +31,16 @@ namespace QAAutomationLab.CoreLayer.Driver
             return _driver;
         }
 
-        private static void SetUpParameters()
-        {
-            _driver.Manage().Window.Maximize();
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(_implicitWaitTime);
-        }
-
         public static void Quit()
         {
             _driver.Quit();
             _driver = null;
+        }
+
+        private static void SetUpParameters()
+        {
+            _driver.Manage().Window.Maximize();
+            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(_implicitWaitTime);
         }
     }
 }

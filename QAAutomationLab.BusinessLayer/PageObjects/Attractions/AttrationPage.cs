@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
-using QAAutomationLab.BusinessLayer.Waiters;
 using QAAutomationLab.CoreLayer.BasePage;
+using QAAutomationLab.CoreLayer.Waiters;
 using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
@@ -9,23 +9,24 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private readonly BaseWebElement _searchFieldElement = new(By.XPath("//input[@type=\"search\"]"));
 
-        private BaseWebElement _submitButton => new(By.XPath("//button[.=\"Search\"]"));
-
         private readonly BaseWebElement _topDestinationDubai = new(By.XPath("//a[@title=\"Dubai\"]"));
+
+        private readonly By _cruiseLocator = By.XPath("//a[contains(@href, \"cruise\")]");
+
+        public AttrationPage()
+            : base()
+        {
+        }
+
+        public string BaseUrl => DriverInstance.Url;
 
         private BaseWebElement _asiaTab => new(By.XPath("//button[.=\"Asia\"]"));
 
         private BaseWebElement _kyotoLink => new(By.XPath("//a[@title=\"Kyoto\"]"));
 
-        private readonly By _cruiseLocator = By.XPath("//a[contains(@href, \"cruise\")]");
-
         private BaseWebElement _cruiseResultLink => new(_cruiseLocator);
 
-        public string BaseUrl => DriverInstance.Url;
-
-        public AttrationPage() : base()
-        {
-        }
+        private BaseWebElement _submitButton => new(By.XPath("//button[.=\"Search\"]"));
 
         public AttrationPage EnterSearchString(string text)
         {

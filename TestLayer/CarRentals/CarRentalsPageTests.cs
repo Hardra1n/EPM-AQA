@@ -32,7 +32,7 @@ namespace TestLayer.CarRentals
                 .ChooseSameLocation()
                 .EnterPickUpLocation(location);
 
-            Assert.Throws<OpenQA.Selenium.WebDriverTimeoutException> (() => page.ClickSearchButton());
+            Assert.Throws<OpenQA.Selenium.WebDriverTimeoutException>(() => page.ClickSearchButton());
 
             bool vissible = page.IsErrorMessageShown();
 
@@ -40,8 +40,8 @@ namespace TestLayer.CarRentals
         }
 
         [Test]
-        [TestCase("Pruzhany","Los Angeles")]
-        public void SearchWithoutExistingResults(string pickUpLocation,string dropDownLocation) 
+        [TestCase("Pruzhany", "Los Angeles")]
+        public void SearchWithoutExistingResults(string pickUpLocation, string dropDownLocation)
         {
             bool result = Utilities.RunBrowser(TestsSettings.MainPageUrl)
                 .GoToCarRentals().ChooseDifferentLocation()

@@ -1,12 +1,17 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 {
-    public class CarRentalsPage:BasePage
+    public class CarRentalsPage : BasePage
     {
         private const string _title = "car hire";
+
+        private readonly By _pickUpFirstSearchSuggestion = By.XPath("//div[@data-visible='rentalcars']//ul//li");
+
+        private readonly By _dropOffFirstSearchSuggestion = By.XPath("//input[@id='ss']/../..//li");
 
         private BaseWebElement _sameLocationSelector = new BaseWebElement(By.XPath("//label[@for='return-location-same']"));
 
@@ -26,32 +31,29 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         private BaseWebElement _invalidAgeMessage = new BaseWebElement(By.XPath("//div[contains(@class,'searchbox__error sb-searchbox__driver-age')]"));
 
-        private readonly By _pickUpFirstSearchSuggestion =By.XPath("//div[@data-visible='rentalcars']//ul//li");
-
-        private readonly By _dropOffFirstSearchSuggestion =By.XPath("//input[@id='ss']/../..//li");
-
-        public CarRentalsPage():base()
+        public CarRentalsPage()
+            : base()
         {
-            WebDriverWait Wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(10));
 
-            Wait.Until(x => x.FindElement(By.XPath($"//title[contains(text(),'{_title}')]")));
+            wait.Until(x => x.FindElement(By.XPath($"//title[contains(text(),'{_title}')]")));
         }
 
-        public CarRentalsPage ChooseSameLocation() 
+        public CarRentalsPage ChooseSameLocation()
         {
             _sameLocationSelector.Click();
 
             return this;
         }
 
-        public CarRentalsPage ChooseDifferentLocation() 
+        public CarRentalsPage ChooseDifferentLocation()
         {
             _differentLocationSelector.Click();
 
             return this;
         }
 
-        public CarRentalsPage EnterPickUpLocation(string location) 
+        public CarRentalsPage EnterPickUpLocation(string location)
         {
             _pickUpLocationField.SendKeys(location);
 
@@ -65,7 +67,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return this;
         }
 
-        public CarRentalsPage ChooseFirstDropOffSuggestion(string location) 
+        public CarRentalsPage ChooseFirstDropOffSuggestion(string location)
         {
             _dropOffLocationField.Wait.Until(x => x.FindElement(_dropOffFirstSearchSuggestion).Text.Contains(location));
 
@@ -90,14 +92,14 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return new SearchResultsPage();
         }
 
-        public CarRentalsPage ClickAgeCheckBox() 
+        public CarRentalsPage ClickAgeCheckBox()
         {
             _ageCheckBox.Click();
-            
+
             return this;
         }
 
-        public CarRentalsPage EnterAge(string age) 
+        public CarRentalsPage EnterAge(string age)
         {
             _ageField.SendKeys(age);
 
@@ -109,7 +111,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return _invalidSearchRequrstMessage.Displayed && _invalidSearchRequrstMessage.Enabled;
         }
 
-        public bool IsIncorrectAgeMessageShown() 
+        public bool IsIncorrectAgeMessageShown()
         {
             return _invalidAgeMessage.Displayed && _invalidAgeMessage.Enabled;
         }

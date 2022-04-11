@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
-using QAAutomationLab.BusinessLayer.Waiters;
 using QAAutomationLab.CoreLayer.BasePage;
+using QAAutomationLab.CoreLayer.Waiters;
 using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
@@ -19,9 +19,10 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private readonly By _submitButtonLocator = By.XPath("//span[@data-testid=\"bpd-cta\"]/button");
 
-        public string BaseUrl => DriverInstance.Url;
+        public BookingPage()
+            : base() { }
 
-        public BookingPage() : base() { }
+        public string BaseUrl => DriverInstance.Url;
 
         public BookingPage SubmitData(string urlPartToContain)
         {

@@ -7,18 +7,19 @@ using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects
 {
-    public class MainPage:BasePage
+    public class MainPage : BasePage
     {
         private const string _title = "Booking.com";
 
-        private BaseWebElement _carRentalsButton => new BaseWebElement(By.XPath("//span[contains(text(),'Car rentals')]"));
-
         private readonly BaseWebElement _attractionsButton = new(By.XPath("//a[@data-decider-header=\"attractions\"]"));
 
-        public MainPage():base() 
+        public MainPage()
+            : base()
         {
             DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
         }
+
+        private BaseWebElement _carRentalsButton => new BaseWebElement(By.XPath("//span[contains(text(),'Car rentals')]"));
 
         public AttrationPage GoToAttractions()
         {
@@ -26,7 +27,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects
             return new AttrationPage();
         }
 
-        public CarRentalsPage GoToCarRentals() 
+        public CarRentalsPage GoToCarRentals()
         {
             _carRentalsButton.Click();
 

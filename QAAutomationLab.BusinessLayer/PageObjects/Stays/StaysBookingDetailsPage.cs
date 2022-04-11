@@ -8,6 +8,9 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
     public class StaysBookingDetailsPage : BasePage
     {
+        public StaysBookingDetailsPage()
+            : base() { }
+
         private BaseWebElement _unfinishedNotification => new(By.Id("growl_squash"));
 
         private BaseWebElement _hotelNameElement => new(By.XPath("//h1[contains(@id, 'title')]"));
@@ -23,10 +26,6 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         private BaseWebElement _confirmDetailsButton => new(By.Name("book"));
 
         private BaseWebElement _checkInArrivalTimeSelect => new(By.Name("checkin_eta_hour"));
-
-
-        public StaysBookingDetailsPage() : base() { }
-
 
         public string GetHotelName() => _hotelNameElement.Text;
 
@@ -66,7 +65,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             element.SelectByValue("-1");
             return this;
         }
-       
+
         public StaysBookingDetailsPage AddBookingDetailsContext(StaysBookingDetailsContext context)
         {
             EnterFirstName(context.FirstName);

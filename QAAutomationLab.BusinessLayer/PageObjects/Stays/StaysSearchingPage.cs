@@ -1,14 +1,17 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
-using System;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
     public class StaysSearchingPage : BasePage
     {
+        public StaysSearchingPage()
+            : base() { }
+
         private BaseWebElement _destinationInput => new(By.XPath("//input[@type='search']"));
 
         private BaseWebElement _searchButton => new(By.XPath("//button[@class='sb-searchbox__button ']"));
@@ -16,8 +19,6 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         private CalendarWebElement _calendarDropDownMenu => new(By.XPath("//div[@class='xp__dates-inner']"));
 
         private BaseWebElement _personsDropDownMenu => new(By.XPath("//label[@id='xp__guests__toggle']"));
-
-        private BaseWebElement _destinationErrorBanner = new(By.XPath("//div[@class='fe_banner__message']"));
 
         private AdderWebElement _adultsAdderElement
             => new()
@@ -44,9 +45,6 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             };
 
         private BaseWebElement _destinationErrorBanner => new(By.XPath("//div[@class='fe_banner__message']"));
-
-        public StaysSearchingPage() : base() { }
-
 
         public StaysSearchingPage EnterDestination(string destination)
         {

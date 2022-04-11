@@ -17,7 +17,7 @@
                 FirstName = "Korora",
                 LastName = "Foreza",
                 Email = "differentmail@yand.ru",
-                ConfirmEmail = "differentmail@yand.ru"
+                ConfirmEmail = "differentmail@yand.ru",
             };
         }
     }

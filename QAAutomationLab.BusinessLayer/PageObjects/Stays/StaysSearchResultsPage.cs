@@ -1,6 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using System.Linq;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.BasePage;
+using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
@@ -9,6 +12,15 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         private const string _title = "Hotels in";
 
         private const string _noAdsExceptionMessage = "There are no ads on the page";
+
+        public StaysSearchResultsPage()
+            : base()
+        {
+            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
+        }
+
+        public BaseWebElement _filteringOverlayElement
+            => new(By.XPath("//div[@data-testid='overlay-card']"));
 
         private BaseWebElement _firstAdNavigatingButton
             => new(DriverInstance.FindElements(
@@ -21,28 +33,22 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
             => new(DriverInstance.FindElements(
                 By.XPath("//div[@data-filters-group = 'class']//div[@data-filters-item]")).FirstOrDefault());
 
-        private BaseWebElement _firstShowOnMapButton 
+        private BaseWebElement _firstShowOnMapButton
             => new(DriverInstance.FindElements(By.XPath("//div[@data-testid = 'location']/a")).FirstOrDefault());
-        
+
         private BaseWebElement _adsHeadElement => new(By.XPath("//h1"));
-
-        public BaseWebElement _filteringOverlayElement 
-            => new(By.XPath("//div[@data-testid='overlay-card']"));
-
-
-        public StaysSearchResultsPage() : base()
-        {
-            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
-        }
-
 
         public int? GetAdsCount()
         {
-            string digits = new String(_adsHeadElement.Text.Where(c => Char.IsDigit(c)).ToArray());
-            if (Int32.TryParse(digits, out int number))
+            string digits = new string(_adsHeadElement.Text.Where(c => char.IsDigit(c)).ToArray());
+            if (int.TryParse(digits, out int number))
+            {
                 return number;
+            }
             else
+            {
                 return null;
+            }
         }
 
         public string GetFirstAddTitle()
@@ -51,10 +57,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         public StaysAdPage ClickFirstAdNavigatingButton()
         {
             if (GetAdsCount() > 0)
-            { 
+            {
                 Utilities.Utilities.SwitchToNewHandle(_firstAdNavigatingButton.Click);
                 return new StaysAdPage();
             }
+
             throw new ArgumentException(_noAdsExceptionMessage);
         }
 
@@ -79,7 +86,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
         }
 
         public StaysAdPage ClickFirstShowOnMapButton()
-        { 
+        {
             Utilities.Utilities.SwitchToNewHandle(_firstShowOnMapButton.Click);
             return new StaysAdPage();
         }

@@ -4,7 +4,8 @@ using QAAutomationLab.BusinessLayer.Utilities;
 
 namespace TestLayer
 {
-    [TestFixture, Category("Smoke")]
+    [TestFixture]
+    [Category("Smoke")]
     public class SmokeTests : BaseTest
     {
         [Test]

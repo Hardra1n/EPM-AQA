@@ -2,9 +2,9 @@
 {
     public class StaysBookingFinalStepPage
     {
-        public StaysBookingFinalStepPage() : base()
+        public StaysBookingFinalStepPage()
+            : base()
         {
-         
         }
     }
 }

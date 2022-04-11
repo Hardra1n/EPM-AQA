@@ -1,11 +1,12 @@
-﻿using OpenQA.Selenium;
-using System;
+﻿using System;
+using OpenQA.Selenium;
 
 namespace QAAutomationLab.CoreLayer.WebElement
 {
     public class CalendarWebElement : BaseWebElement
     {
-        public CalendarWebElement(By openCalendarLocator) : base(openCalendarLocator) {}
+        public CalendarWebElement(By openCalendarLocator)
+            : base(openCalendarLocator) { }
 
         public void ChooseFromToDates(By dateFromLocator, By dateToLocator)
         {
@@ -15,11 +16,11 @@ namespace QAAutomationLab.CoreLayer.WebElement
                 BaseWebElement toDateElement = this.FindElement(dateToLocator);
                 fromDateElement.Click();
                 toDateElement.Click();
-                _logger.Information("Calendar.ChooseFromToDates:Success");
+                Logger.Information("Calendar.ChooseFromToDates:Success");
             }
             catch (Exception)
             {
-                _logger.Error("Calendar.ChooseFromToDates:Error");
+                Logger.Error("Calendar.ChooseFromToDates:Error");
                 throw;
             }
         }

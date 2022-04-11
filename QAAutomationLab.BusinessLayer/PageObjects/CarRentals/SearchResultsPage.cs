@@ -4,17 +4,18 @@ using QAAutomationLab.CoreLayer.BasePage;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 {
-    public class SearchResultsPage:BasePage
+    public class SearchResultsPage : BasePage
     {
         private const string _title = "at discounted rates";
 
         private readonly By _noResultsMessage = By.XPath("//div[@class='no_results']");
 
-        public SearchResultsPage() : base() 
+        public SearchResultsPage()
+            : base()
         {
-            WebDriverWait Wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(25));
+            WebDriverWait wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(25));
 
-            Wait.Until(x => x.FindElement(By.XPath($"//title[contains(text(),'{_title}')]")));
+            wait.Until(x => x.FindElement(By.XPath($"//title[contains(text(),'{_title}')]")));
         }
 
         public bool IsNoResultsMessageShown()
@@ -24,7 +25,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
                 DriverInstance.FindElement(_noResultsMessage);
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }

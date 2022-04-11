@@ -18,7 +18,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
             }
             catch
             {
-                ValueElement._logger.Error("AdderWebElement.GetValue:Error");
+                ValueElement.Logger.Error("AdderWebElement.GetValue:Error");
                 throw;
             }
         }

@@ -4,7 +4,8 @@ using QAAutomationLab.BusinessLayer.Utilities;
 
 namespace TestLayer.Attractions
 {
-    [TestFixture, Category("All")]
+    [TestFixture]
+    [Category("All")]
     public class AttractionBookingTests : BaseTest
     {
         [Test]
