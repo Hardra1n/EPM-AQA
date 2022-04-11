@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using QAAutomationLab.CoreLayer.BasePage;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
@@ -11,7 +12,9 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         public SearchResultsPage() : base() 
         {
-            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
+            WebDriverWait Wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(25));
+
+            Wait.Until(x => x.FindElement(By.XPath($"//title[contains(text(),'{_title}')]")));
         }
 
         public bool IsNoResultsMessageShown()

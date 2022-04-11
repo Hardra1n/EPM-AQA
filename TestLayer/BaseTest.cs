@@ -24,6 +24,7 @@ namespace TestLayer
         [SetUp]
         public void SetUp()
         {
+            DriverSettingService.SetPathToDriver();
             Driver = QAAutomationLab.CoreLayer.Driver.Driver.GetInstance();
             Logger.Logger.Information($"{TestContext.CurrentContext.Test.Name} successfully started.");
         }

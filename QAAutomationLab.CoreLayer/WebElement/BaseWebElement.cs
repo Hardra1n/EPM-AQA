@@ -4,6 +4,7 @@ using QAAutomationLab.CoreLayer.Logging;
 using Serilog;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace QAAutomationLab.CoreLayer.WebElement
 {
@@ -37,8 +38,9 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             _logger = ReportPortalLogger.GetInstance().Logger;
             Locator = locator;
-            Element = _driver.FindElement(Locator);
             Wait = new WebDriverWait(_driver, System.TimeSpan.FromSeconds(10));
+            Wait.Until(x => x.FindElement(Locator));
+            Element = _driver.FindElement(Locator);
         }
 
         public BaseWebElement(IWebElement element)
@@ -60,6 +62,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             try
             {
+                Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
                 Element.SendKeys(text);
                 _logger.Information("SendKeys:Success");
             }
@@ -73,6 +76,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             try
             {
+                Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
                 Element.Click();
                 _logger.Information("Click:Success");
             }
@@ -120,6 +124,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             try
             {
+                Wait.Until(x => x.FindElement(Locator).Displayed && x.FindElement(Locator).Enabled);
                 Element.Clear();
                 _logger.Information("Clear:Success");
             }
@@ -146,11 +151,12 @@ namespace QAAutomationLab.CoreLayer.WebElement
             }
         }
 
-        public IWebElement FindElement(By by)
+        public BaseWebElement FindElement(By by)
         {
             try
             {
-                IWebElement element = Element.FindElement(by);
+                Wait.Until(x => Element.FindElement(by));
+                BaseWebElement element = new(Element.FindElement(by));
                 _logger.Information("FindElement:Success");
 
                 return element;
@@ -163,11 +169,12 @@ namespace QAAutomationLab.CoreLayer.WebElement
             }
         }
 
-        public IReadOnlyCollection<IWebElement> FindElements(By by)
+        public IReadOnlyCollection<BaseWebElement> FindElements(By by)
         {
             try
             {
-                IReadOnlyCollection<IWebElement> elements = Element.FindElements(by);
+                IReadOnlyCollection<BaseWebElement> elements 
+                    = Element.FindElements(by).Select(x => new BaseWebElement(x)).ToList();
                 _logger.Information("FindElements:Success");
 
                 return elements;

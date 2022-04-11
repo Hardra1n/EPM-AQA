@@ -62,7 +62,8 @@ namespace TestLayer.Attractions
         {
             // Arrange
             var mainPageUrl = TestsSettings.MainPageUrl;
-            var expectedUrlPart = "/pay";
+            var notExpectedUrlPart = "/pay";
+            var expectedUrlPart = "/book";
             var bookingPage = Utilities.RunBrowser(mainPageUrl).
                 GoToAttractions().EnterSearchString("New").ChooseCruiseResult().
                 GoToBookingPage();
@@ -71,7 +72,7 @@ namespace TestLayer.Attractions
             bookingPage.SubmitData(expectedUrlPart);
 
             // Assert
-            bookingPage.BaseUrl.Should().NotContain(expectedUrlPart);
+            bookingPage.BaseUrl.Should().NotContain(notExpectedUrlPart);
         }
 
         [Test]

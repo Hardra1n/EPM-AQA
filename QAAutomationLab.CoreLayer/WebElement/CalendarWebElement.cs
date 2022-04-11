@@ -11,8 +11,8 @@ namespace QAAutomationLab.CoreLayer.WebElement
         {
             try
             {
-                BaseWebElement fromDateElement = new(this.FindElement(dateFromLocator));
-                BaseWebElement toDateElement = new(this.FindElement(dateToLocator));
+                BaseWebElement fromDateElement = this.FindElement(dateFromLocator);
+                BaseWebElement toDateElement = this.FindElement(dateToLocator);
                 fromDateElement.Click();
                 toDateElement.Click();
                 _logger.Information("Calendar.ChooseFromToDates:Success");

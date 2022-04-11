@@ -20,13 +20,21 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         private BaseWebElement _invalidSearchRequrstMessage = new BaseWebElement(By.XPath("//div[@id='destination__error']"));
 
+        private BaseWebElement _ageCheckBox = new BaseWebElement(By.XPath("//span[contains(@class,'bui-checkbox')]"));
+
+        private BaseWebElement _ageField = new BaseWebElement(By.XPath("//input[@id='driverAgeInput']"));
+
+        private BaseWebElement _invalidAgeMessage = new BaseWebElement(By.XPath("//div[contains(@class,'searchbox__error sb-searchbox__driver-age')]"));
+
         private readonly By _pickUpFirstSearchSuggestion =By.XPath("//div[@data-visible='rentalcars']//ul//li");
 
         private readonly By _dropOffFirstSearchSuggestion =By.XPath("//input[@id='ss']/../..//li");
 
         public CarRentalsPage():base()
         {
-            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
+            WebDriverWait Wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(10));
+
+            Wait.Until(x => x.FindElement(By.XPath($"//title[contains(text(),'{_title}')]")));
         }
 
         public CarRentalsPage ChooseSameLocation() 
@@ -82,9 +90,28 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return new SearchResultsPage();
         }
 
-        public bool IsErrorMessageShown() 
+        public CarRentalsPage ClickAgeCheckBox() 
         {
-            return _invalidSearchRequrstMessage.Displayed || _invalidSearchRequrstMessage.Enabled;
+            _ageCheckBox.Click();
+            
+            return this;
+        }
+
+        public CarRentalsPage EnterAge(string age) 
+        {
+            _ageField.SendKeys(age);
+
+            return this;
+        }
+
+        public bool IsErrorMessageShown()
+        {
+            return _invalidSearchRequrstMessage.Displayed && _invalidSearchRequrstMessage.Enabled;
+        }
+
+        public bool IsIncorrectAgeMessageShown() 
+        {
+            return _invalidAgeMessage.Displayed && _invalidAgeMessage.Enabled;
         }
     }
 }
