@@ -17,6 +17,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 
         private BaseWebElement _personsDropDownMenu => new(By.XPath("//label[@id='xp__guests__toggle']"));
 
+        private BaseWebElement _destinationErrorBanner = new(By.XPath("//div[@class='fe_banner__message']"));
+
         private AdderWebElement _adultsAdderElement
             => new()
             {
@@ -40,10 +42,9 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
                 AddOneToValueButton = new(By.XPath("//button[@aria-label = 'Increase number of Rooms']"))
             };
 
-        private BaseWebElement _destinationErrorBanner = new(By.XPath("//div[@class='fe_banner__message']"));
-
 
         public StaysSearchingPage() : base() { }
+
 
         public StaysSearchingPage EnterDestination(string destination)
         {

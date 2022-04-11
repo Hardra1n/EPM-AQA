@@ -13,7 +13,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private BaseWebElement _timePickerSelect => new(By.TagName("select"));
 
-        private BaseWebElement _secondTimeOption => new(By.XPath("//option[@value=\"TSchR5i9micp\"]"));
+        private readonly By _optionLocator = By.TagName("option");
 
         private readonly By _selectLocator = By.XPath("//button[@data-testid=\"select-ticket\"]");
 
@@ -33,7 +33,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             DriverInstance.FindElements(_lastDateLocator).Last().Click();
 
             _timePickerSelect.Click();
-            _secondTimeOption.Click();
+            DriverInstance.FindElements(_optionLocator)[1].Click();
 
             return this;
         }
@@ -49,7 +49,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         public AttractionSinglePage ChooseAdultTicket()
         {
-            DriverInstance.FindElements(_selectLocator)[1].Click();
+            DriverInstance.FindElement(_selectLocator).Click();
 
             return this;
         }
@@ -70,7 +70,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         public BookingPage GoToBookingPage()
         {
-            DriverInstance.FindElements(_selectLocator)[1].Click();
+            DriverInstance.FindElement(_selectLocator).Click();
             _plusElement.Click();
             DriverInstance.FindElement(_selectLocator).Click();
 

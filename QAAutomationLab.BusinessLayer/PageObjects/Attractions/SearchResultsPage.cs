@@ -2,6 +2,7 @@
 using QAAutomationLab.BusinessLayer.Waiters;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
+using System.Collections.Generic;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 {
@@ -9,7 +10,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private BaseWebElement _activitiesCheckBox => new(By.XPath("//span[text()=\"Activities\"]/.."));
         
-        private BaseWebElement _priceCheckBox => new(By.XPath("(//div[@class=\"css-18yal0d\"])[9]"));
+        private BaseWebElement _priceCheckBox => new(By.XPath("(//div[@class=\"css-18yal0d\"])[10]"));
 
         private BaseWebElement _freeCancellationCheckBox => new(By.XPath("//span[text()=\"Free cancellation\"]/.."));
 
@@ -51,6 +52,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
         public SearchResultsPage SearchForSimilarActivities(string text)
         {
             _searchField.SendKeys(text);
+            DriverInstance.WaitForElementToAppear(_nightBusLocator);
             _submitButton.Click();
 
             return this;
@@ -63,6 +65,12 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             _nightBusResult.Click();
 
             return new AttractionSinglePage();
+        }
+
+        public IReadOnlyCollection<IWebElement> FindAllResults()
+        {
+            DriverInstance.WaitForElementsCountToBeExpected(_firstResultLocator, 4);
+            return DriverInstance.FindElements(_firstResultLocator);
         }
     }
 }

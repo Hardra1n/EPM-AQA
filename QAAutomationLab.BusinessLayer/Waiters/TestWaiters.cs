@@ -21,5 +21,10 @@ namespace QAAutomationLab.BusinessLayer.Waiters
         {
             return new WebDriverWait(driver, TimeSpan.FromSeconds(60)).Until(ExpectedConditions.UrlContains(urlPart));
         }
+
+        public static bool WaitForElementsCountToBeExpected(this IWebDriver driver, By locator, int count)
+        {
+            return new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(elem => elem.FindElements(locator).Count == count);
+        }
     }
 }
