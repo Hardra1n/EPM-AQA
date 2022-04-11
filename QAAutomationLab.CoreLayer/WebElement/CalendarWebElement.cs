@@ -1,9 +1,5 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QAAutomationLab.CoreLayer.WebElement
 {
@@ -21,7 +17,7 @@ namespace QAAutomationLab.CoreLayer.WebElement
                 toDateElement.Click();
                 _logger.Information("Calendar.ChooseFromToDates:Success");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _logger.Error("Calendar.ChooseFromToDates:Error");
                 throw;

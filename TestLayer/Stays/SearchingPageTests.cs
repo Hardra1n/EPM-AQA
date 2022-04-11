@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.BusinessLayer.Utilities;
-using System;
 
 namespace TestLayer.Stays
 {
