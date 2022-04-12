@@ -1,4 +1,5 @@
-﻿using QAAutomationLab.CoreLayer.BasePage;
+﻿using QAAutomationLab.BusinessLayer.PageObjects.Stays.Components;
+using QAAutomationLab.CoreLayer.BasePage;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {

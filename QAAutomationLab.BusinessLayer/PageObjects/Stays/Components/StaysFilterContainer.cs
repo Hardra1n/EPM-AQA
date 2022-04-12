@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
-namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
+namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
 {
     public class StaysFilterContainer : BasePage
     {
