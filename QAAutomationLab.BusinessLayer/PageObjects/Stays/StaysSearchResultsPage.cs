@@ -5,8 +5,15 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
     public class StaysSearchResultsPage : BasePage
     {
-        public StaysSearchResultsContainer ResultsContainer => new();
+        public StaysSearchResultsPage()
+            : base()
+        {
+            ResultsContainer = new StaysSearchResultsContainer();
+            FilterContainer = new StaysFilterContainer();
+        }
 
-        public StaysFilterContainer FilterContainer => new();
+        public StaysSearchResultsContainer ResultsContainer { get; private set; }
+
+        public StaysFilterContainer FilterContainer { get; private set; }
     }
 }

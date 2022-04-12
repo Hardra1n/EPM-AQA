@@ -7,7 +7,13 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
     public class StaysBookingDetailsPage : BasePage
     {
-        public StaysBookingDetailsMainContainer MainContainer => new();
+        public StaysBookingDetailsPage()
+            : base()
+        {
+            MainContainer = new StaysBookingDetailsMainContainer();
+        }
+
+        public StaysBookingDetailsMainContainer MainContainer { get; private set; }
 
         private BaseWebElement _unfinishedNotification => new(By.Id("growl_squash"));
 

@@ -5,6 +5,12 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays
 {
     public class StaysSearchingPage : BasePage
     {
-        public StaysSearchPanel SearchPanel => new StaysSearchPanel();
+        public StaysSearchingPage()
+            : base()
+        {
+            SearchPanel = new StaysSearchPanel();
+        }
+
+        public StaysSearchPanel SearchPanel { get; private set; }
     }
 }
