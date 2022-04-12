@@ -9,13 +9,13 @@ namespace QAAutomationLab.BusinessLayer.Utilities
 {
     public class Utilities
     {
-        public static MainPageTopBar RunBrowser(string url)
+        public static MainPage RunBrowser(string url)
         {
             IWebDriver driver = Driver.GetInstance();
 
             driver.Navigate().GoToUrl(url);
 
-            return new MainPageTopBar();
+            return new MainPage();
         }
 
         public static void SwitchToNewHandle(Action op)
