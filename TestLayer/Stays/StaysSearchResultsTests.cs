@@ -16,6 +16,7 @@ namespace TestLayer.Stays
         {
             _page = Utilities.RunBrowser(TestsSettings.MainPageUrl)
                              .GoToStays()
+                             .SearchPanel
                              .AddSearchingContext(StaysSearchingContext.GetDefaultContext())
                              .ClickSearchButton();
         }
@@ -24,9 +25,10 @@ namespace TestLayer.Stays
         [Category("Smoke")]
         public void CorrectNavigatingToAdPage()
         {
-            string expectedAdPageTitleSubstring = _page.GetFirstAddTitle();
+            string expectedAdPageTitleSubstring = _page.ResultsContainer.GetFirstAddTitle();
 
-            string actualAdPageTitle = _page.ClickFirstAdNavigatingButton().GetHotelName();
+            string actualAdPageTitle = _page.ResultsContainer.ClickFirstAdNavigatingButton()
+                                            .HeaderContainer.GetHotelName();
 
             Assert.That(actualAdPageTitle, Is.EqualTo(expectedAdPageTitleSubstring));
         }
@@ -34,10 +36,10 @@ namespace TestLayer.Stays
         [Test]
         public void SearchResultsChangesAfterCheckingFilteringOptions()
         {
-            int? numberOfAdsBeforeFiltering = _page.GetAdsCount();
+            int? numberOfAdsBeforeFiltering = _page.ResultsContainer.GetAdsCount();
 
-            _page.ClickFirstFilteringStarsOption();
-            int? numberOfAdsAfterFiltering = _page.GetAdsCount();
+            _page.FilterContainer.ClickFirstFilteringStarsOption();
+            int? numberOfAdsAfterFiltering = _page.ResultsContainer.GetAdsCount();
 
             Assert.That(numberOfAdsAfterFiltering, Is.Not.EqualTo(numberOfAdsBeforeFiltering));
         }
@@ -45,9 +47,9 @@ namespace TestLayer.Stays
         [Test]
         public void StayingPlaceShowsOnMapSuccessfully()
         {
-            var page = _page.ClickFirstShowOnMapButton();
+            var page = _page.ResultsContainer.ClickFirstShowOnMapButton();
 
-            Assert.That(page.IsMapDisplayed(), Is.True);
+            Assert.That(page.HeaderContainer.IsMapDisplayed(), Is.True);
         }
     }
 }

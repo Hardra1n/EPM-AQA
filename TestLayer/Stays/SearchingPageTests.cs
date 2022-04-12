@@ -24,8 +24,8 @@ namespace TestLayer.Stays
         {
             StaysSearchingContext context = StaysSearchingContext.GetDefaultContext();
 
-            var resultpage = _page.AddSearchingContext(context)
-                                  .ClickSearchButton();
+            var resultpage = _page.SearchPanel.AddSearchingContext(context)
+                                              .ClickSearchButton();
 
             Assert.That(resultpage is StaysSearchResultsPage, Is.True);
         }
@@ -37,9 +37,9 @@ namespace TestLayer.Stays
             StaysSearchingContext context = StaysSearchingContext.GetDefaultContext();
             context.Destination = string.Empty;
 
-            _page.AddSearchingContext(context)
+            _page.SearchPanel.AddSearchingContext(context)
                  .ClickSearchButtonWithoutNavigating();
-            var errorMessage = _page.GetDestinationErrorMessage();
+            var errorMessage = _page.SearchPanel.GetDestinationErrorMessage();
 
             Assert.That(errorMessage, Does.Contain(expectedErrorMessage));
         }
@@ -50,9 +50,9 @@ namespace TestLayer.Stays
             StaysSearchingContext context = StaysSearchingContext.GetDefaultContext();
             context.ChildrenAge = new int[0];
 
-            _page.AddSearchingContext(context);
+            _page.SearchPanel.AddSearchingContext(context);
 
-            Assert.That(() => _page.ClickSearchButton(), Throws.TypeOf<NoSuchElementException>());
+            Assert.That(() => _page.SearchPanel.ClickSearchButton(), Throws.TypeOf<NoSuchElementException>());
         }
     }
 }
