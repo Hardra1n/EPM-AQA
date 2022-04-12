@@ -1,10 +1,13 @@
 ﻿namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 {
-    public static class SearchResultsPage
+    public class SearchResultsPage
     {
-        public static SearchResultsPanel SearchResultsPanel()
+        public SearchResultsPage()
+            : base()
         {
-            return new SearchResultsPanel();
+            SearchResultsPanel = new SearchResultsPanel();
         }
+
+        public SearchResultsPanel SearchResultsPanel { get; private set; }
     }
 }

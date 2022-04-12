@@ -1,10 +1,15 @@
+using QAAutomationLab.CoreLayer.BasePage;
+
 namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
 {
-    public static class MainPage
+    public class MainPage : BasePage
     {
-        public static TopBar TopBar()
+        public MainPage()
+            : base()
         {
-            return new TopBar();
+            MainPageTopBar = new MainPageTopBar();
         }
+
+        public MainPageTopBar MainPageTopBar { get; private set; }
     }
 }

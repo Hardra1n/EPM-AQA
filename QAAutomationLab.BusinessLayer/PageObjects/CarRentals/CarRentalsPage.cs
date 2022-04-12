@@ -1,15 +1,15 @@
-﻿namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
+﻿using QAAutomationLab.CoreLayer.BasePage;
+
+namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 {
-    public static class CarRentalsPage
+    public class CarRentalsPage : BasePage
     {
-        public static SearchPanel SearchBar()
+        public CarRentalsPage()
+            : base()
         {
-            return new SearchPanel();
+            CarRentalsSearchPanel = new CarRentalsSearchPanel();
         }
 
-        public static SearchResultsPanel SearchResultsPanel()
-        {
-            return new SearchResultsPanel();
-        }
+        public CarRentalsSearchPanel CarRentalsSearchPanel { get; private set; }
     }
 }
