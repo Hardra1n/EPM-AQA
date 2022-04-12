@@ -4,7 +4,7 @@ using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 {
-    public class SearchPanel : BasePage
+    public class CarRentalsSearchPanel : BasePage
     {
         private static By containerLocator = By.XPath("//div[contains(@class,'car-index')]");
 
@@ -12,7 +12,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         private readonly By _dropOffFirstSearchSuggestion = By.XPath("//input[@id='ss']/../..//li");
 
-        public SearchPanel()
+        public CarRentalsSearchPanel()
             : base(containerLocator) { }
 
         public BaseWebElement _sameLocationSelector => containerElement.FindElement(By.XPath("//label[@for='return-location-same']"));
@@ -33,35 +33,35 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         private BaseWebElement _invalidAgeMessage => containerElement.FindElement(By.XPath("//div[contains(@class,'searchbox__error sb-searchbox__driver-age')]"));
 
-        public SearchPanel ChooseSameLocation()
+        public CarRentalsSearchPanel ChooseSameLocation()
         {
             _sameLocationSelector.Click();
 
             return this;
         }
 
-        public SearchPanel ChooseDifferentLocation()
+        public CarRentalsSearchPanel ChooseDifferentLocation()
         {
             _differentLocationSelector.Click();
 
             return this;
         }
 
-        public SearchPanel EnterPickUpLocation(string location)
+        public CarRentalsSearchPanel EnterPickUpLocation(string location)
         {
             _pickUpLocationField.SendKeys(location);
 
             return this;
         }
 
-        public SearchPanel EnterDropOffLocation(string location)
+        public CarRentalsSearchPanel EnterDropOffLocation(string location)
         {
             _dropOffLocationField.SendKeys(location);
 
             return this;
         }
 
-        public SearchPanel ChooseFirstDropOffSuggestion(string location)
+        public CarRentalsSearchPanel ChooseFirstDropOffSuggestion(string location)
         {
             _dropOffLocationField.Wait.Until(x => x.FindElement(_dropOffFirstSearchSuggestion).Text.Contains(location));
 
@@ -70,7 +70,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return this;
         }
 
-        public SearchPanel ChooseFirstPickUpSuggestion(string location)
+        public CarRentalsSearchPanel ChooseFirstPickUpSuggestion(string location)
         {
             _pickUpLocationField.Wait.Until(x => x.FindElement(_pickUpFirstSearchSuggestion).Text.Contains(location));
 
@@ -86,14 +86,14 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return new SearchResultsPanel();
         }
 
-        public SearchPanel ClickAgeCheckBox()
+        public CarRentalsSearchPanel ClickAgeCheckBox()
         {
             _ageCheckBox.Click();
 
             return this;
         }
 
-        public SearchPanel EnterAge(string age)
+        public CarRentalsSearchPanel EnterAge(string age)
         {
             _ageField.SendKeys(age);
 

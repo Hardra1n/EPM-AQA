@@ -7,11 +7,11 @@ using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
 {
-    public class TopBar : BasePage
+    public class MainPageTopBar : BasePage
     {
         private static By containerLocator = By.XPath("//header[contains(@class,'header--logo')]");
 
-        public TopBar()
+        public MainPageTopBar()
             : base(containerLocator) { }
 
         private BaseWebElement _attractionsButton => containerElement.FindElement(By.XPath("//a[@data-decider-header=\"attractions\"]"));
@@ -24,11 +24,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
             return new AttrationPage();
         }
 
-        public SearchPanel GoToCarRentals()
+        public CarRentalsPage GoToCarRentals()
         {
             _carRentalsButton.Click();
 
-            return new SearchPanel();
+            return new CarRentalsPage();
         }
 
         public StaysSearchingPage GoToStays() => new StaysSearchingPage();
