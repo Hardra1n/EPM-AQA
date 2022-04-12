@@ -15,9 +15,12 @@ namespace TestLayer.Stays
         public void SetUp()
         {
             _page = Utilities.RunBrowser(TestsSettings.MainPageUrl)
+                             .MainPageTopBar
                              .GoToStays()
+                             .SearchPanel
                              .AddSearchingContext(StaysSearchingContext.GetDefaultContext())
                              .ClickSearchButton()
+                             .ResultsContainer
                              .ClickFirstAdNavigatingButton();
         }
 
@@ -25,10 +28,13 @@ namespace TestLayer.Stays
         [Category("Smoke")]
         public void CorrectNavigatingToBookingPageTest()
         {
-            string expectedHotelName = _page.GetHotelName();
+            string expectedHotelName = _page.HeaderContainer
+                                            .GetHotelName();
 
-            string actualHotelName = _page.AddOneRoomToBooking()
+            string actualHotelName = _page.RoomContainer
+                                          .AddOneRoomToBooking()
                                           .ClickNavigatingToBookingButton()
+                                          .MainContainer
                                           .GetHotelName();
 
             Assert.That(actualHotelName, Is.EqualTo(expectedHotelName));
