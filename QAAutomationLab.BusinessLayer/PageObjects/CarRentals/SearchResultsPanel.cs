@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using QAAutomationLab.CoreLayer.BasePage;
+using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 {
@@ -11,6 +12,15 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         public SearchResultsPanel()
             : base(containerLocator) { }
+
+        public BaseWebElement _firstSearchResult => containerElement.FindElement(By.XPath("//a[contains(@class,'result__bui-btn')]"));
+
+        public CarSelectionPage ChooseFirstSearchResult()
+        {
+            _firstSearchResult.Click();
+
+            return new CarSelectionPage();
+        }
 
         public bool IsNoResultsMessageShown()
         {

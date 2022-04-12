@@ -79,11 +79,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
             return this;
         }
 
-        public SearchResultsPanel ClickSearchButton()
+        public SearchResultsPage ClickSearchButton()
         {
             _searchButton.Click();
 
-            return new SearchResultsPanel();
+            return new SearchResultsPage();
         }
 
         public CarRentalsSearchPanel ClickAgeCheckBox()
