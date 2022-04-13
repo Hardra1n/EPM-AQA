@@ -40,7 +40,8 @@ namespace TestLayer.Stays
             int? numberOfAdsBeforeFiltering = _page.ResultsContainer.GetAdsCount();
 
             _page.FilterContainer.ClickFirstFilteringStarsOption();
-            int? numberOfAdsAfterFiltering = _page.ResultsContainer.GetAdsCount();
+            int? numberOfAdsAfterFiltering = _page.ResultsContainer.WaitForUpdateResults()
+                                                                   .GetAdsCount();
 
             Assert.That(numberOfAdsAfterFiltering, Is.Not.EqualTo(numberOfAdsBeforeFiltering));
         }

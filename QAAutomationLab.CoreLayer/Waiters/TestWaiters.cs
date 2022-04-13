@@ -26,5 +26,10 @@ namespace QAAutomationLab.CoreLayer.Waiters
         {
             return new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(elem => elem.FindElements(locator).Count == count);
         }
+
+        public static bool WaitForElementToBeInvisable(this IWebDriver driver, By locator)
+        {
+            return new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(ExpectedConditions.InvisibilityOfElementLocated(locator));
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using OpenQA.Selenium;
 using QAAutomationLab.CoreLayer.BasePage;
+using QAAutomationLab.CoreLayer.Waiters;
 using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
@@ -61,6 +62,13 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
         {
             Utilities.Utilities.SwitchToNewHandle(_firstShowOnMapButton.Click);
             return new StaysAdPage();
+        }
+
+        public StaysSearchResultsContainer WaitForUpdateResults()
+        {
+            DriverInstance.WaitForElementToAppear(FilteringOverlayLocator);
+            DriverInstance.WaitForElementToBeInvisable(FilteringOverlayLocator);
+            return this;
         }
     }
 }
