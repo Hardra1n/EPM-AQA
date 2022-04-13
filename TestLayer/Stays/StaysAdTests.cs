@@ -37,7 +37,7 @@ namespace TestLayer.Stays
                                           .MainContainer
                                           .GetHotelName();
 
-            Assert.That(actualHotelName, Is.EqualTo(expectedHotelName));
+            Assert.That(actualHotelName, Is.SubsetOf(expectedHotelName));
         }
     }
 }
