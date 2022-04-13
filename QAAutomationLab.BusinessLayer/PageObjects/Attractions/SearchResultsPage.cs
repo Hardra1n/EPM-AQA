@@ -1,15 +1,23 @@
-﻿namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
+﻿using QAAutomationLab.CoreLayer.BasePage;
+
+namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 {
-    public static class SearchResultsPage
+    public class SearchResultsPage : BasePage
     {
-        public static SearchResultsLeftBar SearchResultsLeftBar()
+        public SearchResultsPage()
+            : base()
         {
-            return new SearchResultsLeftBar();
+            SearchResultCheckBox = new SearchResultCheckBox();
+            SearchResultSearchPanel = new SearchResultSearchPanel();
+            SearchResultsList = new SearchResultsList();
         }
 
-        public static SearhResultsMiddleBar SearhResultsMiddleBar()
-        {
-            return new SearhResultsMiddleBar();
-        }
+        public string BaseUrl => DriverInstance.Url;
+
+        public SearchResultCheckBox SearchResultCheckBox { get; private set; }
+
+        public SearchResultSearchPanel SearchResultSearchPanel { get; private set; }
+
+        public SearchResultsList SearchResultsList { get; private set; }
     }
 }

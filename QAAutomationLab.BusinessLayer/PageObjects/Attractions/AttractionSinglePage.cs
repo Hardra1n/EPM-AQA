@@ -1,10 +1,17 @@
-﻿namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
+﻿using QAAutomationLab.CoreLayer.BasePage;
+
+namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 {
-    public static class AttractionSinglePage
+    public class AttractionSinglePage : BasePage
     {
-        public static AttractionsSinglePageRightBar AttractionsSinglePageRightBar()
+        public AttractionSinglePage()
+            : base()
         {
-            return new AttractionsSinglePageRightBar();
+            SinglePageForm = new SinglePageForm();
         }
+
+        public string BaseUrl => DriverInstance.Url;
+
+        public SinglePageForm SinglePageForm { get; private set; }
     }
 }

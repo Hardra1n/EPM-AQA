@@ -1,15 +1,14 @@
-﻿namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
-{
-    public static class BookingPage
-    {
-        public static BookingPageMiddleBar BookingPageMiddleBar()
-        {
-            return new BookingPageMiddleBar();
-        }
+﻿using QAAutomationLab.CoreLayer.BasePage;
 
-        public static BookingPageRightBar BookingPageRightBar()
-        {
-            return new BookingPageRightBar();
-        }
+namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
+{
+    public class BookingPage : BasePage
+    {
+        public BookingPage()
+            : base() { }
+
+        public string BaseUrl => DriverInstance.Url;
+
+        public BookingForm BookingForm => new BookingForm();
     }
 }

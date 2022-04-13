@@ -1,15 +1,23 @@
-﻿namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
+﻿using QAAutomationLab.CoreLayer.BasePage;
+
+namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 {
-    public static class AttrationPage
+    public class AttrationPage : BasePage
     {
-        public static AttractionPageSearchPanel AttractionPageSearchPanel()
+        public AttrationPage()
+            : base()
         {
-            return new AttractionPageSearchPanel();
+            AttractionsTopDestination = new AttractionsTopDestination();
+            AttractionsSearchPanel = new AttractionsSearchPanel();
+            AttractionsCityBar = new AttractionsCityBar();
         }
 
-        public static AttractionPageMiddleBar AttractionPageMiddleBar()
-        {
-            return new AttractionPageMiddleBar();
-        }
+        public AttractionsTopDestination AttractionsTopDestination { get; private set; }
+
+        public AttractionsSearchPanel AttractionsSearchPanel { get; private set; }
+
+        public AttractionsCityBar AttractionsCityBar { get; private set; }
+
+        public string BaseUrl => DriverInstance.Url;
     }
 }
