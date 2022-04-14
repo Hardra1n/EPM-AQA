@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
@@ -16,10 +18,71 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
             => containerElement.FindElements(
                 By.XPath("//div[@data-filters-group = 'class']//div[@data-filters-item]")).FirstOrDefault();
 
+        private BaseWebElement _ownPriceFilteringToggle
+            => containerElement.FindElement(
+                By.XPath("//div[@data-testid = 'filters-group-toggle-style']"));
+
+        private BaseWebElement _lowerLimitSlider
+            => containerElement.FindElements(
+                By.XPath(".//div[@role='none']")).FirstOrDefault();
+
+        private BaseWebElement _higerLimitSlider
+            => containerElement.FindElements(
+                By.XPath(".//div[@role='none']")).LastOrDefault();
+
+        private BaseWebElement _priceLimitInfo
+            => containerElement.FindElement(By.XPath(".//input[@type = 'range']"));
+
         public StaysFilterContainer ClickFirstFilteringStarsOption()
         {
             _firstFilteringStarsOption.Click();
             return this;
+        }
+
+        public StaysFilterContainer ClickOwnPriceToggle()
+        {
+            _ownPriceFilteringToggle.Click();
+            return this;
+        }
+
+        public StaysFilterContainer SelectOwnPriceLimit(int lowerLimit, int higerLimit)
+        {
+            ChangeToggleLocation(_lowerLimitSlider, GetLowerLimitPrice, lowerLimit);
+            ChangeToggleLocation(_higerLimitSlider, GetHigerLimitPrice, higerLimit);
+            return this;
+        }
+
+        private void ChangeToggleLocation(BaseWebElement toggle, Func<int> getPriceLimit, int price)
+        {
+            int currentValue = getPriceLimit.Invoke();
+            new Actions(DriverInstance).ClickAndHold(toggle.Element)
+                                       .Build()
+                                       .Perform();
+            Actions actionProvider = new Actions(DriverInstance);
+            actionProvider.MoveByOffset(2 * Math.Sign(price - currentValue), 0)
+                          .Build();
+            do
+            {
+                actionProvider.Perform();
+                currentValue = getPriceLimit.Invoke();
+            }
+            while (currentValue != price);
+            toggle.Click();
+        }
+
+        private int GetLowerLimitPrice()
+        {
+            string value = _priceLimitInfo.GetAttribute("aria-valuetext");
+            value = value.Substring(0, value.IndexOf(' '));
+            return int.Parse(value);
+        }
+
+        private int GetHigerLimitPrice()
+        {
+            string value = _priceLimitInfo.GetAttribute("aria-valuetext");
+            int spaceIndex = value.LastIndexOf(' ');
+            value = value.Substring(spaceIndex, value.Length - spaceIndex);
+            return int.Parse(value);
         }
     }
 }
