@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
+using QAAutomationLab.CoreLayer.WebElement.Extensions;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
 {
@@ -55,15 +55,10 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
         private void ChangeToggleLocation(BaseWebElement toggle, Func<int> getPriceLimit, int price)
         {
             int currentValue = getPriceLimit.Invoke();
-            new Actions(DriverInstance).ClickAndHold(toggle.Element)
-                                       .Build()
-                                       .Perform();
-            Actions actionProvider = new Actions(DriverInstance);
-            actionProvider.MoveByOffset(2 * Math.Sign(price - currentValue), 0)
-                          .Build();
+            toggle.ClickAndHold();
             do
             {
-                actionProvider.Perform();
+                toggle.MoveByOffset(2 * Math.Sign(price - currentValue), 0);
                 currentValue = getPriceLimit.Invoke();
             }
             while (currentValue != price);

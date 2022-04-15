@@ -22,8 +22,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
             => containerElement.FindElement(By.XPath("//div[@data-testid = 'location']/a"));
 
         private BaseWebElement _priceElement
-            => containerElement.FindElement(
-                By.XPath("//div[contains(@data-testid, 'discounted-price')]"));
+            => containerElement.FindElements(
+                By.XPath("//div[contains(@data-testid, 'discounted-price')]")).LastOrDefault();
 
         public string GetAdTitle() => _adTitleElement.Text;
 
