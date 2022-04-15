@@ -15,10 +15,14 @@ namespace TestLayer.Stays
         public void SetUp()
         {
             _page = Utilities.RunBrowser(TestsSettings.MainPageUrl)
+                             .MainPageTopBar
                              .GoToStays()
+                             .SearchPanel
                              .AddSearchingContext(StaysSearchingContext.GetDefaultContext())
                              .ClickSearchButton()
+                             .ResultsContainer
                              .ClickFirstAdNavigatingButton()
+                             .RoomContainer
                              .AddOneRoomToBooking()
                              .ClickNavigatingToBookingButton();
         }
@@ -27,7 +31,9 @@ namespace TestLayer.Stays
         [Category("Smoke")]
         public void CorrectNavigatingToFinalStep()
         {
-            var resultPage = _page.AddBookingDetailsContext(StaysBookingDetailsContext.GetDefaultContext())
+            var resultPage = _page.MainContainer
+                                  .AddBookingDetailsContext(
+                                      StaysBookingDetailsContext.GetDefaultContext())
                                   .ClickConfirmButton();
 
             Assert.That(resultPage is StaysBookingFinalStepPage, Is.True);

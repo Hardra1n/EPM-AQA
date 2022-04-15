@@ -1,25 +1,22 @@
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.PageObjects.Attractions;
 using QAAutomationLab.BusinessLayer.PageObjects.CarRentals;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
-namespace QAAutomationLab.BusinessLayer.PageObjects
+namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
 {
-    public class MainPage : BasePage
+    public class MainPageTopBar : BasePage
     {
-        private const string _title = "Booking.com";
+        private static By containerLocator = By.XPath("//header[contains(@class,'header--logo')]");
 
-        private readonly BaseWebElement _attractionsButton = new(By.XPath("//a[@data-decider-header=\"attractions\"]"));
+        public MainPageTopBar()
+            : base(containerLocator) { }
 
-        public MainPage()
-            : base()
-        {
-            DriverInstance.FindElement(By.XPath($"//title[contains(text(),'{_title}')]"));
-        }
+        private BaseWebElement _attractionsButton => containerElement.FindElement(By.XPath("//a[@data-decider-header=\"attractions\"]"));
 
-        private BaseWebElement _carRentalsButton => new BaseWebElement(By.XPath("//span[contains(text(),'Car rentals')]"));
+        private BaseWebElement _carRentalsButton => containerElement.FindElement(By.XPath("//span[contains(text(),'Car rentals')]"));
 
         public AttrationPage GoToAttractions()
         {

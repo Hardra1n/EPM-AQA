@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
-using QAAutomationLab.BusinessLayer.PageObjects;
+using QAAutomationLab.BusinessLayer.PageObjects.Attractions;
+using QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects;
 using QAAutomationLab.CoreLayer.Driver;
 
 namespace QAAutomationLab.BusinessLayer.Utilities

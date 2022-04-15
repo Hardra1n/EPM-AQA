@@ -17,7 +17,7 @@ namespace TestLayer
 
             // Act
             var mainPage = Utilities.RunBrowser(mainPageUrl);
-            var attractionPage = mainPage.GoToAttractions();
+            var attractionPage = mainPage.MainPageTopBar.GoToAttractions();
 
             // Assert
             attractionPage.BaseUrl.Should().Contain(attractionsPart);

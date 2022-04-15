@@ -1,119 +1,15 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using QAAutomationLab.CoreLayer.BasePage;
-using QAAutomationLab.CoreLayer.WebElement;
+﻿using QAAutomationLab.CoreLayer.BasePage;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 {
     public class CarRentalsPage : BasePage
     {
-        private const string _title = "car hire";
-
-        private readonly By _pickUpFirstSearchSuggestion = By.XPath("//div[@data-visible='rentalcars']//ul//li");
-
-        private readonly By _dropOffFirstSearchSuggestion = By.XPath("//input[@id='ss']/../..//li");
-
-        private BaseWebElement _sameLocationSelector = new BaseWebElement(By.XPath("//label[@for='return-location-same']"));
-
-        private BaseWebElement _differentLocationSelector = new BaseWebElement(By.XPath("//label[@for='return-location-different']"));
-
-        private BaseWebElement _pickUpLocationField = new BaseWebElement(By.XPath("//input[@id='ss_origin']"));
-
-        private BaseWebElement _dropOffLocationField = new BaseWebElement(By.XPath("//input[@id='ss']"));
-
-        private BaseWebElement _searchButton = new BaseWebElement(By.XPath("//button[@type='submit']"));
-
-        private BaseWebElement _invalidSearchRequrstMessage = new BaseWebElement(By.XPath("//div[@id='destination__error']"));
-
-        private BaseWebElement _ageCheckBox = new BaseWebElement(By.XPath("//span[contains(@class,'bui-checkbox')]"));
-
-        private BaseWebElement _ageField = new BaseWebElement(By.XPath("//input[@id='driverAgeInput']"));
-
-        private BaseWebElement _invalidAgeMessage = new BaseWebElement(By.XPath("//div[contains(@class,'searchbox__error sb-searchbox__driver-age')]"));
-
         public CarRentalsPage()
             : base()
         {
-            WebDriverWait wait = new WebDriverWait(DriverInstance, System.TimeSpan.FromSeconds(10));
-
-            wait.Until(x => x.FindElement(By.XPath($"//title[contains(text(),'{_title}')]")));
+            CarRentalsSearchPanel = new CarRentalsSearchPanel();
         }
 
-        public CarRentalsPage ChooseSameLocation()
-        {
-            _sameLocationSelector.Click();
-
-            return this;
-        }
-
-        public CarRentalsPage ChooseDifferentLocation()
-        {
-            _differentLocationSelector.Click();
-
-            return this;
-        }
-
-        public CarRentalsPage EnterPickUpLocation(string location)
-        {
-            _pickUpLocationField.SendKeys(location);
-
-            return this;
-        }
-
-        public CarRentalsPage EnterDropOffLocation(string location)
-        {
-            _dropOffLocationField.SendKeys(location);
-
-            return this;
-        }
-
-        public CarRentalsPage ChooseFirstDropOffSuggestion(string location)
-        {
-            _dropOffLocationField.Wait.Until(x => x.FindElement(_dropOffFirstSearchSuggestion).Text.Contains(location));
-
-            DriverInstance.FindElement(_dropOffFirstSearchSuggestion).Click();
-
-            return this;
-        }
-
-        public CarRentalsPage ChooseFirstPickUpSuggestion(string location)
-        {
-            _pickUpLocationField.Wait.Until(x => x.FindElement(_pickUpFirstSearchSuggestion).Text.Contains(location));
-
-            DriverInstance.FindElement(_pickUpFirstSearchSuggestion).Click();
-
-            return this;
-        }
-
-        public SearchResultsPage ClickSearchButton()
-        {
-            _searchButton.Click();
-
-            return new SearchResultsPage();
-        }
-
-        public CarRentalsPage ClickAgeCheckBox()
-        {
-            _ageCheckBox.Click();
-
-            return this;
-        }
-
-        public CarRentalsPage EnterAge(string age)
-        {
-            _ageField.SendKeys(age);
-
-            return this;
-        }
-
-        public bool IsErrorMessageShown()
-        {
-            return _invalidSearchRequrstMessage.Displayed && _invalidSearchRequrstMessage.Enabled;
-        }
-
-        public bool IsIncorrectAgeMessageShown()
-        {
-            return _invalidAgeMessage.Displayed && _invalidAgeMessage.Enabled;
-        }
+        public CarRentalsSearchPanel CarRentalsSearchPanel { get; private set; }
     }
 }

@@ -15,11 +15,17 @@ namespace TestLayer.Attractions
             var mainPageUrl = TestsSettings.MainPageUrl;
             var expectedTitle = "Graffiti Workshop in Brooklyn";
             var searchResultPage = Utilities.RunBrowser(mainPageUrl).
+                MainPageTopBar.
                 GoToAttractions().
+                AttractionsSearchPanel.
                 GoToSearchResult("New");
 
             // Act
-            var filteredFirstResult = searchResultPage.FilterResult().ShowFirstResultTitle();
+            var filteredFirstResult = searchResultPage.
+                SearchResultCheckBox.
+                FilterResult().
+                SearchResultsList.
+                ShowFirstResultTitle();
 
             // Assert
             filteredFirstResult.Should().BeEquivalentTo(expectedTitle);
@@ -30,16 +36,23 @@ namespace TestLayer.Attractions
         {
             // Arrange
             var mainPageUrl = TestsSettings.MainPageUrl;
-            var expectedCount = 4;
+            var expectedTitle = "Edge Sky Deck Admission Tickets";
             var searchResultPage = Utilities.RunBrowser(mainPageUrl).
+                MainPageTopBar.
                 GoToAttractions().
+                AttractionsSearchPanel.
                 GoToSearchResult("New");
 
             // Act
-            var similarResults = searchResultPage.SearchForSimilarActivities("Edge").FindAllResults();
+            var similarResultsFirst = searchResultPage.
+                SearchResultSearchPanel.
+                SearchForSimilarActivities("Edge").
+                SearchResultsList.
+                ChooseLowestPrice().
+                ShowFirstResultTitle();
 
             // Assert
-            similarResults.Count.Should().Be(expectedCount);
+            similarResultsFirst.Should().Contain(expectedTitle);
         }
 
         [Test]
@@ -49,11 +62,13 @@ namespace TestLayer.Attractions
             var mainPageUrl = TestsSettings.MainPageUrl;
             var expectedUrlPart = "night-bus-tour";
             var searchResultPage = Utilities.RunBrowser(mainPageUrl).
+                MainPageTopBar.
                 GoToAttractions().
+                AttractionsSearchPanel.
                 GoToSearchResult("New");
 
             // Act
-            var nightBusPage = searchResultPage.ChooseEdgeResult();
+            var nightBusPage = searchResultPage.SearchResultSearchPanel.ChooseEdgeResult();
 
             // Assert
             nightBusPage.BaseUrl.Should().Contain(expectedUrlPart);

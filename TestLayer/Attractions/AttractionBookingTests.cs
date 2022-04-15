@@ -14,12 +14,21 @@ namespace TestLayer.Attractions
             // Arrange
             var mainPageUrl = TestsSettings.MainPageUrl;
             var cruisePage = Utilities.RunBrowser(mainPageUrl).
-                GoToAttractions().EnterSearchString("New").ChooseCruiseResult();
+                MainPageTopBar.
+                GoToAttractions().
+                AttractionsSearchPanel.
+                EnterSearchString("New").
+                ChooseCruiseResult();
 
-            var dateTimeValues = cruisePage.GetDateTimeValues();
+            var dateTimeValues = cruisePage.
+                SinglePageForm.
+                GetDateTimeValues();
 
             // Act
-            var changedDateTime = cruisePage.ChooseDateAndTime().GetDateTimeValues();
+            var changedDateTime = cruisePage.
+                SinglePageForm.
+                ChooseDateAndTime().
+                GetDateTimeValues();
 
             // Assert
             changedDateTime[0].Should().NotBeEquivalentTo(dateTimeValues[0]);
@@ -33,10 +42,16 @@ namespace TestLayer.Attractions
             var mainPageUrl = TestsSettings.MainPageUrl;
             var expectedUrlPart = "/book";
             var cruisePage = Utilities.RunBrowser(mainPageUrl).
-                GoToAttractions().EnterSearchString("New").ChooseCruiseResult();
+                MainPageTopBar.
+                GoToAttractions().
+                AttractionsSearchPanel.
+                EnterSearchString("New").
+                ChooseCruiseResult();
 
             // Act
-            var bookingPage = cruisePage.GoToBookingPage();
+            var bookingPage = cruisePage.
+                SinglePageForm.
+                GoToBookingPage();
 
             // Assert
             bookingPage.BaseUrl.Should().Contain(expectedUrlPart);
@@ -49,10 +64,14 @@ namespace TestLayer.Attractions
             var mainPageUrl = TestsSettings.MainPageUrl;
             var expectedUrlPart = "/book";
             var cruisePage = Utilities.RunBrowser(mainPageUrl).
-                GoToAttractions().EnterSearchString("New").ChooseCruiseResult();
+                MainPageTopBar.
+                GoToAttractions().
+                AttractionsSearchPanel.
+                EnterSearchString("New").
+                ChooseCruiseResult();
 
             // Act
-            cruisePage = cruisePage.ChooseAdultTicket().ClickSubmitButton();
+            cruisePage = cruisePage.SinglePageForm.ChooseAdultTicket().ClickSubmitButton();
 
             // Assert
             cruisePage.BaseUrl.Should().NotContain(expectedUrlPart);
@@ -66,11 +85,16 @@ namespace TestLayer.Attractions
             var notExpectedUrlPart = "/pay";
             var expectedUrlPart = "/book";
             var bookingPage = Utilities.RunBrowser(mainPageUrl).
-                GoToAttractions().EnterSearchString("New").ChooseCruiseResult().
+                MainPageTopBar.
+                GoToAttractions().
+                AttractionsSearchPanel.
+                EnterSearchString("New").
+                ChooseCruiseResult().
+                SinglePageForm.
                 GoToBookingPage();
 
             // Act
-            bookingPage.SubmitData(expectedUrlPart);
+            bookingPage.BookingForm.SubmitData(expectedUrlPart);
 
             // Assert
             bookingPage.BaseUrl.Should().NotContain(notExpectedUrlPart);
@@ -83,11 +107,16 @@ namespace TestLayer.Attractions
             var mainPageUrl = TestsSettings.MainPageUrl;
             var expectedUrlPart = "/pay";
             var bookingPage = Utilities.RunBrowser(mainPageUrl).
-                GoToAttractions().EnterSearchString("New").ChooseCruiseResult().
+                MainPageTopBar.
+                GoToAttractions().
+                AttractionsSearchPanel.
+                EnterSearchString("New").
+                ChooseCruiseResult().
+                SinglePageForm.
                 GoToBookingPage();
 
             // Act
-            bookingPage.
+            bookingPage.BookingForm.
                 InputFirstName("Igor").
                 InputLastName("Valeriy").
                 InputEmail("testMail@mail.com").

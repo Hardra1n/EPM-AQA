@@ -5,7 +5,7 @@ namespace QAAutomationLab.CoreLayer.BasePage
 {
     public abstract class BasePage
     {
-        private BaseWebElement containerElement;
+        protected BaseWebElement containerElement;
 
         public BasePage()
         {
