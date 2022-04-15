@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
+using QAAutomationLab.BusinessLayer.PageObjects.Stays.Components;
 using QAAutomationLab.BusinessLayer.Utilities;
-using System.Threading;
 
 namespace TestLayer.Stays
 {
@@ -63,8 +63,28 @@ namespace TestLayer.Stays
         [Test]
         public void AdCardsHaveCorrectPriceAfterPriceFiltering()
         {
-            _page.FilterContainer.ClickOwnPriceToggle().SelectOwnPriceLimit(500, 600);
-        }
+            var context = StaysSearchingContext.GetDefaultContext();
+            var daysDifference = (context.DateTo - context.DateFrom).Days;
+            int lowerPriceLimit = 500;
+            int upperPriceLimit = 600;
 
+            _page.FilterContainer
+                 .ClickOwnPriceToggle()
+                 .SelectOwnPriceLimit(lowerPriceLimit, upperPriceLimit);
+            _page.ResultsContainer.WaitForUpdateResults();
+            int adCount = _page.ResultsContainer
+                               .GetAdsCountOnPage();
+
+            Assert.Multiple(() =>
+            {
+                for (int i = 1; i <= adCount; i++)
+                {
+                    StaysSearchAdCard card = _page.ResultsContainer.GetAdCard(i);
+                    int price = card.GetPrice();
+                    Assert.That(price, Is.LessThanOrEqualTo(upperPriceLimit * daysDifference));
+                    Assert.That(price, Is.GreaterThanOrEqualTo(lowerPriceLimit * daysDifference));
+                }
+            });
+        }
     }
 }
