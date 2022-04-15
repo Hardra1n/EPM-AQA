@@ -23,7 +23,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
 
         private BaseWebElement _priceElement
             => containerElement.FindElements(
-                By.XPath("//div[contains(@data-testid, 'discounted-price')]")).LastOrDefault();
+                By.XPath("//div[contains(@data-testid, 'discounted-price')]/span")).LastOrDefault();
 
         public string GetAdTitle() => _adTitleElement.Text;
 
