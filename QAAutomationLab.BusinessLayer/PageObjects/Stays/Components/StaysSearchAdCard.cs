@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System.Linq;
+using OpenQA.Selenium;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
@@ -20,6 +21,10 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
         private BaseWebElement _showOnMapButton
             => containerElement.FindElement(By.XPath("//div[@data-testid = 'location']/a"));
 
+        private BaseWebElement _priceElement
+            => containerElement.FindElement(
+                By.XPath("//div[contains(@data-testid, 'discounted-price')]"));
+
         public string GetAdTitle() => _adTitleElement.Text;
 
         public StaysAdPage ClickNavigatingButton()
@@ -34,5 +39,10 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
             return new StaysAdPage();
         }
 
+        public int GetPrice()
+        {
+            string price = new string(_priceElement.Text.Where(x => char.IsDigit(x)).ToArray());
+            return int.Parse(price);
+        }
     }
 }
