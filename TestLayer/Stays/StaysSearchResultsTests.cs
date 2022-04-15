@@ -2,6 +2,7 @@
 using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.BusinessLayer.Utilities;
+using System.Threading;
 
 namespace TestLayer.Stays
 {
@@ -26,10 +27,13 @@ namespace TestLayer.Stays
         [Category("Smoke")]
         public void CorrectNavigatingToAdPage()
         {
-            string expectedAdPageTitleSubstring = _page.ResultsContainer.GetFirstAddTitle();
+            string expectedAdPageTitleSubstring = _page.ResultsContainer.GetAdCard(1).GetAdTitle();
 
-            string actualAdPageTitle = _page.ResultsContainer.ClickFirstAdNavigatingButton()
-                                            .HeaderContainer.GetHotelName();
+            string actualAdPageTitle = _page.ResultsContainer
+                                            .GetAdCard()
+                                            .ClickNavigatingButton()
+                                            .HeaderContainer
+                                            .GetHotelName();
 
             Assert.That(actualAdPageTitle, Does.Contain(expectedAdPageTitleSubstring));
         }
@@ -49,9 +53,18 @@ namespace TestLayer.Stays
         [Test]
         public void StayingPlaceShowsOnMapSuccessfully()
         {
-            var page = _page.ResultsContainer.ClickFirstShowOnMapButton();
+            var page = _page.ResultsContainer
+                            .GetAdCard()
+                            .ClickShowOnMapButton();
 
             Assert.That(page.HeaderContainer.IsMapDisplayed(), Is.True);
         }
+
+        [Test]
+        public void AdCardsHaveCorrectPriceAfterPriceFiltering()
+        {
+            _page.FilterContainer.ClickOwnPriceToggle().SelectOwnPriceLimit(500, 600);
+        }
+
     }
 }
