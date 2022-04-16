@@ -13,22 +13,28 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
         {
         }
 
-        private BaseWebElement AsiaTab => new(By.XPath("//button[.=\"Asia\"]"));
-
-        private BaseWebElement KyotoLink => new(By.XPath("//a[@title=\"Kyoto\"]"));
-
-        public SearchResultsPage GoToKyoto()
+        public SearchResultsPage GoToCity(string cityName)
         {
-            KyotoLink.Click();
+            GetCityLink(cityName).Click();
 
             return new SearchResultsPage();
         }
 
-        public AttractionsCityBar ChooseAsiaTab()
+        public AttractionsCityBar ChooseTab(string tabName)
         {
-            AsiaTab.Click();
+            GetTabElement(tabName).Click();
 
             return this;
+        }
+
+        private static BaseWebElement GetTabElement(string tabName)
+        {
+            return new BaseWebElement(By.XPath($"//button[.=\"{tabName}\"]"));
+        }
+
+        private static BaseWebElement GetCityLink(string cityName)
+        {
+            return new BaseWebElement(By.XPath($"//a[@title=\"{cityName}\"]"));
         }
     }
 }

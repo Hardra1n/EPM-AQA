@@ -24,8 +24,6 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private BaseWebElement TimePickerSelect => new(By.TagName("select"));
 
-        private BaseWebElement PlusElement => new(By.XPath("//span[.=\"+\"]/.."));
-
         private BaseWebElement TestDateResultLocator => new(By.XPath("//div[@class=\"css-1tl8iqp\"]"));
 
         public SinglePageForm ChooseDateAndTime()
@@ -55,13 +53,6 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             return this;
         }
 
-        public SinglePageForm AddTicket()
-        {
-            PlusElement.Click();
-
-            return this;
-        }
-
         public AttractionSinglePage ClickSubmitButton()
         {
             DriverInstance.FindElement(_selectLocator).Click();
@@ -69,13 +60,18 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             return new AttractionSinglePage();
         }
 
-        public BookingPage GoToBookingPage()
+        public BookingPage GoToBookingPage(string plusText)
         {
             DriverInstance.FindElement(_selectLocator).Click();
-            PlusElement.Click();
+            GetSpanByText(plusText).Click();
             DriverInstance.FindElement(_selectLocator).Click();
 
             return new BookingPage();
+        }
+
+        private static BaseWebElement GetSpanByText(string innerText)
+        {
+            return new BaseWebElement(By.XPath($"//span[.=\"{innerText}\"]/.."));
         }
     }
 }

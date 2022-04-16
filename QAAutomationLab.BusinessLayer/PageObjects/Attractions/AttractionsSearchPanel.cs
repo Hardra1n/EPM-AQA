@@ -18,8 +18,6 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
         {
         }
 
-        private BaseWebElement SubmitButton => new(By.XPath("//button[.=\"Search\"]"));
-
         private BaseWebElement CruiseResultLink => new(_cruiseLocator);
 
         public AttractionsSearchPanel EnterSearchString(string text)
@@ -29,18 +27,18 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             return this;
         }
 
-        public SearchResultsPage GoToSearchResult(string text)
+        public SearchResultsPage GoToSearchResult(string text, string buttonText)
         {
             _searchFieldElement.SendKeys(text);
             DriverInstance.WaitForElementToAppear(_cruiseLocator);
-            SubmitButton.Click();
+            GetSubmitButton(buttonText).Click();
 
             return new SearchResultsPage();
         }
 
-        public AttrationPage SubmitSearchRequest()
+        public AttrationPage SubmitSearchRequest(string buttonText)
         {
-            SubmitButton.Click();
+            GetSubmitButton(buttonText).Click();
 
             return new AttrationPage();
         }
@@ -51,6 +49,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             CruiseResultLink.Click();
 
             return new AttractionSinglePage();
+        }
+
+        private static BaseWebElement GetSubmitButton(string innerText)
+        {
+            return new BaseWebElement(By.XPath($"//button[.=\"{innerText}\"]"));
         }
     }
 }

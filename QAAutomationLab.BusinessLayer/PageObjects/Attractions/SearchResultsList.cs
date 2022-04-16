@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using QAAutomationLab.CoreLayer.BasePage;
-using QAAutomationLab.CoreLayer.Waiters;
 using QAAutomationLab.CoreLayer.WebElement;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
@@ -19,20 +17,23 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private BaseWebElement TypeOfSortButton => new(By.XPath("//button[@class=\"_7a08ee31f2 _25a3e33c2a _44a4609e1c _5a7a33cce8 _4671f4fac1\"]"));
 
-        private BaseWebElement LowestPriceButton => new(By.XPath("//button[.=\"Lowest price\"]"));
-
         public string ShowFirstResultTitle()
         {
             var firstResultLink = DriverInstance.FindElements(_firstResultLocator)[0];
             return firstResultLink.GetAttribute("title");
         }
 
-        public SearchResultsList ChooseLowestPrice()
+        public SearchResultsList ChooseFilterButton(string buttonText)
         {
             TypeOfSortButton.Click();
-            LowestPriceButton.Click();
+            GetFilterButton(buttonText).Click();
 
             return this;
+        }
+
+        private static BaseWebElement GetFilterButton(string innerText)
+        {
+            return new BaseWebElement(By.XPath($"//button[.=\"{innerText}\"]"));
         }
     }
 }
