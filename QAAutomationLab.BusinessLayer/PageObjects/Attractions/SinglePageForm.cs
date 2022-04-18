@@ -9,6 +9,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.XPath("//form[@class=\"css-1j79jlf\"]");
 
+        private static readonly string _spanXPath = "//span[.=\"{0}\"]/..";
+
         private readonly BaseWebElement _datePickerSelect = new(By.XPath("//div[@data-testid=\"datepicker\"]"));
 
         private readonly By _lastDateLocator = By.XPath("//td[@role=\"gridcell\"]");
@@ -71,7 +73,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private static BaseWebElement GetSpanByText(string innerText)
         {
-            return new BaseWebElement(By.XPath($"//span[.=\"{innerText}\"]/.."));
+            return new BaseWebElement(By.XPath(string.Format(_spanXPath, innerText)));
         }
     }
 }

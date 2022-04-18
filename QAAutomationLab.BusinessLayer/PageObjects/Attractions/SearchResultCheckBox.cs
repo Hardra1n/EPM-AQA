@@ -9,6 +9,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.ClassName("css-9zgckk");
 
+        private static readonly string _filterXPath = "//span[text()=\"{0}\"]/..";
+
         public SearchResultCheckBox()
             : base(_containerLocator)
         {
@@ -40,7 +42,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private static BaseWebElement GetFilterPoint(string innerText)
         {
-            return new(By.XPath($"//span[text()=\"{innerText}\"]/.."));
+            return new(By.XPath(string.Format(_filterXPath, innerText)));
         }
     }
 }

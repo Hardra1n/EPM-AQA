@@ -10,6 +10,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.ClassName("css-wuc7a6");
 
+        private static readonly string _buttonXPath = "//button[.=\"{0}\"]";
+
         private readonly By _resultLocator = By.XPath("//a[@class=\"css-xbcz3d\"]");
 
         private List<SearchResultElement> _searchResults = new();
@@ -38,7 +40,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private static BaseWebElement GetFilterButton(string innerText)
         {
-            return new BaseWebElement(By.XPath($"//button[.=\"{innerText}\"]"));
+            return new BaseWebElement(By.XPath(string.Format(_buttonXPath, innerText)));
         }
 
         private void GetResultList()

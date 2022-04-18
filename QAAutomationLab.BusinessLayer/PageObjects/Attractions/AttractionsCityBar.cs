@@ -8,6 +8,10 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.ClassName("intersection-visible-wrapper");
 
+        private static readonly string _buttonXPath = "//button[.=\"{0}\"]";
+
+        private static readonly string _linkXPath = "//a[@title=\"{0}\"]";
+
         public AttractionsCityBar()
             : base(_containerLocator)
         {
@@ -29,12 +33,12 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private static BaseWebElement GetTabElement(string tabName)
         {
-            return new BaseWebElement(By.XPath($"//button[.=\"{tabName}\"]"));
+            return new BaseWebElement(By.XPath(string.Format(_buttonXPath, tabName)));
         }
 
         private static BaseWebElement GetCityLink(string cityName)
         {
-            return new BaseWebElement(By.XPath($"//a[@title=\"{cityName}\"]"));
+            return new BaseWebElement(By.XPath(string.Format(_linkXPath, cityName)));
         }
     }
 }

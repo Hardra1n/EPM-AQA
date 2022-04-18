@@ -8,6 +8,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.XPath("//div[@class=\"css-1t3v2n3\"]/../../..");
 
+        private static readonly string _linkXPath = "//a[@title=\"{0}\"]";
+
         public AttractionsTopDestination()
             : base(_containerLocator)
         {
@@ -22,7 +24,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private static BaseWebElement GetTopDestination(string cityName)
         {
-            return new BaseWebElement(By.XPath($"//a[@title=\"{cityName}\"]"));
+            return new BaseWebElement(By.XPath(string.Format(_linkXPath, cityName)));
         }
     }
 }

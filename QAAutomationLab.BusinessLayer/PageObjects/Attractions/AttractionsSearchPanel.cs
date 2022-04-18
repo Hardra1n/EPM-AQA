@@ -9,6 +9,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.ClassName("css-1g9yk3");
 
+        private static readonly string _buttonXPath = "//button[.=\"{0}\"]";
+
         private readonly BaseWebElement _searchFieldElement = new(By.XPath("//input[@type=\"search\"]"));
 
         private readonly By _cruiseLocator = By.XPath("//a[contains(@href, \"cruise\")]");
@@ -53,7 +55,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private static BaseWebElement GetSubmitButton(string innerText)
         {
-            return new BaseWebElement(By.XPath($"//button[.=\"{innerText}\"]"));
+            return new BaseWebElement(By.XPath(string.Format(_buttonXPath, innerText)));
         }
     }
 }
