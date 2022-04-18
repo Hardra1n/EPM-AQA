@@ -54,5 +54,20 @@ namespace TestLayer.Stays
 
             Assert.That(() => _page.SearchPanel.ClickSearchButton(), Throws.TypeOf<NoSuchElementException>());
         }
+
+        [Test]
+        public void CorrectLinksAtFooterTests()
+        {
+            Assert.Multiple(() =>
+            {
+                foreach (var link in _page.Footer.GetFooterLinks())
+                {
+                    string hrefText = link.GetAttribute("href");
+                    bool isStartsWith = hrefText.StartsWith("https://") ||
+                                        hrefText.StartsWith("http://");
+                    Assert.That(isStartsWith, Is.True);
+                }
+            });
+        }
     }
 }
