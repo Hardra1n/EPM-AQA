@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 using QAAutomationLab.BusinessLayer.Utilities;
 
 namespace TestLayer.LanguageVariationTests
@@ -7,17 +8,18 @@ namespace TestLayer.LanguageVariationTests
     public class LanguageVariationTests : BaseTest
     {
         [Test]
-        [TestCase("Deutsch")]
-        public void LanguageSelectionTest(string language)
+        public void LanguageSelectionTest()
         {
-            var page = Utilities.RunBrowser(TestsSettings.MainPageUrl)
-                .MainPageTopBar;
+            List<Translations> translations = CsvDeserializator.ReadCSV("Translations.csv");
 
-            string defaultText = page.GetCarRentalsButtonsText();
+            var page = Utilities.RunBrowser(TestsSettings.MainPageUrl);
 
-            string changedText = page.ClickLanguageSelectionButton().ChooseLanguage(language).MainPageTopBar.GetCarRentalsButtonsText();
+            foreach (var translation in translations)
+            {
+                page = page.MainPageTopBar.ClickLanguageSelectionButton().ChooseLanguage(translation.Language);
 
-            Assert.IsFalse(defaultText == changedText);
+                Assert.IsTrue(page.MainPageTopBar.GetCarRentalsButtonsText().Equals(translation.CarRentalsTranslation));
+            }
         }
     }
 }
