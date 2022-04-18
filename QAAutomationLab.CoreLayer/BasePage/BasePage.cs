@@ -18,6 +18,12 @@ namespace QAAutomationLab.CoreLayer.BasePage
             containerElement = new(containerLocator);
         }
 
+        public BasePage(BaseWebElement element)
+        {
+            DriverInstance = Driver.Driver.GetInstance();
+            containerElement = element;
+        }
+
         public IWebDriver DriverInstance { get; }
     }
 }
