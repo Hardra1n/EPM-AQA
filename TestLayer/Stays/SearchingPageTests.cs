@@ -52,7 +52,7 @@ namespace TestLayer.Stays
 
             _page.SearchPanel.AddSearchingContext(context);
 
-            Assert.That(() => _page.SearchPanel.ClickSearchButton(), Throws.TypeOf<NoSuchElementException>());
+            Assert.That(() => _page.SearchPanel.ClickSearchButton(), Throws.TypeOf<WebDriverTimeoutException>());
         }
     }
 }

@@ -21,7 +21,8 @@ namespace TestLayer.Stays
                              .AddSearchingContext(StaysSearchingContext.GetDefaultContext())
                              .ClickSearchButton()
                              .ResultsContainer
-                             .ClickFirstAdNavigatingButton()
+                             .GetAdCard()
+                             .ClickNavigatingButton()
                              .RoomContainer
                              .AddOneRoomToBooking()
                              .ClickNavigatingToBookingButton();

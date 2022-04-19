@@ -21,7 +21,8 @@ namespace TestLayer.Stays
                              .AddSearchingContext(StaysSearchingContext.GetDefaultContext())
                              .ClickSearchButton()
                              .ResultsContainer
-                             .ClickFirstAdNavigatingButton();
+                             .GetAdCard()
+                             .ClickNavigatingButton();
         }
 
         [Test]
@@ -37,7 +38,7 @@ namespace TestLayer.Stays
                                           .MainContainer
                                           .GetHotelName();
 
-            Assert.That(actualHotelName, Is.EqualTo(expectedHotelName));
+            Assert.That(actualHotelName, Is.SubsetOf(expectedHotelName));
         }
     }
 }
