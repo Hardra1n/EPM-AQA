@@ -13,14 +13,14 @@ namespace TestLayer.Attractions
         {
             // Arrange
             var mainPageUrl = TestsSettings.MainPageUrl;
-            var burjHalifTitle = "Ain Dubai Admission";
+            var burjHalifTitle = "Palm Monorail Ticket";
             var attractionPage = Utilities.RunBrowser(mainPageUrl).MainPageTopBar.GoToAttractions();
 
             // Act
             var firstResultTitle = attractionPage.
                 AttractionsTopDestination.
-                GoToDubai().
-                SearchResultsList.ChooseLowestPrice().
+                GoToCity("Dubai").
+                SearchResultsList.ChooseFilterButton("Lowest price").
                 ShowFirstResultTitle();
 
             // Assert
@@ -61,7 +61,7 @@ namespace TestLayer.Attractions
             var topThingToDo = attractionPage.
                 AttractionsSearchPanel.
                 EnterSearchString("Абырвалг").
-                SubmitSearchRequest();
+                SubmitSearchRequest("Search");
 
             // Assert
             topThingToDo.BaseUrl.Should().Contain(expectedUrlPart);
@@ -80,8 +80,8 @@ namespace TestLayer.Attractions
             // Act
             var kyotoSearchPage = attractionPage.
                 AttractionsCityBar.
-                ChooseAsiaTab().
-                GoToKyoto();
+                ChooseTab("Asia").
+                GoToCity("Kyoto");
 
             // Assert
             kyotoSearchPage.BaseUrl.Should().Contain(expectedUrlPart);
@@ -100,7 +100,7 @@ namespace TestLayer.Attractions
             // Act
             var kyotoSearchPage = attractionPage.
                 AttractionsSearchPanel.
-                GoToSearchResult("New");
+                GoToSearchResult("New", "Search");
 
             // Assert
             kyotoSearchPage.BaseUrl.Should().Contain(expectedUrlPart);

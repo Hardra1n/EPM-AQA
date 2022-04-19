@@ -9,6 +9,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.ClassName("css-1g9yk3");
 
+        private static readonly string _buttonXPath = "//button[.=\"{0}\"]";
+
         private readonly BaseWebElement _searchFieldElement = new(By.XPath("//input[@type=\"search\"]"));
 
         private readonly By _cruiseLocator = By.XPath("//a[contains(@href, \"cruise\")]");
@@ -17,8 +19,6 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             : base(_containerLocator)
         {
         }
-
-        private BaseWebElement SubmitButton => new(By.XPath("//button[.=\"Search\"]"));
 
         private BaseWebElement CruiseResultLink => new(_cruiseLocator);
 
@@ -29,18 +29,18 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             return this;
         }
 
-        public SearchResultsPage GoToSearchResult(string text)
+        public SearchResultsPage GoToSearchResult(string text, string buttonText)
         {
             _searchFieldElement.SendKeys(text);
             DriverInstance.WaitForElementToAppear(_cruiseLocator);
-            SubmitButton.Click();
+            GetSubmitButton(buttonText).Click();
 
             return new SearchResultsPage();
         }
 
-        public AttrationPage SubmitSearchRequest()
+        public AttrationPage SubmitSearchRequest(string buttonText)
         {
-            SubmitButton.Click();
+            GetSubmitButton(buttonText).Click();
 
             return new AttrationPage();
         }
@@ -51,6 +51,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
             CruiseResultLink.Click();
 
             return new AttractionSinglePage();
+        }
+
+        private static BaseWebElement GetSubmitButton(string innerText)
+        {
+            return new BaseWebElement(By.XPath(string.Format(_buttonXPath, innerText)));
         }
     }
 }
