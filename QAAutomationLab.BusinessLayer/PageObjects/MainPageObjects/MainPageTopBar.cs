@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.PageObjects.Attractions;
 using QAAutomationLab.BusinessLayer.PageObjects.CarRentals;
+using QAAutomationLab.BusinessLayer.PageObjects.HelpCenter;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
@@ -18,6 +19,9 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
 
         private BaseWebElement _carRentalsButton => containerElement.FindElement(By.XPath("//span[contains(text(),'Car rentals')]"));
 
+        private BaseWebElement _helpCenterButton
+            => containerElement.FindElement(By.XPath("//a[@data-bui-component='Tooltip']"));
+
         public AttrationPage GoToAttractions()
         {
             _attractionsButton.Click();
@@ -32,5 +36,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
         }
 
         public StaysSearchingPage GoToStays() => new StaysSearchingPage();
+
+        public HelpCenterPage GoToHelpCenter()
+        {
+            _helpCenterButton.Click();
+            return new HelpCenterPage();
+        }
     }
 }
