@@ -18,12 +18,16 @@ namespace TestLayer.Attractions
                 MainPageTopBar.
                 GoToAttractions().
                 AttractionsSearchPanel.
-                GoToSearchResult("New");
+                GoToSearchResult("New", "Search");
 
             // Act
             var filteredFirstResult = searchResultPage.
                 SearchResultCheckBox.
-                FilterResult().
+                FilterByElementExceptPrice("Activities").
+                FilterByPrice().
+                FilterByElementExceptPrice("Free cancellation").
+                FilterByElementExceptPrice("Brooklyn").
+                ReturnToSearchResultPage().
                 SearchResultsList.
                 ShowFirstResultTitle();
 
@@ -41,14 +45,14 @@ namespace TestLayer.Attractions
                 MainPageTopBar.
                 GoToAttractions().
                 AttractionsSearchPanel.
-                GoToSearchResult("New");
+                GoToSearchResult("New", "Search");
 
             // Act
             var similarResultsFirst = searchResultPage.
                 SearchResultSearchPanel.
                 SearchForSimilarActivities("Edge").
                 SearchResultsList.
-                ChooseLowestPrice().
+                ChooseFilterButton("Lowest price").
                 ShowFirstResultTitle();
 
             // Assert
@@ -65,7 +69,7 @@ namespace TestLayer.Attractions
                 MainPageTopBar.
                 GoToAttractions().
                 AttractionsSearchPanel.
-                GoToSearchResult("New");
+                GoToSearchResult("New", "Search");
 
             // Act
             var nightBusPage = searchResultPage.SearchResultSearchPanel.ChooseEdgeResult();

@@ -8,27 +8,37 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.ClassName("intersection-visible-wrapper");
 
+        private static readonly string _buttonXPath = "//button[.=\"{0}\"]";
+
+        private static readonly string _linkXPath = "//a[@title=\"{0}\"]";
+
         public AttractionsCityBar()
             : base(_containerLocator)
         {
         }
 
-        private BaseWebElement AsiaTab => new(By.XPath("//button[.=\"Asia\"]"));
-
-        private BaseWebElement KyotoLink => new(By.XPath("//a[@title=\"Kyoto\"]"));
-
-        public SearchResultsPage GoToKyoto()
+        public SearchResultsPage GoToCity(string cityName)
         {
-            KyotoLink.Click();
+            GetCityLink(cityName).Click();
 
             return new SearchResultsPage();
         }
 
-        public AttractionsCityBar ChooseAsiaTab()
+        public AttractionsCityBar ChooseTab(string tabName)
         {
-            AsiaTab.Click();
+            GetTabElement(tabName).Click();
 
             return this;
+        }
+
+        private static BaseWebElement GetTabElement(string tabName)
+        {
+            return new BaseWebElement(By.XPath(string.Format(_buttonXPath, tabName)));
+        }
+
+        private static BaseWebElement GetCityLink(string cityName)
+        {
+            return new BaseWebElement(By.XPath(string.Format(_linkXPath, cityName)));
         }
     }
 }

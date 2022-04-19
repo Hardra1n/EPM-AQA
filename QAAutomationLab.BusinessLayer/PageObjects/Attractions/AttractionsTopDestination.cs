@@ -8,18 +8,23 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.XPath("//div[@class=\"css-1t3v2n3\"]/../../..");
 
-        private readonly BaseWebElement _topDestinationDubai = new(By.XPath("//a[@title=\"Dubai\"]"));
+        private static readonly string _linkXPath = "//a[@title=\"{0}\"]";
 
         public AttractionsTopDestination()
             : base(_containerLocator)
         {
         }
 
-        public SearchResultsPage GoToDubai()
+        public SearchResultsPage GoToCity(string cityName)
         {
-            _topDestinationDubai.Click();
+            GetTopDestination(cityName).Click();
 
             return new SearchResultsPage();
+        }
+
+        private static BaseWebElement GetTopDestination(string cityName)
+        {
+            return new BaseWebElement(By.XPath(string.Format(_linkXPath, cityName)));
         }
     }
 }

@@ -9,28 +9,40 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
     {
         private static readonly By _containerLocator = By.ClassName("css-9zgckk");
 
+        private static readonly string _filterXPath = "//span[text()=\"{0}\"]/..";
+
         public SearchResultCheckBox()
             : base(_containerLocator)
         {
         }
 
-        private BaseWebElement ActivitiesCheckBox => new(By.XPath("//span[text()=\"Activities\"]/.."));
-
         private BaseWebElement PriceCheckBox => new(By.XPath("(//div[@class=\"css-18yal0d\"])[10]"));
 
-        private BaseWebElement FreeCancellationCheckBox => new(By.XPath("//span[text()=\"Free cancellation\"]/.."));
-
-        private BaseWebElement BrooklynCheckBox => new(By.XPath("//span[text()=\"Brooklyn\"]/.."));
-
-        public SearchResultsPage FilterResult()
+        public SearchResultCheckBox FilterByElementExceptPrice(string innerText)
         {
-            DriverInstance.WaitForElementToBeClickable(ActivitiesCheckBox.Locator);
-            ActivitiesCheckBox.Click();
-            PriceCheckBox.Click();
-            FreeCancellationCheckBox.Click();
-            BrooklynCheckBox.Click();
+            var element = GetFilterPoint(innerText);
+            DriverInstance.WaitForElementToBeClickable(element.Locator);
+            element.Click();
 
+            return this;
+        }
+
+        public SearchResultCheckBox FilterByPrice()
+        {
+            DriverInstance.WaitForElementToBeClickable(PriceCheckBox.Locator);
+            PriceCheckBox.Click();
+
+            return this;
+        }
+
+        public SearchResultsPage ReturnToSearchResultPage()
+        {
             return new SearchResultsPage();
+        }
+
+        private static BaseWebElement GetFilterPoint(string innerText)
+        {
+            return new(By.XPath(string.Format(_filterXPath, innerText)));
         }
     }
 }

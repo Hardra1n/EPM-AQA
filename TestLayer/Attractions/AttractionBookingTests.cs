@@ -51,7 +51,7 @@ namespace TestLayer.Attractions
             // Act
             var bookingPage = cruisePage.
                 SinglePageForm.
-                GoToBookingPage();
+                GoToBookingPage("+");
 
             // Assert
             bookingPage.BaseUrl.Should().Contain(expectedUrlPart);
@@ -91,7 +91,7 @@ namespace TestLayer.Attractions
                 EnterSearchString("New").
                 ChooseCruiseResult().
                 SinglePageForm.
-                GoToBookingPage();
+                GoToBookingPage("+");
 
             // Act
             bookingPage.BookingForm.SubmitData(expectedUrlPart);
@@ -113,7 +113,7 @@ namespace TestLayer.Attractions
                 EnterSearchString("New").
                 ChooseCruiseResult().
                 SinglePageForm.
-                GoToBookingPage();
+                GoToBookingPage("+");
 
             // Act
             bookingPage.BookingForm.
