@@ -36,5 +36,16 @@ namespace TestLayer.General
                 }
             });
         }
+
+        [Test]
+        public void CorrectSerpaWidgetSource()
+        {
+            string correctSource = "https://cf.bstatic.com/static/tag_container/sherpa_tag_container";
+
+            var widget = _page.WidgetContainer.GetSherpaWidget();
+            var srcAtribute = widget.GetAttribute("src");
+
+            Assert.That(srcAtribute, Does.StartWith(correctSource));
+        }
     }
 }
