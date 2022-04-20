@@ -19,5 +19,22 @@ namespace TestLayer.General
                              .MainContent
                              .GoToCovidPage();
         }
+
+        [Test]
+        public void CorrectLinksInCountryRestrictions()
+        {
+            var links = _page.RestrictionsContainer.OpenRestrictions()
+                                                   .GetCountryLinks();
+
+            Assert.Multiple(() =>
+            {
+                foreach (var link in links)
+                {
+                    var hrefAttribute = link.GetAttribute("href");
+                    bool isValid = hrefAttribute.StartsWith("http://") || hrefAttribute.StartsWith("https://");
+                    Assert.That(isValid, Is.True);
+                }
+            });
+        }
     }
 }
