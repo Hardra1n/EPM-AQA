@@ -146,7 +146,7 @@ namespace TestLayer.Account
                 MainPageTopBar.
                 GoToLoginPage();
 
-            var email = "wehhus@fexbox.org";
+            var email = "azawq@fexbox.org";
             var password = "j_D6sE_5t+U_N3c";
 
             // Act
