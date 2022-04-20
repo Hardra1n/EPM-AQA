@@ -105,5 +105,31 @@ namespace TestLayer.Attractions
             // Assert
             kyotoSearchPage.BaseUrl.Should().Contain(expectedUrlPart);
         }
+
+        [Test]
+        public void CheckFooterLinks_ShouldHaveCorrectAttribure()
+        {
+            // Arrange
+            var mainPageUrl = TestsSettings.MainPageUrl;
+            var attractionPage = Utilities.RunBrowser(mainPageUrl).
+                MainPageTopBar.
+                GoToAttractions();
+
+            // Act
+            var footerLinks = attractionPage.AttractionsFooter.
+                GetFooterLinks();
+
+            // Assert
+            Assert.Multiple(() =>
+            {
+                foreach (var link in footerLinks)
+                {
+                    var hrefText = link.GetAttribute("href");
+                    bool isCorrect = hrefText.StartsWith("http://") ||
+                        hrefText.StartsWith("https://");
+                    isCorrect.Should().BeTrue();
+                }
+            });
+        }
     }
 }
