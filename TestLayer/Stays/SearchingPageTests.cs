@@ -52,7 +52,22 @@ namespace TestLayer.Stays
 
             _page.SearchPanel.AddSearchingContext(context);
 
-            Assert.That(() => _page.SearchPanel.ClickSearchButton(), Throws.TypeOf<NoSuchElementException>());
+            Assert.That(() => _page.SearchPanel.ClickSearchButton(), Throws.TypeOf<WebDriverTimeoutException>());
+        }
+
+        [Test]
+        public void CorrectLinksAtFooterTests()
+        {
+            Assert.Multiple(() =>
+            {
+                foreach (var link in _page.Footer.GetFooterLinks())
+                {
+                    string hrefText = link.GetAttribute("href");
+                    bool isStartsWith = hrefText.StartsWith("https://") ||
+                                        hrefText.StartsWith("http://");
+                    Assert.That(isStartsWith, Is.True);
+                }
+            });
         }
     }
 }

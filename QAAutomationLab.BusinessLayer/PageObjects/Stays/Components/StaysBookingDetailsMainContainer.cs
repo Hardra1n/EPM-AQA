@@ -75,6 +75,5 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
             SelectDefaultArriavalTime();
             return this;
         }
-
     }
 }

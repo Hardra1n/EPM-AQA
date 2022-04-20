@@ -14,16 +14,16 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
         public StaysSearchPanel()
             : base(_containerLocator) { }
 
-        private BaseWebElement _destinationInput 
+        private BaseWebElement _destinationInput
             => containerElement.FindElement(By.XPath("//input[@type='search']"));
 
-        private BaseWebElement _searchButton 
+        private BaseWebElement _searchButton
             => containerElement.FindElement(By.XPath("//button[@class='sb-searchbox__button ']"));
 
-        private CalendarWebElement _calendarDropDownMenu 
+        private CalendarWebElement _calendarDropDownMenu
             => new(By.XPath("//div[@class='xp__dates-inner']"));
 
-        private BaseWebElement _personsDropDownMenu 
+        private BaseWebElement _personsDropDownMenu
             => containerElement.FindElement(By.XPath("//label[@id='xp__guests__toggle']"));
 
         private AdderWebElement _adultsAdderElement
@@ -59,7 +59,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Stays.Components
                     By.XPath("//button[@aria-label = 'Increase number of Rooms']")),
             };
 
-        private BaseWebElement _destinationErrorBanner 
+        private BaseWebElement _destinationErrorBanner
             => containerElement.FindElement(By.XPath("//div[@class='fe_banner__message']"));
 
         public StaysSearchPanel EnterDestination(string destination)
