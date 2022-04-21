@@ -8,8 +8,11 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
             : base()
         {
             MainPageTopBar = new MainPageTopBar();
+            TravelCommunitiesPanel = new TravelCommunitiesPanel();
         }
 
         public MainPageTopBar MainPageTopBar { get; private set; }
+
+        public TravelCommunitiesPanel TravelCommunitiesPanel { get; private set; }
     }
 }
