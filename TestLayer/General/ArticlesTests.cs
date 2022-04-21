@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
+using QAAutomationLab.BusinessLayer.PageObjects.Articles;
 using QAAutomationLab.BusinessLayer.Utilities;
+using System.Linq;
 
 namespace TestLayer.General
 {
@@ -27,6 +29,43 @@ namespace TestLayer.General
                     Assert.That(hrefAttribute, Does.StartWith(correctStartingSubstring));
                 }
             });
+        }
+
+        [Test]
+        public void CorrectArticlesFiltering()
+        {
+            var page = GoToArticlesMainPage();
+
+            string[] topics = page.TopicsContainer.GetTopicNames();
+            string articleTitle = page.ArticlesContainer
+                                      .GetArticleCards()
+                                      .First()
+                                      .GetArticleTitle();
+
+            Assert.Multiple(() =>
+            {
+                for (int i = 1; i < topics.Length; i++)
+                {
+                    page = page.TopicsContainer.GoToTopic(topics[i]);
+                    string newArticleTitle = page.ArticlesContainer
+                                                 .GetArticleCards()
+                                                 .First()
+                                                 .GetArticleTitle();
+                    Assert.That(articleTitle, Does.Not.EqualTo(newArticleTitle));
+                    articleTitle = newArticleTitle;
+                }
+            });
+        }
+
+        private ArticlesMainPage GoToArticlesMainPage()
+        {
+            return Utilities.RunBrowser(TestsSettings.MainPageUrl)
+                .MainPageTopBar
+                .GoToStays()
+                .MainContent
+                .GoToArticle()
+                .MainContent
+                .GoToArticles();
         }
     }
 }
