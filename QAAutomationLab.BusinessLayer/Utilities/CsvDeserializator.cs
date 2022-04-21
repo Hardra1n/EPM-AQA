@@ -9,13 +9,24 @@ namespace QAAutomationLab.BusinessLayer.Utilities
     {
         private static string defaultPath = "../../../TestData/";
 
-        public static List<Translations> ReadCSV(string fileName)
+        public static List<Translations> ReadTranslationsFromCSV(string fileName)
         {
             using (StreamReader streamReader = new StreamReader(defaultPath + fileName))
             {
                 using (CsvReader csvReader = new CsvReader(streamReader, System.Globalization.CultureInfo.InvariantCulture))
                 {
                     return csvReader.GetRecords<Translations>().ToList();
+                }
+            }
+        }
+
+        public static List<Currencies> ReadCurrenciesFromCSV(string fileName)
+        {
+            using (StreamReader streamReader = new StreamReader(defaultPath + fileName))
+            {
+                using (CsvReader csvReader = new CsvReader(streamReader, System.Globalization.CultureInfo.InvariantCulture))
+                {
+                    return csvReader.GetRecords<Currencies>().ToList();
                 }
             }
         }

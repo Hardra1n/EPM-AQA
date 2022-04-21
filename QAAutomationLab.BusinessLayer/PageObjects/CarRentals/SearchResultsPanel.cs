@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
 
@@ -15,11 +16,27 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.CarRentals
 
         public BaseWebElement _firstSearchResult => containerElement.FindElement(By.XPath("//a[contains(@class,'result__bui-btn')]"));
 
+        public BaseWebElement _firstResultPrice => containerElement.FindElement(By.XPath("//div[@class='result__price-total']"));
+
+        public BaseWebElement _mainPageButton => containerElement.FindElement(By.XPath("//a[@href='https://www.booking.com']"));
+
         public CarSelectionPage ChooseFirstSearchResult()
         {
             _firstSearchResult.Click();
 
             return new CarSelectionPage();
+        }
+
+        public string GetFirstResultPriceText()
+        {
+            return _firstResultPrice.Text;
+        }
+
+        public MainPage GoToMainPage()
+        {
+            _mainPageButton.Click();
+
+            return new MainPage();
         }
 
         public bool IsNoResultsMessageShown()
