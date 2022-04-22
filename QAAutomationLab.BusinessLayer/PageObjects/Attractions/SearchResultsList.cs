@@ -12,7 +12,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         private static readonly string _buttonXPath = "//button[.=\"{0}\"]";
 
-        private readonly By _resultLocator = By.XPath("//a[@class=\"css-xbcz3d\"]");
+        private readonly By _resultLocator = By.XPath("//a[@class=\"css-aaudvs\"]");
 
         private List<SearchResultElement> _searchResults = new();
 

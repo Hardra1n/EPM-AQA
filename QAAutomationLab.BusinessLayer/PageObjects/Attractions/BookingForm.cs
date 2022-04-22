@@ -48,6 +48,7 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.Attractions
 
         public BookingPage SubmitData(string urlPartToContain)
         {
+            DriverInstance.WaitForElementToBeClickable(_submitButtonLocator);
             DriverInstance.FindElements(_submitButtonLocator).Last().Click();
             DriverInstance.WaitForUrlToContain(urlPartToContain);
 
