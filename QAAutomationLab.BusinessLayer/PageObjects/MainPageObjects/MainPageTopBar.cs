@@ -1,3 +1,4 @@
+using System;
 using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.PageObjects.Account;
 using QAAutomationLab.BusinessLayer.PageObjects.Attractions;
@@ -6,7 +7,6 @@ using QAAutomationLab.BusinessLayer.PageObjects.HelpCenter;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.WebElement;
-using System;
 
 namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
 {
@@ -46,6 +46,8 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
 
         private BaseWebElement _accountButton => containerElement.FindElement(By.XPath("//*[contains(@aria-describedby, \"profile\")]"));
 
+        private BaseWebElement _currencySelectionButton => containerElement.FindElement(By.XPath("//button[@data-modal-header-async-type='currencyDesktop']"));
+
         public AttrationPage GoToAttractions()
         {
             _attractionsButton.Click();
@@ -73,11 +75,18 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
             return new AccountMenu();
         }
 
-        public LanguageSelectionBar ClickLanguageSelectionButton() 
+        public LanguageSelectionBar ClickLanguageSelectionButton()
         {
             _languageSelectionButton.Click();
 
             return new LanguageSelectionBar();
+        }
+
+        public CurrencyVariationBar ClickCurrencyVariationButton()
+        {
+            _currencySelectionButton.Click();
+
+            return new CurrencyVariationBar();
         }
 
         public StaysSearchingPage GoToStays() => new StaysSearchingPage();

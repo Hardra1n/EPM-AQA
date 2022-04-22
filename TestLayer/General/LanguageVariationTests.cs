@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using QAAutomationLab.BusinessLayer.Utilities;
 
-namespace TestLayer.LanguageVariationTests
+namespace TestLayer.General
 {
     [TestFixture]
     public class LanguageVariationTests : BaseTest
@@ -10,7 +10,7 @@ namespace TestLayer.LanguageVariationTests
         [Test]
         public void LanguageSelectionTest()
         {
-            List<Translations> translations = CsvDeserializator.ReadCSV("Translations.csv");
+            List<Translations> translations = CsvDeserializator.ReadTranslationsFromCSV("Translations.csv");
 
             var page = Utilities.RunBrowser(TestsSettings.MainPageUrl);
 
