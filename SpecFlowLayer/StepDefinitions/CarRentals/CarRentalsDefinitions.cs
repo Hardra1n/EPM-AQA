@@ -24,6 +24,7 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         }
 
         [Given(@"user opened Car Rentals Page")]
+        [When(@"user opens Car Rentals Page")]
         public void GoToCarRetnalsPage()
         {
             MainPage page = (MainPage)_page;
@@ -158,6 +159,14 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         public void IsBookingPage()
         {
             Assert.IsTrue(_page is BookPage);
+        }
+
+        [Then(@"price should contain '(.*)'")]
+        public void PriceShouldContain(string expectedSubstring)
+        {
+            SearchResultsPage page = (SearchResultsPage)_page;
+            string resultPrice = page.SearchResultsPanel.GetFirstResultPriceText();
+            Assert.That(resultPrice, Does.Contain(expectedSubstring));
         }
     }
 }
