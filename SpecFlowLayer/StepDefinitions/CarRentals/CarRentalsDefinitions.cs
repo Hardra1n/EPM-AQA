@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.PageObjects.CarRentals;
+using QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects;
 using QAAutomationLab.BusinessLayer.Utilities;
 using QAAutomationLab.CoreLayer.BasePage;
 using TechTalk.SpecFlow;
@@ -14,10 +15,19 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
 
         private object _result;
 
+        private ScenarioContext _scenarioContext;
+
+        public CarRentalsDefinitions(ScenarioContext scenarioContext)
+        {
+            _scenarioContext = scenarioContext;
+            _page = (MainPage)_scenarioContext["MainPage"];
+        }
+
         [Given(@"user opened Car Rentals Page")]
         public void GoToCarRetnalsPage()
         {
-            _page = Utilities.RunBrowser("https://www.booking.com/").MainPageTopBar.GoToCarRentals();
+            MainPage page = (MainPage)_page;
+            _page = page.MainPageTopBar.GoToCarRentals();
         }
 
         [Given(@"user chose same location to return car")]
