@@ -92,6 +92,38 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
             }
         }
 
+        [Given("user clicked first location to rent")]
+        [When("user clicks first location to rent")]
+        public void SelectFirstLocation()
+        {
+            SearchResultsPage page = (SearchResultsPage)_page;
+            _page = page.SearchResultsPanel.ChooseFirstSearchResult();
+        }
+
+        [Given(@"user clicked first car to book")]
+        [When(@"user clicks first car to book")]
+        public void SelectFirstCar()
+        {
+            CarSelectionPage page = (CarSelectionPage)_page;
+            _page = page.CarSelectionPageRightBar.ChooseFirstCar();
+        }
+
+        [Given(@"user chose all car's additional options")]
+        [When(@"user choose all car's additional options")]
+        public void SelectAllCarsOptions()
+        {
+            CarOptionsPage page = (CarOptionsPage)_page;
+            page.CarOptionsMiddleBar.ChooseAllOptions();
+        }
+
+        [Given(@"user clicked go to book button")]
+        [When(@"user clicks go to book button")]
+        public void GoToCarBookingPage()
+        {
+            CarOptionsMiddleBar page = (CarOptionsMiddleBar)_page;
+            page.GoToBookPage();
+        }
+
         [Then(@"'(.*)' that car rentals results on the page")]
         public void AreResultsShown(bool isOnPage)
         {
@@ -106,10 +138,16 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         }
 
         [Then(@"user can see the error message")]
-        public void IsWrongDestinationMessageOnPage()
+        public void WrongDestinationMessageIsOnPage()
         {
             SearchResultsPage page = (SearchResultsPage)_page;
             Assert.IsTrue(page.SearchResultsPanel.IsNoResultsMessageShown());
+        }
+
+        [Then(@"user on the booking page")]
+        public void IsBookingPage()
+        {
+            Assert.IsTrue(_page is BookPage);
         }
     }
 }

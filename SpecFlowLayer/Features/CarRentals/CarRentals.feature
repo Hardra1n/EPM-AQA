@@ -30,3 +30,16 @@ Scenario: Invalid search request
 	And user clicks search button
 	Then user can't go to new page
 	But user can see the error message
+
+@browser
+Scenario: User can book car with options
+	Given user chose same location to return car
+	And user entered 'Berlin' pick-up location
+	And user selected first pick-up suggestion with name 'Berlin'
+	And user selected own driver age '21'
+	And user clicked search button
+	When user clicks first location to rent
+	And user clicks first car to book
+	And user choose all car's additional options
+	And user clicks go to book button
+	Then user on the booking page
