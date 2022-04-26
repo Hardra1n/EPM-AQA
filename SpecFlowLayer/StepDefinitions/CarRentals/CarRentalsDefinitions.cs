@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.PageObjects.CarRentals;
 using QAAutomationLab.BusinessLayer.Utilities;
 using QAAutomationLab.CoreLayer.BasePage;
@@ -10,6 +11,8 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
     public class CarRentalsDefinitions
     {
         private BasePage _page;
+
+        private object _result;
 
         [Given(@"user opened Car Rentals Page")]
         public void GoToCarRetnalsPage()
@@ -79,7 +82,14 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         public void SearchForCar()
         {
             CarRentalsPage page = (CarRentalsPage)_page;
-            _page = page.CarRentalsSearchPanel.ClickSearchButton();
+            try
+            {
+                _page = page.CarRentalsSearchPanel.ClickSearchButton();
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                _result = ex;
+            }
         }
 
         [Then(@"'(.*)' that car rentals results on the page")]
@@ -89,5 +99,17 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
             Assert.AreEqual(isOnPage, page.AreResultsShown());
         }
 
+        [Then(@"user can't go to new page")]
+        public void GoToNewPageThrowsExpection()
+        {
+            Assert.IsTrue(_result is WebDriverTimeoutException);
+        }
+
+        [Then(@"user can see the error message")]
+        public void IsWrongDestinationMessageOnPage()
+        {
+            SearchResultsPage page = (SearchResultsPage)_page;
+            Assert.IsTrue(page.SearchResultsPanel.IsNoResultsMessageShown());
+        }
     }
 }

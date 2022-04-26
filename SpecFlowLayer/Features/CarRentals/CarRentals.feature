@@ -22,3 +22,11 @@ Scenario: Search without existing ruslts
 	And user selects first drop-off suggestion with name 'Los Angeles'
 	And user clicks search button
 	Then 'false' that car rentals results on the page
+	
+@browser
+Scenario: Invalid search request
+	When user chooses same location to return car
+	And user enters 'ase232' pick-up location
+	And user clicks search button
+	Then user can't go to new page
+	But user can see the error message
