@@ -120,8 +120,8 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When(@"user clicks go to book button")]
         public void GoToCarBookingPage()
         {
-            CarOptionsMiddleBar page = (CarOptionsMiddleBar)_page;
-            page.GoToBookPage();
+            CarOptionsPage page = (CarOptionsPage)_page;
+            _page = page.CarOptionsMiddleBar.GoToBookPage();
         }
 
         [Then(@"'(.*)' that car rentals results on the page")]
@@ -140,8 +140,8 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [Then(@"user can see the error message")]
         public void WrongDestinationMessageIsOnPage()
         {
-            SearchResultsPage page = (SearchResultsPage)_page;
-            Assert.IsTrue(page.SearchResultsPanel.IsNoResultsMessageShown());
+            CarRentalsPage page = (CarRentalsPage)_page;
+            Assert.IsTrue(page.CarRentalsSearchPanel.IsErrorMessageShown());
         }
 
         [Then(@"user on the booking page")]
