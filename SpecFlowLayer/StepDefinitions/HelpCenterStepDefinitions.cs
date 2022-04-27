@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using QAAutomationLab.BusinessLayer.PageObjects.HelpCenter;
 using QAAutomationLab.BusinessLayer.PageObjects.HelpCenter.Components;
 using QAAutomationLab.BusinessLayer.Utilities;
-using QAAutomationLab.CoreLayer.BasePage;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowLayer.StepDefinitions
@@ -19,13 +14,13 @@ namespace SpecFlowLayer.StepDefinitions
 
         private IEnumerable<QuestionTopicContainer> _topics;
 
-        [Given(@"I go to help center")]
+        [Given(@"Help center page is opened")]
         public void GoToHelpCenterPage()
         {
             _page = Utilities.RunBrowser("https://www.booking.com/index.en-gb.html").MainPageTopBar.GoToHelpCenter();
         }
 
-        [When(@"I get question topics")]
+        [When(@"User gets question topics")]
         public void GetPopularTopics()
         {
             _topics = _page.PopularQuestionsContainer.GetQuestionTopics();

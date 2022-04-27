@@ -2,6 +2,6 @@
 
 @browser
 Scenario: Navigating buttons displayable and enabled
-	Given I go to help center
-	When I get question topics
+	Given Help center page is opened
+	When User gets question topics
 	Then All buttons in topics are enabled and displayed
