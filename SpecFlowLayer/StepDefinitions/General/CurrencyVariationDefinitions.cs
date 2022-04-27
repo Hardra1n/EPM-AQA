@@ -15,7 +15,7 @@ namespace SpecFlowLayer.StepDefinitions.General
         public CurrencyVariationDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            _page = (MainPage)_scenarioContext["MainPage"];
+            _page = (BasePage)_scenarioContext["MainPage"];
         }
 
         [Given(@"user opened currancy changing tab")]
@@ -32,7 +32,7 @@ namespace SpecFlowLayer.StepDefinitions.General
         {
             CurrencyVariationBar page = (CurrencyVariationBar)_page;
             _page = page.ChooseCurrency(currency);
-            _scenarioContext["MainPage"] = (MainPage)_page;
+            //_scenarioContext["MainPage"] = (MainPage)_page;
         }
     }
 }

@@ -2,7 +2,6 @@
 using OpenQA.Selenium;
 using QAAutomationLab.BusinessLayer.PageObjects.CarRentals;
 using QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects;
-using QAAutomationLab.BusinessLayer.Utilities;
 using QAAutomationLab.CoreLayer.BasePage;
 using TechTalk.SpecFlow;
 
@@ -20,7 +19,7 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         public CarRentalsDefinitions(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
-            _page = (MainPage)_scenarioContext["MainPage"];
+            _page = (BasePage)_scenarioContext["MainPage"];
         }
 
         [Given(@"user opened Car Rentals Page")]
