@@ -8,33 +8,24 @@ using TechTalk.SpecFlow;
 namespace SpecFlowLayer.StepDefinitions.CarRentals
 {
     [Binding]
-    public class CarRentalsDefinitions
+    public class CarRentalsDefinitions : BaseDefinitions
     {
-        private BasePage _page;
-
-        private object _result;
-
-        private ScenarioContext _scenarioContext;
-
         public CarRentalsDefinitions(ScenarioContext scenarioContext)
-        {
-            _scenarioContext = scenarioContext;
-            _page = (BasePage)_scenarioContext["MainPage"];
-        }
+            : base(scenarioContext) { }
 
         [Given(@"user opened Car Rentals Page")]
         [When(@"user opens Car Rentals Page")]
         public void GoToCarRetnalsPage()
         {
-            MainPage page = (MainPage)_page;
-            _page = page.MainPageTopBar.GoToCarRentals();
+            var page = (MainPage)Page;
+            Page = page.MainPageTopBar.GoToCarRentals();
         }
 
         [Given(@"user chose same location to return car")]
         [When(@"user chooses same location to return car")]
         public void SelectSameLocationToReturnCar()
         {
-            CarRentalsPage page = (CarRentalsPage)_page;
+            var page = (CarRentalsPage)Page;
             page.CarRentalsSearchPanel.ChooseSameLocation();
         }
 
@@ -42,7 +33,7 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When(@"user chooses different location to return car")]
         public void SelectDifferentLocationToReturnCar()
         {
-            CarRentalsPage page = (CarRentalsPage)_page;
+            var page = (CarRentalsPage)Page;
             page.CarRentalsSearchPanel.ChooseDifferentLocation();
         }
 
@@ -50,7 +41,7 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When(@"user enters '(.*)' pick-up location")]
         public void EnterPickUpLocation(string location)
         {
-            CarRentalsPage page = (CarRentalsPage)_page;
+            var page = (CarRentalsPage)Page;
             page.CarRentalsSearchPanel.EnterPickUpLocation(location);
         }
 
@@ -58,7 +49,7 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When(@"user selects first pick-up suggestion with name '(.*)'")]
         public void SelectFirstPickUpSuggestion(string location)
         {
-            CarRentalsPage page = (CarRentalsPage)_page;
+            var page = (CarRentalsPage)Page;
             page.CarRentalsSearchPanel.ChooseFirstPickUpSuggestion(location);
         }
 
@@ -66,7 +57,7 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When(@"user enters '(.*)' drop-off location")]
         public void EnterDropOffLocation(string location)
         {
-            CarRentalsPage page = (CarRentalsPage)_page;
+            var page = (CarRentalsPage)Page;
             page.CarRentalsSearchPanel.EnterDropOffLocation(location);
         }
 
@@ -74,7 +65,7 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When(@"user selects first drop-off suggestion with name '(.*)'")]
         public void SelectFirstDropOffSuggestion(string location)
         {
-            CarRentalsPage page = (CarRentalsPage)_page;
+            var page = (CarRentalsPage)Page;
             page.CarRentalsSearchPanel.ChooseFirstDropOffSuggestion(location);
         }
 
@@ -82,7 +73,7 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When(@"user selects own driver age '(.*)'")]
         public void SelectDriverAge(int age)
         {
-            CarRentalsPage page = (CarRentalsPage)_page;
+            var page = (CarRentalsPage)Page;
             page.CarRentalsSearchPanel.ClickAgeCheckBox();
             page.CarRentalsSearchPanel.EnterAge(age.ToString());
         }
@@ -91,14 +82,14 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When(@"user clicks search button")]
         public void SearchForCar()
         {
-            CarRentalsPage page = (CarRentalsPage)_page;
+            var page = (CarRentalsPage)Page;
             try
             {
-                _page = page.CarRentalsSearchPanel.ClickSearchButton();
+                Page = page.CarRentalsSearchPanel.ClickSearchButton();
             }
             catch (WebDriverTimeoutException ex)
             {
-                _result = ex;
+                Result = ex;
             }
         }
 
@@ -106,23 +97,23 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When("user clicks first location to rent")]
         public void SelectFirstLocation()
         {
-            SearchResultsPage page = (SearchResultsPage)_page;
-            _page = page.SearchResultsPanel.ChooseFirstSearchResult();
+            var page = (SearchResultsPage)Page;
+            Page = page.SearchResultsPanel.ChooseFirstSearchResult();
         }
 
         [Given(@"user clicked first car to book")]
         [When(@"user clicks first car to book")]
         public void SelectFirstCar()
         {
-            CarSelectionPage page = (CarSelectionPage)_page;
-            _page = page.CarSelectionPageRightBar.ChooseFirstCar();
+            var page = (CarSelectionPage)Page;
+            Page = page.CarSelectionPageRightBar.ChooseFirstCar();
         }
 
         [Given(@"user chose all car's additional options")]
         [When(@"user choose all car's additional options")]
         public void SelectAllCarsOptions()
         {
-            CarOptionsPage page = (CarOptionsPage)_page;
+            var page = (CarOptionsPage)Page;
             page.CarOptionsMiddleBar.ChooseAllOptions();
         }
 
@@ -130,40 +121,40 @@ namespace SpecFlowLayer.StepDefinitions.CarRentals
         [When(@"user clicks go to book button")]
         public void GoToCarBookingPage()
         {
-            CarOptionsPage page = (CarOptionsPage)_page;
-            _page = page.CarOptionsMiddleBar.GoToBookPage();
+            var page = (CarOptionsPage)Page;
+            Page = page.CarOptionsMiddleBar.GoToBookPage();
         }
 
         [Then(@"'(.*)' that car rentals results on the page")]
         public void AreResultsShown(bool isOnPage)
         {
-            SearchResultsPage page = (SearchResultsPage)_page;
+            var page = (SearchResultsPage)Page;
             Assert.AreEqual(isOnPage, page.AreResultsShown());
         }
 
         [Then(@"user can't go to new page")]
         public void GoToNewPageThrowsExpection()
         {
-            Assert.IsTrue(_result is WebDriverTimeoutException);
+            Assert.IsTrue(Result is WebDriverTimeoutException);
         }
 
         [Then(@"user can see the error message")]
         public void WrongDestinationMessageIsOnPage()
         {
-            CarRentalsPage page = (CarRentalsPage)_page;
+            var page = (CarRentalsPage)Page;
             Assert.IsTrue(page.CarRentalsSearchPanel.IsErrorMessageShown());
         }
 
         [Then(@"user on the booking page")]
         public void IsBookingPage()
         {
-            Assert.IsTrue(_page is BookPage);
+            Assert.IsTrue(Page is BookPage);
         }
 
         [Then(@"price should contain '(.*)'")]
         public void PriceShouldContain(string expectedSubstring)
         {
-            SearchResultsPage page = (SearchResultsPage)_page;
+            var page = (SearchResultsPage)Page;
             string resultPrice = page.SearchResultsPanel.GetFirstResultPriceText();
             Assert.That(resultPrice, Does.Contain(expectedSubstring));
         }

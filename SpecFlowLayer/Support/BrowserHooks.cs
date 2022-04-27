@@ -22,7 +22,7 @@ namespace SpecFlowLayer.Support
             DriverSettingService.SetPathToDriver();
             Driver.GetInstance();
             BasePage page = Utilities.RunBrowser("https://www.booking.com/");
-            _scenarioContext.Add("MainPage", page);
+            _scenarioContext.Add("Page", page);
         }
 
         [AfterScenario("browser")]
