@@ -2,41 +2,49 @@
 
 @browser
 Scenario: Hotel name is equal to card name
-	Given I go to stays page
-	And I get default page context
-	And I set given context
-	And Click on Search button
-	When I get card`s title
-	And I navigate to result
-	And Get hotel name
+	Given Stays page is opened
+	And Default page context has been gotten
+	And Given context is set
+	And Search button is clicked
+	When User gets card`s title
+	And User navigates to result
+	And User gets hotel name
 	Then Hotel name should contain card`s title
 
 @browser
 Scenario: Search results change after filtering
-	Given I go to stays page
-	And I get default page context
-	And I set given context
-	And Click on Search button
-	And I get first results count
-	When I filter results
-	And I get second results count
+	Given Stays page is opened
+	And Default page context has been gotten
+	And Given context is set
+	And Search button is clicked
+	And <first request> results count has been gotten
+	When User filters results
+	And User gets <second request> results count
 	Then Actual count is different from previous
+
+	Examples: 
+	| first request | second request |
+	| first			| second		 |
 
 @browser
 Scenario: Place is shown on map
-	Given I go to stays page
-	And I get default page context
-	And I set given context
-	And Click on Search button
-	When I search hotel on a map
+	Given Stays page is opened
+	And Default page context has been gotten
+	And Given context is set
+	And Search button is clicked
+	When User searches hotel on a map
 	Then Map is displayed
 
 @browser
 Scenario: Hotel cards have correct price after filtering
-	Given I go to stays page
-	And I get default page context
-	And I set given context
-	And Click on Search button
-	When I set price limits as 500 and 600
-	And I filter by price
+	Given Stays page is opened
+	And Default page context has been gotten
+	And Given context is set
+	And Search button is clicked
+	When User sets price limits as <first limit> and <second limit>
+	And User filters by price
 	Then All cards should contain expected price
+
+	Examples: 
+	| first limit | second limit |
+	|	 500	  |		600		 |

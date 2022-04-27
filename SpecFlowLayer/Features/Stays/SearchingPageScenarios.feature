@@ -2,32 +2,40 @@
 
 @browser
 Scenario: Successful search result
-	Given I go to stays page
-	And I get default page context
-	When I set given context
-	And Click on Search button
-	Then I should be navigated to results page
+	Given Stays page is opened
+	And Default page context has been gotten
+	When User sets given context
+	And User clicks on Search button
+	Then Results page should be opened
 
 @browser
 Scenario: Error when search without destination
-	Given I go to stays page
-	And I get default page context
-	When I remove destination
-	And I set given context
-	And Click on Search button
-	Then I should get panel error text
-	And Error text should contain 'enter a destination to start searching.'
+	Given Stays page is opened
+	And Default page context has been gotten
+	When User removes destination
+	And User sets given context
+	And User clicks on Search button
+	Then User should get panel error text
+	And Error text should contain '<Error part>'
+
+	Examples: 
+	|			Error part                    |
+	| enter a destination to start searching. |
 
 @browser
 Scenario: Error when search without selecting age
-	Given I go to stays page
-	And I get default page context
-	When I remove children age
-	And I set given context
-	And Click on Search button
-	Then I should get 'Timed out after 10 seconds' error
+	Given Stays page is opened
+	And Default page context has been gotten
+	When User removes children age
+	And User sets given context
+	And User clicks on Search button
+	Then User should get '<Error text>' error
+
+	Examples: 
+	|		  Error text		 |
+	| Timed out after 10 seconds |
 
 @browser
 Scenario: Check if footer contains all elements
-	Given I go to stays page
-	Then All footer links contain neccessary parts
+	Given Stays page is opened
+	Then All footer links should contain neccessary parts

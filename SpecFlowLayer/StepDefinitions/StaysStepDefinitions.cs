@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using QAAutomationLab.BusinessLayer.Models;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays;
 using QAAutomationLab.BusinessLayer.PageObjects.Stays.Components;
 using QAAutomationLab.BusinessLayer.Utilities;
 using QAAutomationLab.CoreLayer.BasePage;
-using System;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowLayer.StepDefinitions
@@ -30,28 +30,28 @@ namespace SpecFlowLayer.StepDefinitions
 
         private int? _nextCount;
 
-        [Given(@"I go to stays page")]
+        [Given(@"Stays page is opened")]
         public void GoToStaysPage()
         {
             _page = Utilities.RunBrowser("https://www.booking.com/index.en-gb.html").MainPageTopBar.GoToStays();
         }
 
-        [Given(@"I get default page context")]
+        [Given(@"Default page context has been gotten")]
         public void GetDefaultContext()
         {
             _context = StaysSearchingContext.GetDefaultContext();
         }
 
-        [Given(@"I set given context")]
-        [When(@"I set given context")]
+        [Given(@"Given context is set")]
+        [When(@"User sets given context")]
         public void SetContext()
         {
             StaysSearchingPage page = (StaysSearchingPage)_page;
             page.SearchPanel.AddSearchingContext(_context);
         }
 
-        [Given(@"I get (.*) results count")]
-        [When(@"I get (.*) results count")]
+        [Given(@"(.*) results count has been gotten")]
+        [When(@"User gets (.*) results count")]
         public void GetResultsCount(string typeOfCount)
         {
             StaysSearchResultsPage page = (StaysSearchResultsPage)_page;
@@ -65,8 +65,8 @@ namespace SpecFlowLayer.StepDefinitions
             }
         }
 
-        [When(@"Click on Search button")]
-        [Given(@"Click on Search button")]
+        [When(@"User clicks on Search button")]
+        [Given(@"Search button is clicked")]
         public void SearchButtonClick()
         {
             StaysSearchingPage page = (StaysSearchingPage)_page;
@@ -80,77 +80,77 @@ namespace SpecFlowLayer.StepDefinitions
             }
         }
 
-        [When(@"I remove destination")]
+        [When(@"User removes destination")]
         public void RemoveDestination()
         {
             _context.Destination = string.Empty;
         }
 
-        [When(@"I search hotel on a map")]
+        [When(@"User searches hotel on a map")]
         public void ShowHotelMap()
         {
             StaysSearchResultsPage page = (StaysSearchResultsPage)_page;
             _page = page.ResultsContainer.GetAdCard().ClickShowOnMapButton();
         }
 
-        [When(@"I filter results")]
+        [When(@"User filters results")]
         public void FilterSearchResults()
         {
             StaysSearchResultsPage page = (StaysSearchResultsPage)_page;
             page.FilterContainer.ClickFirstFilteringStarsOption();
         }
 
-        [When(@"I remove children age")]
+        [When(@"User removes children age")]
         public void RemoveChildrenAge()
         {
             _context.ChildrenAge = Array.Empty<int>();
         }
 
-        [When(@"I get card`s title")]
+        [When(@"User gets card`s title")]
         public void GetCardTitle()
         {
             StaysSearchResultsPage page = (StaysSearchResultsPage)_page;
             _expectedText = page.ResultsContainer.GetAdCard().GetAdTitle();
         }
 
-        [Given(@"I navigate to result")]
-        [When(@"I navigate to result")]
+        [Given(@"Result page is opened")]
+        [When(@"User navigates to result")]
         public void NavigateToFirstResult()
         {
             StaysSearchResultsPage page = (StaysSearchResultsPage)_page;
             _page = page.ResultsContainer.GetAdCard().ClickNavigatingButton();
         }
 
-        [When(@"Get hotel name")]
+        [When(@"User gets hotel name")]
         public void GetHotelName()
         {
             StaysAdPage page = (StaysAdPage)_page;
             _actualResult = page.HeaderContainer.GetHotelName();
         }
 
-        [Given(@"I navigate to room booking")]
-        [When(@"I navigate to room booking")]
+        [Given(@"Room booking page is opened")]
+        [When(@"User navigates to room booking")]
         public void NavigateToBooking()
         {
             StaysAdPage page = (StaysAdPage)_page;
             _page = page.RoomContainer.AddOneRoomToBooking().ClickNavigatingToBookingButton();
         }
 
-        [When(@"I get booked hotel name")]
+        [When(@"User gets booked hotel name")]
         public void GetBookedHotelName()
         {
             StaysBookingDetailsPage page = (StaysBookingDetailsPage)_page;
             _expectedText = page.MainContainer.GetHotelName();
         }
 
-        [When(@"I set price limits as (.*) and (.*)")]
+        [When(@"User sets price limits as (.*) and (.*)")]
         public void SetPriceLimits(int minimalSum, int maximumSum)
         {
             _previousCount = minimalSum;
             _nextCount = maximumSum;
         }
 
-        [When(@"I filter by price")]
+        [When(@"User filters by price")]
         public void FilterByPrice()
         {
             StaysSearchResultsPage page = (StaysSearchResultsPage)_page;
@@ -160,47 +160,47 @@ namespace SpecFlowLayer.StepDefinitions
             page.ResultsContainer.WaitForUpdateResults();
         }
 
-        [When(@"I get booking context")]
+        [When(@"User gets booking context")]
         public void GetBookingContext()
         {
             _bookingContext = StaysBookingDetailsContext.GetDefaultContext();
         }
 
-        [When(@"I set booking context")]
+        [When(@"User sets booking context")]
         public void SetBookingContext()
         {
             StaysBookingDetailsPage page = (StaysBookingDetailsPage)_page;
             page.MainContainer.AddBookingDetailsContext(_bookingContext);
         }
 
-        [When(@"I click confirm button")]
+        [When(@"User clicks confirm button")]
         public void ClickBookingConfirmButton()
         {
             StaysBookingDetailsPage page = (StaysBookingDetailsPage)_page;
             _page = page.MainContainer.ClickConfirmButton();
         }
 
-        [When(@"I go to main page")]
+        [When(@"User goes to main page")]
         public void GoToMainPage()
         {
             Utilities.RunBrowser("https://www.booking.com/index.en-gb.html");
         }
 
-        [When(@"Check for unfinished booking notification")]
+        [When(@"User checks for unfinished booking notification")]
         public void CheckIfUnfinishedBookingNotificationExists()
         {
             StaysBookingDetailsPage page = (StaysBookingDetailsPage)_page;
             _booleanForCheck = page.IsThereUnfinishedBookingNotification();
         }
 
-        [Then(@"I should be navigated to results page")]
+        [Then(@"Results page should be opened")]
         public void AssertThatPageIsStaysSearchResultsPage()
         {
             StaysSearchResultsPage page = (StaysSearchResultsPage)_page;
             Assert.That(page is StaysSearchResultsPage, Is.True);
         }
 
-        [Then(@"I should get panel error text")]
+        [Then(@"User should get panel error text")]
         public void GetPanelErrorMessage()
         {
             StaysSearchingPage page = (StaysSearchingPage)_page;
@@ -213,14 +213,14 @@ namespace SpecFlowLayer.StepDefinitions
             Assert.That(_expectedText, Does.Contain(errorPart));
         }
 
-        [Then(@"I should get '(.*)' error")]
+        [Then(@"User should get '(.*)' error")]
         public void AssertThatErrorContainsText(string errorPart)
         {
             _expectedText = _error.Message;
             Assert.That(_expectedText, Does.Contain(errorPart));
         }
 
-        [Then(@"All footer links contain neccessary parts")]
+        [Then(@"All footer links should contain neccessary parts")]
         public void AssertThatFooterLinksContainParts()
         {
             StaysSearchingPage page = (StaysSearchingPage)_page;
