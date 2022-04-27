@@ -1,5 +1,6 @@
 ﻿using QAAutomationLab.BusinessLayer.Services;
 using QAAutomationLab.BusinessLayer.Utilities;
+using QAAutomationLab.CoreLayer.BasePage;
 using QAAutomationLab.CoreLayer.Driver;
 using TechTalk.SpecFlow;
 
@@ -20,7 +21,8 @@ namespace SpecFlowLayer.Support
         {
             DriverSettingService.SetPathToDriver();
             Driver.GetInstance();
-            _scenarioContext.Add("MainPage", Utilities.RunBrowser("https://booking.com/"));
+            BasePage page = Utilities.RunBrowser("https://www.booking.com/");
+            _scenarioContext.Add("Page", page);
         }
 
         [AfterScenario("browser")]

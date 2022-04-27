@@ -6,33 +6,25 @@ using TechTalk.SpecFlow;
 namespace SpecFlowLayer.StepDefinitions.General
 {
     [Binding]
-    public class CurrencyVariationDefinitions
+    public class CurrencyVariationDefinitions : BaseDefinitions
     {
-        private BasePage _page;
-
-        private ScenarioContext _scenarioContext;
-
-        public CurrencyVariationDefinitions(ScenarioContext scenarioContext)
-        {
-            _scenarioContext = scenarioContext;
-            _page = (MainPage)_scenarioContext["MainPage"];
-        }
+        public CurrencyVariationDefinitions(ScenarioContext scenarioContext) 
+            : base(scenarioContext) { }
 
         [Given(@"user opened currancy changing tab")]
         [When(@"user opens currency changing tab")]
         public void OpenCurrencyChangingTab()
         {
-            MainPage page = (MainPage)_page;
-            _page = page.MainPageTopBar.ClickCurrencyVariationButton();
+            var page = (MainPage)Page;
+            Page = page.MainPageTopBar.ClickCurrencyVariationButton();
         }
 
         [Given(@"user chose '(.*)' currency")]
         [When(@"user chooses '(.*)' currency")]
         public void ChangeCurrency(string currency)
         {
-            CurrencyVariationBar page = (CurrencyVariationBar)_page;
-            _page = page.ChooseCurrency(currency);
-            _scenarioContext["MainPage"] = (MainPage)_page;
+            var page = (CurrencyVariationBar)Page;
+            Page = page.ChooseCurrency(currency);
         }
     }
 }
