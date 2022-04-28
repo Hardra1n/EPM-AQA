@@ -28,6 +28,7 @@
     <Folder Include="Features\CarRentals\" />
 	<Folder Include="Features\Articles\" />
 	<Folder Include="Features\HelpCenter\" />
+	<Folder Include="Features\Stays\" />
   </ItemGroup>
 
   <ItemGroup>
