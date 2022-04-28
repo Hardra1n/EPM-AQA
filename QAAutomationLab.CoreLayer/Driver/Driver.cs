@@ -1,18 +1,21 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
+using QAAutomationLab.CoreLayer.Configuration;
+using QAAutomationLab.CoreLayer.Driver.DriverCreators;
 
 namespace QAAutomationLab.CoreLayer.Driver
 {
     public class Driver
     {
-        public const int _implicitWaitTime = 15;
-
         private static IWebDriver _driver;
 
         private static object _locker = new object();
 
-        private Driver() { }
+        private Driver()
+        {
+            var creator = SelectDriverCreator();
+            _driver = creator.CreateDriver(PathToDriver);
+            creator.SetupParameters(_driver);
+        }
 
         public static string PathToDriver { get; set; }
 
@@ -22,10 +25,8 @@ namespace QAAutomationLab.CoreLayer.Driver
             {
                 lock (_locker)
                 {
-                    _driver = new ChromeDriver(PathToDriver);
+                    new Driver();
                 }
-
-                SetUpParameters();
             }
 
             return _driver;
@@ -37,10 +38,21 @@ namespace QAAutomationLab.CoreLayer.Driver
             _driver = null;
         }
 
-        private static void SetUpParameters()
+        private static DriverCreator SelectDriverCreator()
         {
-            _driver.Manage().Window.Maximize();
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(_implicitWaitTime);
+            string browser = ConfigProvider.GetConfigRoot()["browser"];
+            switch (browser.ToLower())
+            {
+                case "firefox":
+                    return new FireFoxCreator();
+
+                case "edge":
+                    return new EdgeCreator();
+
+                case "chrome":
+                default:
+                    return new ChromeCreator();
+            }
         }
     }
 }
