@@ -1,11 +1,13 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Firefox;
 
 namespace QAAutomationLab.CoreLayer.Driver.DriverCreators
 {
-    internal class IECreator : DriverCreator
+    internal class FireFoxCreator : DriverCreator
     {
         internal override IWebDriver CreateDriver(string PathToDriver)
-            => new InternetExplorerDriver(PathToDriver);
+        {
+            return new FirefoxDriver(PathToDriver);
+        }
     }
 }

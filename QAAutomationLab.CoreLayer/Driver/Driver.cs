@@ -1,6 +1,5 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
+using QAAutomationLab.CoreLayer.Configuration;
 using QAAutomationLab.CoreLayer.Driver.DriverCreators;
 
 namespace QAAutomationLab.CoreLayer.Driver
@@ -41,7 +40,19 @@ namespace QAAutomationLab.CoreLayer.Driver
 
         private static DriverCreator SelectDriverCreator()
         {
-            return new ChromeCreator();
+            string browser = ConfigProvider.GetConfigRoot()["browser"];
+            switch (browser.ToLower())
+            {
+                case "firefox":
+                    return new FireFoxCreator();
+
+                case "edge":
+                    return new EdgeCreator();
+
+                case "chrome":
+                default:
+                    return new ChromeCreator();
+            }
         }
     }
 }
