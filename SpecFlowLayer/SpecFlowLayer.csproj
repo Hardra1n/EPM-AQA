@@ -27,6 +27,7 @@
     <Folder Include="Features\Covid\" />
     <Folder Include="Features\CarRentals\" />
 	<Folder Include="Features\Articles\" />
+	<Folder Include="Features\HelpCenter\" />
   </ItemGroup>
 
   <ItemGroup>
