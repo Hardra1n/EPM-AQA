@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <SpecFlowFeatureFiles Remove="Attractions\Features\ChangeDateAndTime.feature" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.69" />
