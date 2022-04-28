@@ -10,14 +10,18 @@ namespace QAAutomationLab.BusinessLayer.PageObjects.MainPageObjects
     {
         private static By containerLocator = By.XPath("//div[@class='bui-group bui-group--large']");
 
-        private List<BaseWebElement> _currencyContainerList => (List<BaseWebElement>)containerElement.FindElements(By.XPath("//div[@class='bui-traveller-header__currency']/.."));
-
         public CurrencyVariationBar()
             : base(containerLocator) { }
 
+        private List<BaseWebElement> _currencyContainerList
+            => (List<BaseWebElement>)containerElement.FindElements(
+                By.XPath("//div[@class='bui-traveller-header__currency']/.."));
+
         public MainPage ChooseCurrency(string currency)
         {
-            BaseWebElement selectedLanguage = _currencyContainerList.Where(x => x.Text.Contains(currency)).First();
+            BaseWebElement selectedLanguage
+                = _currencyContainerList.Where(
+                    x => x.Text.ToLower().Contains(currency.ToLower())).First();
 
             selectedLanguage.Click();
 
