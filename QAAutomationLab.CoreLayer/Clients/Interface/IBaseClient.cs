@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QAAutomationLab.CoreLayer.Clients
+﻿namespace QAAutomationLab.CoreLayer.Clients
 {
-    public interface IBaseClient
+    public interface IBaseClient<T>
+        where T : class
     {
+        T Get();
+
+        T Post(object body);
+
+        T Put(int id, object body);
+
+        T Delete(int id);
     }
 }
