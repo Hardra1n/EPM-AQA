@@ -1,14 +1,13 @@
 ﻿namespace QAAutomationLab.CoreLayer.Clients
 {
-    public interface IBaseClient<T>
-        where T : class
+    public interface IBaseClient
     {
-        T Get();
+        T Get<T>();
 
-        T Post(object body);
+        T Post<T>(object body);
 
-        T Put(int id, object body);
+        T Put<T>(int id, object body);
 
-        T Delete(int id);
+        T Delete<T>(int id);
     }
 }
