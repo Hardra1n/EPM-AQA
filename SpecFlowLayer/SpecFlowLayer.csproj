@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,8 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Drivers\**" />
+    <EmbeddedResource Remove="Drivers\**" />
+    <None Remove="Drivers\**" />
+    <SpecFlowFeatureFiles Remove="Drivers\**" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Drivers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="RestSharp" Version="107.3.0" />
+    <PackageReference Include="SpecFlow.ExternalData" Version="3.9.69" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.9.69" />
     <PackageReference Include="nunit" Version="3.13.3" />
@@ -16,10 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Drivers\" />
-    <Folder Include="Features\" />
-    <Folder Include="StepDefinitions\" />
-    <Folder Include="Support\" />
+    <Folder Include="Features\Covid\" />
+    <Folder Include="Features\CarRentals\" />
+	<Folder Include="Features\Articles\" />
+	<Folder Include="Features\HelpCenter\" />
+	<Folder Include="Features\Stays\" />
   </ItemGroup>
 
   <ItemGroup>
