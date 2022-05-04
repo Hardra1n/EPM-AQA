@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
 using QAAutomationLab.CoreLayer.Configuration;
 using QAAutomationLab.CoreLayer.Driver.DriverCreators;
 
@@ -40,7 +41,9 @@ namespace QAAutomationLab.CoreLayer.Driver
 
         private static DriverCreator SelectDriverCreator()
         {
-            string browser = ConfigProvider.GetConfigRoot()["browser"];
+            var root = ConfigProvider.GetConfigRoot();
+            string browser = root["browser"];
+            //string browser = ConfigProvider.GetConfigRoot()["browser"];
             switch (browser.ToLower())
             {
                 case "firefox":
