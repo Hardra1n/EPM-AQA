@@ -32,6 +32,7 @@ namespace QAAutomationLab.CoreLayer.Clients
 
         public void AddHeader(string name, string value)
         {
+            _httpClient.DefaultRequestHeaders.Remove(name);
             _httpClient.DefaultRequestHeaders.Add(name, value);
         }
 

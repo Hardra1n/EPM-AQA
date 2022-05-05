@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using QAAutomationLab.CoreLayer.Clients;
 
 namespace QAAutomationLab.APITestLayer
@@ -11,8 +6,6 @@ namespace QAAutomationLab.APITestLayer
     public class BaseHttpClientTest
     {
         protected IBaseClient Client { get; private set; }
-
-        protected int UserId { get; set; }
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
