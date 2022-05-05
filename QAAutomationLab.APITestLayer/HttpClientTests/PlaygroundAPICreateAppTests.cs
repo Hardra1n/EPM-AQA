@@ -66,7 +66,7 @@ namespace QAAutomationLab.APITestLayer.HttpClientTests
             // Arrange
             var sendData = new AppElements
             {
-                PhoneNumber = "1234567",
+                phone_number = "1234567",
                 Email = "email@email.com",
                 LinkedIn = "linkedin.com",
                 Github = "github.com",
@@ -74,19 +74,19 @@ namespace QAAutomationLab.APITestLayer.HttpClientTests
             };
             var expectedResult = new SuccessNewApp
             {
-                PhoneNumber = "1234567",
+                phone_number = "1234567",
                 Email = "email@email.com",
                 LinkedIn = "linkedin.com",
                 Github = "github.com",
                 HomePage = "www.homepage.com",
-                UserId = _id,
+                user_id = _id,
             };
 
             // Act
-            var result = await Client.Delete<SuccessMessage>("users/", _id);
+            var result = await Client.Post<SuccessNewApp>("application", sendData);
 
             // Assert
-            result.Should().BeEquivalentTo(expectedResult, options => options.ExcludingMissingMembers());
+            result.Should().BeEquivalentTo(expectedResult, options => options.Excluding(e => e.created_at).Excluding(e => e.updated_at).Excluding(e => e.applicant_id));
         }
     }
 }

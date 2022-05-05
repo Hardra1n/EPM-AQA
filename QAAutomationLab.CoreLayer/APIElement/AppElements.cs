@@ -5,7 +5,7 @@ namespace QAAutomationLab.CoreLayer.APIElement
     public class AppElements
     {
         [JsonPropertyName("phone_number")]
-        public string PhoneNumber { get; set; }
+        public string phone_number { get; set; }
 
         public string Email { get; set; }
 

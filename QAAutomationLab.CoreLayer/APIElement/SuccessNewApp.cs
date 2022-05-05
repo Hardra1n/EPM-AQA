@@ -6,13 +6,13 @@ namespace QAAutomationLab.CoreLayer.APIElement
     public class SuccessNewApp
     {
         [JsonPropertyName("applicant_id")]
-        public int ApplicantId { get; set; }
+        public int applicant_id { get; set; }
 
         [JsonPropertyName("user_id")]
-        public int UserId { get; set; }
+        public int user_id { get; set; }
 
         [JsonPropertyName("phone_number")]
-        public string PhoneNumber { get; set; }
+        public string phone_number { get; set; }
 
         public string Email { get; set; }
 
@@ -24,9 +24,9 @@ namespace QAAutomationLab.CoreLayer.APIElement
         public string HomePage { get; set; }
 
         [JsonPropertyName("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public DateTime created_at { get; set; }
 
         [JsonPropertyName("updated_at")]
-        public DateTime UpdatedAt { get; set; }
+        public DateTime updated_at { get; set; }
     }
 }
