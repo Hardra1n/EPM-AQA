@@ -1,13 +1,17 @@
-﻿namespace QAAutomationLab.CoreLayer.Clients
+﻿using System.Threading.Tasks;
+
+namespace QAAutomationLab.CoreLayer.Clients
 {
     public interface IBaseClient
     {
-        T Get<T>();
+        Task<T> Get<T>(string url);
 
-        T Post<T>(object body);
+        Task<T> Post<T>(string url, object body);
 
-        T Put<T>(int id, object body);
+        Task<T> Put<T>(string url, int id, object body);
 
-        T Delete<T>(int id);
+        Task<T> Delete<T>(string url, int id);
+
+        void AddHeader(string name, string value);
     }
 }
