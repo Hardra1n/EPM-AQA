@@ -12,6 +12,24 @@ namespace QAAutomationLab.APITestLayer.HttpClientTests
     [TestFixture]
     public class PlaygroundAPCreateUserTests : BaseHttpClientTest
     {
+        [OneTimeSetUp]
+        public async Task Setup()
+        {
+            // Arrange
+            var sendData = new Credentials
+            {
+                Email = "new_message@fexbox.org",
+                Password = "Abcd_123",
+            };
+
+            // Act
+            await Client.Post<SuccessNewUser>("users", sendData);
+            var result = await Client.Post<SuccessLogin>("login", sendData);
+            Client.AddHeader("Authorization", "Bearer " + result.Token);
+
+            await Client.Delete<SuccessMessage>("users/", result.Id);
+        }
+
         [Test]
         public async Task CreateCredits_WhenThereIsNotEmail_ShouldReturnErrorWithNoEmail()
         {

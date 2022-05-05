@@ -20,16 +20,6 @@ namespace QAAutomationLab.CoreLayer.Clients
             };
         }
 
-        public BaseHttpClient(string baseUrl, string token)
-        {
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(baseUrl),
-            };
-
-            _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-        }
-
         public void AddHeader(string name, string value)
         {
             _httpClient.DefaultRequestHeaders.Remove(name);
