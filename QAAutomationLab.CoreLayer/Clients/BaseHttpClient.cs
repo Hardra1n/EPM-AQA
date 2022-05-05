@@ -73,7 +73,10 @@ namespace QAAutomationLab.CoreLayer.Clients
         {
             var message = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<T>(message);
+            return JsonConvert.DeserializeObject<T>(message, new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            });
         }
     }
 }
