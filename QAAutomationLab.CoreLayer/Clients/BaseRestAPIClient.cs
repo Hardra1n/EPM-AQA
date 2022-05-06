@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 using RestSharp;
 
 namespace QAAutomationLab.CoreLayer.Clients
@@ -7,7 +9,12 @@ namespace QAAutomationLab.CoreLayer.Clients
     {
         public BaseRestAPIClient(string url)
         {
-            Client = new RestClient(url);
+            var client = new HttpClient(new LoggingHttpClientHandler())
+            {
+                BaseAddress = new Uri(url),
+            };
+
+            Client = new RestClient(client);
         }
 
         public RestClient Client { get; private set; }

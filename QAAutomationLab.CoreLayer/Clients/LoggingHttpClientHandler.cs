@@ -12,10 +12,13 @@ namespace QAAutomationLab.CoreLayer.Clients
         internal LoggingHttpClientHandler()
             : base(new HttpClientHandler()) { }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var response = base.SendAsync(request, cancellationToken);
-            _logger.Logger.Information($"{request.Method} request started execution with uri:" +
+
+            _logger.Logger.Information(
+                $"{request.Method} request started execution with uri:" +
                 $"{request.RequestUri}. " +
                 $"Response id: {response.Id}");
 
