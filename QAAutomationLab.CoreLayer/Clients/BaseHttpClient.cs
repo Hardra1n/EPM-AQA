@@ -14,7 +14,7 @@ namespace QAAutomationLab.CoreLayer.Clients
 
         public BaseHttpClient(string baseUrl)
         {
-            _httpClient = new HttpClient
+            _httpClient = new HttpClient(new LoggingHttpClientHandler())
             {
                 BaseAddress = new Uri(baseUrl),
             };
