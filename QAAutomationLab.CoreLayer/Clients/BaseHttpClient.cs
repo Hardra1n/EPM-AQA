@@ -20,18 +20,9 @@ namespace QAAutomationLab.CoreLayer.Clients
             };
         }
 
-        public BaseHttpClient(string baseUrl, string token)
-        {
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(baseUrl),
-            };
-
-            _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-        }
-
         public void AddHeader(string name, string value)
         {
+            _httpClient.DefaultRequestHeaders.Remove(name);
             _httpClient.DefaultRequestHeaders.Add(name, value);
         }
 
@@ -73,7 +64,10 @@ namespace QAAutomationLab.CoreLayer.Clients
         {
             var message = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<T>(message);
+            return JsonConvert.DeserializeObject<T>(message, new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+            });
         }
     }
 }
